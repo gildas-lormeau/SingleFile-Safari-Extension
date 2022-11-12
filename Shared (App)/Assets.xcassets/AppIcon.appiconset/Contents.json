@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Icon_1024.png",
+      "filename" : "Icon_1024_blank.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
