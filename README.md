@@ -7,7 +7,7 @@ The extension can be downloaded from the App Store: https://apps.apple.com/us/ap
 # Installation
 
 1. Install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-2. Download the Xcode project as a [zip file](https://github.com/gildas-lormeau/SingleFile-Safari/archive/refs/heads/main.zip) and unzip it somewhere on your machine
+2. Download the Xcode project as a [zip file](https://github.com/gildas-lormeau/SingleFile-Safari-Extension/archive/refs/heads/main.zip) and unzip it somewhere on your machine
 3. Launch Xcode and open the folder where you unzipped the Xcode project
 4. Press the Play button in the title bar of the left panel in Xcode to build the app and install the extension in Safari
 5. Allow Safari to run unsigned extensions by following this procedure: https://developer.apple.com/documentation/safariservices/safari_app_extensions/building_a_safari_app_extension#2957925
