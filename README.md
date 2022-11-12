@@ -16,4 +16,4 @@ The extension can be downloaded from the App Store: https://apps.apple.com/us/ap
 
 1. Run `./init.sh` to retrieve the source code of the extension
 2. Run `./build-dev.sh` or `./build.sh` to build the extension
-3. Build the project in XCode
+3. Build the project in Xcode
