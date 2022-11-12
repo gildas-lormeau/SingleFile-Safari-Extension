@@ -1,0 +1,1 @@
+!function(){"use strict";document.currentScript.remove(),function t(e){e.querySelectorAll("template[shadowroot]").forEach((e=>{let o=e.parentElement.shadowRoot;if(!o){try{o=e.parentElement.attachShadow({mode:e.getAttribute("shadowroot")}),o.innerHTML=e.innerHTML,e.remove()}catch(t){}o&&t(o)}}))}(document)}();
