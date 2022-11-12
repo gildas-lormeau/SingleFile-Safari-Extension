@@ -345,7 +345,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8E136F2C291F07220036F08D /* Build configuration list for PBXProject "SingleFile Safari" */;
+			buildConfigurationList = 8E136F2C291F07220036F08D /* Build configuration list for PBXProject "single-file-safari" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -913,7 +913,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8E136F2C291F07220036F08D /* Build configuration list for PBXProject "SingleFile Safari" */ = {
+		8E136F2C291F07220036F08D /* Build configuration list for PBXProject "single-file-safari" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E136F92291F07240036F08D /* Debug */,
