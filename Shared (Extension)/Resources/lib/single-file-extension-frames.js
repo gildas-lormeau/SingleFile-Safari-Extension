@@ -1,1 +1,239 @@
-!function(){"use strict";const e=globalThis.document;if(e instanceof globalThis.Document){let n=e.createElement("script");n.src="data:,("+t.toString()+")()",(e.documentElement||e).appendChild(n),n.remove(),n=e.createElement("script"),n.textContent="("+t.toString()+")()",(e.documentElement||e).appendChild(n),n.remove()}function t(){"undefined"==typeof globalThis&&(window.globalThis=window);const e=globalThis.document,t=globalThis.console,n=e=>globalThis.dispatchEvent(e),r=globalThis.CustomEvent,a=globalThis.FileReader,o=globalThis.Blob,s=t&&t.warn&&((...e)=>t.warn(...e))||(()=>{}),i="single-file-new-font-face",c={family:"font-family",style:"font-style",weight:"font-weight",stretch:"font-stretch",unicodeRange:"unicode-range",variant:"font-variant",featureSettings:"font-feature-settings"};if(globalThis.FontFace){const t=globalThis.FontFace;let a;globalThis.FontFace=function(){return a||(s("SingleFile is hooking the FontFace constructor, document.fonts.delete and document.fonts.clear to handle dynamically loaded fonts."),a=!0),l(...arguments).then((e=>n(new r(i,{detail:e})))),new t(...arguments)},globalThis.FontFace.toString=function(){return"function FontFace() { [native code] }"};const o=e.fonts.delete;e.fonts.delete=function(t){return l(t.family).then((e=>n(new r("single-file-delete-font",{detail:e})))),o.call(e.fonts,t)},e.fonts.delete.toString=function(){return"function delete() { [native code] }"};const c=e.fonts.clear;e.fonts.clear=function(){return n(new r("single-file-clear-fonts")),c.call(e.fonts)},e.fonts.clear.toString=function(){return"function clear() { [native code] }"}}async function l(e,t,n){const r={};return r["font-family"]=e,r.src=t,n&&Object.keys(n).forEach((e=>{c[e]&&(r[c[e]]=n[e])})),new Promise((e=>{if(r.src instanceof ArrayBuffer){const t=new a;t.readAsDataURL(new o([r.src])),t.addEventListener("load",(()=>{r.src="url("+t.result+")",e(r)}))}else e(r)}))}}const n=globalThis.browser,r=globalThis.document;if(r instanceof globalThis.Document&&n&&n.runtime&&n.runtime.getURL){const e=r.createElement("script");e.src=n.runtime.getURL("/lib/single-file-hooks-frames.js"),e.async=!1,(r.documentElement||r).appendChild(e),e.remove()}const a=(e,t)=>window.fetch(e,t);let o=new Map;browser.runtime.onMessage.addListener((e=>"singlefile.fetchFrame"==e.method&&window.frameId&&window.frameId==e.frameId?async function(e){try{const t=await a(e.url,{cache:"force-cache",headers:e.headers});return{status:t.status,headers:[...t.headers],array:Array.from(new Uint8Array(await t.arrayBuffer()))}}catch(e){return{error:e&&e.toString()}}}(e):"singlefile.fetchResponse"==e.method?async function(e){const t=o.get(e.requestId);t&&(e.error?(t.reject(new Error(e.error)),o.delete(e.requestId)):(e.truncated&&(t.array?t.array=t.array.concat(e.array):(t.array=e.array,o.set(e.requestId,t)),e.finished&&(e.array=t.array)),e.truncated&&!e.finished||(t.resolve({status:e.status,headers:{get:t=>e.headers&&e.headers[t]},arrayBuffer:async()=>new Uint8Array(e.array).buffer}),o.delete(e.requestId))));return{}}(e):void 0))}();
+(function () {
+	'use strict';
+
+	/*
+	 * Copyright 2010-2022 Gildas Lormeau
+	 * contact : gildas.lormeau <at> gmail.com
+	 * 
+	 * This file is part of SingleFile.
+	 *
+	 *   The code in this file is free software: you can redistribute it and/or 
+	 *   modify it under the terms of the GNU Affero General Public License 
+	 *   (GNU AGPL) as published by the Free Software Foundation, either version 3
+	 *   of the License, or (at your option) any later version.
+	 * 
+	 *   The code in this file is distributed in the hope that it will be useful, 
+	 *   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+	 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero 
+	 *   General Public License for more details.
+	 *
+	 *   As additional permission under GNU AGPL version 3 section 7, you may 
+	 *   distribute UNMODIFIED VERSIONS OF THIS file without the copy of the GNU 
+	 *   AGPL normally required by section 4, provided you include this license 
+	 *   notice and a URL through which recipients can access the Corresponding 
+	 *   Source.
+	 */
+
+	/* global globalThis, window */
+
+	const document$1 = globalThis.document;
+	const Document$1 = globalThis.Document;
+
+	if (document$1 instanceof Document$1) {
+		let scriptElement = document$1.createElement("script");
+		scriptElement.src = "data:," + "(" + injectedScript.toString() + ")()";
+		(document$1.documentElement || document$1).appendChild(scriptElement);
+		scriptElement.remove();
+		scriptElement = document$1.createElement("script");
+		scriptElement.textContent = "(" + injectedScript.toString() + ")()";
+		(document$1.documentElement || document$1).appendChild(scriptElement);
+		scriptElement.remove();
+	}
+
+	function injectedScript() {
+		if (typeof globalThis == "undefined") {
+			window.globalThis = window;
+		}
+		const document = globalThis.document;
+		const console = globalThis.console;
+		const dispatchEvent = event => globalThis.dispatchEvent(event);
+		const CustomEvent = globalThis.CustomEvent;
+		const FileReader = globalThis.FileReader;
+		const Blob = globalThis.Blob;
+		const warn = (console && console.warn && ((...args) => console.warn(...args))) || (() => { });
+		const NEW_FONT_FACE_EVENT = "single-file-new-font-face";
+		const DELETE_FONT_EVENT = "single-file-delete-font";
+		const CLEAR_FONTS_EVENT = "single-file-clear-fonts";
+		const FONT_STYLE_PROPERTIES = {
+			family: "font-family",
+			style: "font-style",
+			weight: "font-weight",
+			stretch: "font-stretch",
+			unicodeRange: "unicode-range",
+			variant: "font-variant",
+			featureSettings: "font-feature-settings"
+		};
+
+		if (globalThis.FontFace) {
+			const FontFace = globalThis.FontFace;
+			let warningFontFaceDisplayed;
+			globalThis.FontFace = function () {
+				if (!warningFontFaceDisplayed) {
+					warn("SingleFile is hooking the FontFace constructor, document.fonts.delete and document.fonts.clear to handle dynamically loaded fonts.");
+					warningFontFaceDisplayed = true;
+				}
+				getDetailObject(...arguments).then(detail => dispatchEvent(new CustomEvent(NEW_FONT_FACE_EVENT, { detail })));
+				return new FontFace(...arguments);
+			};
+			globalThis.FontFace.toString = function () { return "function FontFace() { [native code] }"; };
+			globalThis.FontFace.prototype = FontFace.prototype;
+			const deleteFont = document.fonts.delete;
+			document.fonts.delete = function (fontFace) {
+				getDetailObject(fontFace.family).then(detail => dispatchEvent(new CustomEvent(DELETE_FONT_EVENT, { detail })));
+				return deleteFont.call(document.fonts, fontFace);
+			};
+			document.fonts.delete.toString = function () { return "function delete() { [native code] }"; };
+			const clearFonts = document.fonts.clear;
+			document.fonts.clear = function () {
+				dispatchEvent(new CustomEvent(CLEAR_FONTS_EVENT));
+				return clearFonts.call(document.fonts);
+			};
+			document.fonts.clear.toString = function () { return "function clear() { [native code] }"; };
+		}
+
+		async function getDetailObject(fontFamily, src, descriptors) {
+			const detail = {};
+			detail["font-family"] = fontFamily;
+			detail.src = src;
+			if (descriptors) {
+				Object.keys(descriptors).forEach(descriptor => {
+					if (FONT_STYLE_PROPERTIES[descriptor]) {
+						detail[FONT_STYLE_PROPERTIES[descriptor]] = descriptors[descriptor];
+					}
+				});
+			}
+			return new Promise(resolve => {
+				if (detail.src instanceof ArrayBuffer) {
+					const reader = new FileReader();
+					reader.readAsDataURL(new Blob([detail.src]));
+					reader.addEventListener("load", () => {
+						detail.src = "url(" + reader.result + ")";
+						resolve(detail);
+					});
+				} else {
+					resolve(detail);
+				}
+			});
+		}
+	}
+
+	/*
+	 * Copyright 2010-2022 Gildas Lormeau
+	 * contact : gildas.lormeau <at> gmail.com
+	 * 
+	 * This file is part of SingleFile.
+	 *
+	 *   The code in this file is free software: you can redistribute it and/or 
+	 *   modify it under the terms of the GNU Affero General Public License 
+	 *   (GNU AGPL) as published by the Free Software Foundation, either version 3
+	 *   of the License, or (at your option) any later version.
+	 * 
+	 *   The code in this file is distributed in the hope that it will be useful, 
+	 *   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+	 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero 
+	 *   General Public License for more details.
+	 *
+	 *   As additional permission under GNU AGPL version 3 section 7, you may 
+	 *   distribute UNMODIFIED VERSIONS OF THIS file without the copy of the GNU 
+	 *   AGPL normally required by section 4, provided you include this license 
+	 *   notice and a URL through which recipients can access the Corresponding 
+	 *   Source.
+	 */
+
+	/* global globalThis */
+
+	const browser$1 = globalThis.browser;
+	const document = globalThis.document;
+	const Document = globalThis.Document;
+
+	if (document instanceof Document && browser$1 && browser$1.runtime && browser$1.runtime.getURL) {
+		const scriptElement = document.createElement("script");
+		scriptElement.src = browser$1.runtime.getURL("/lib/single-file-hooks-frames.js");
+		scriptElement.async = false;
+		(document.documentElement || document).appendChild(scriptElement);
+		scriptElement.remove();
+	}
+
+	/*
+	 * Copyright 2010-2020 Gildas Lormeau
+	 * contact : gildas.lormeau <at> gmail.com
+	 * 
+	 * This file is part of SingleFile.
+	 *
+	 *   The code in this file is free software: you can redistribute it and/or 
+	 *   modify it under the terms of the GNU Affero General Public License 
+	 *   (GNU AGPL) as published by the Free Software Foundation, either version 3
+	 *   of the License, or (at your option) any later version.
+	 * 
+	 *   The code in this file is distributed in the hope that it will be useful, 
+	 *   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+	 *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero 
+	 *   General Public License for more details.
+	 *
+	 *   As additional permission under GNU AGPL version 3 section 7, you may 
+	 *   distribute UNMODIFIED VERSIONS OF THIS file without the copy of the GNU 
+	 *   AGPL normally required by section 4, provided you include this license 
+	 *   notice and a URL through which recipients can access the Corresponding 
+	 *   Source.
+	 */
+
+	const fetch = (url, options) => window.fetch(url, options);
+
+	let pendingResponses = new Map();
+
+	browser.runtime.onMessage.addListener(message => {
+		if (message.method == "singlefile.fetchFrame" && window.frameId && window.frameId == message.frameId) {
+			return onFetchFrame(message);
+		}
+		if (message.method == "singlefile.fetchResponse") {
+			return onFetchResponse(message);
+		}
+	});
+
+	async function onFetchFrame(message) {
+		try {
+			const response = await fetch(message.url, { cache: "force-cache", headers: message.headers });
+			return {
+				status: response.status,
+				headers: [...response.headers],
+				array: Array.from(new Uint8Array(await response.arrayBuffer()))
+			};
+		} catch (error) {
+			return {
+				error: error && error.toString()
+			};
+		}
+	}
+
+	async function onFetchResponse(message) {
+		const pendingResponse = pendingResponses.get(message.requestId);
+		if (pendingResponse) {
+			if (message.error) {
+				pendingResponse.reject(new Error(message.error));
+				pendingResponses.delete(message.requestId);
+			} else {
+				if (message.truncated) {
+					if (pendingResponse.array) {
+						pendingResponse.array = pendingResponse.array.concat(message.array);
+					} else {
+						pendingResponse.array = message.array;
+						pendingResponses.set(message.requestId, pendingResponse);
+					}
+					if (message.finished) {
+						message.array = pendingResponse.array;
+					}
+				}
+				if (!message.truncated || message.finished) {
+					pendingResponse.resolve({
+						status: message.status,
+						headers: { get: headerName => message.headers && message.headers[headerName] },
+						arrayBuffer: async () => new Uint8Array(message.array).buffer
+					});
+					pendingResponses.delete(message.requestId);
+				}
+			}
+		}
+		return {};
+	}
+
+})();

@@ -214,7 +214,7 @@ async function saveToGitHub(taskId, filename, content, githubToken, githubUser, 
 	}
 }
 
-async function saveWithWebDAV(taskId, filename, content, url, username, password, retry = 0) {
+async function saveWithWebDAV(taskId, filename, content, url, username, password) {
 	const taskInfo = business.getTaskInfo(taskId);
 	const controller = new AbortController();
 	const { signal } = controller;
@@ -226,10 +226,9 @@ async function saveWithWebDAV(taskId, filename, content, url, username, password
 		business.setCancelCallback(taskId, () => controller.abort());
 		try {
 			const response = await sendRequest(url + filename, "PUT", content);
-			let name;
-			if (response.status == 404 && filename.includes("/") && retry < 2) {
+			if (response.status == 404 && filename.includes("/")) {
 				const filenameParts = filename.split(/\/+/);
-				name = filenameParts.pop();
+				filenameParts.pop();
 				let path = "";
 				for (const filenamePart of filenameParts) {
 					if (filenamePart) {
@@ -244,10 +243,7 @@ async function saveWithWebDAV(taskId, filename, content, url, username, password
 						path += "/";
 					}
 				}
-				if (retry == 1) {
-					filename = path + name.substring(0, 256);
-				}
-				return saveWithWebDAV(taskId, filename, content, url, username, password, retry + 1);
+				return saveWithWebDAV(taskId, filename, content, url, username, password);
 			} else if (response.status >= 400) {
 				throw new Error("Error " + response.status + " (WebDAV)");
 			} else {
