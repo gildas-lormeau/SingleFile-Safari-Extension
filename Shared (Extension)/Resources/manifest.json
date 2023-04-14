@@ -1,124 +1,93 @@
 {
-	"name": "SingleFile",
-	"author": "Gildas Lormeau",
-	"homepage_url": "https://github.com/gildas-lormeau/SingleFile",
-	"icons": {
-		"16": "src/ui/resources/icon_16.png",
-		"48": "src/ui/resources/icon_48.png",
-		"64": "src/ui/resources/icon_64.png",
-		"128": "src/ui/resources/icon_128.png"
-	},
-	"version": "1.21.40",
-	"description": "__MSG_extensionDescription__",
-	"content_scripts": [
-		{
-			"matches": [
-				"<all_urls>"
-			],
-			"run_at": "document_start",
-			"js": [
-				"lib/chrome-browser-polyfill.js",
-				"lib/single-file-frames.js",
-				"lib/single-file-extension-frames.js"
-			],
-			"all_frames": true,
-			"match_about_blank": true
-		},
-		{
-			"matches": [
-				"<all_urls>"
-			],
-			"run_at": "document_start",
-			"js": [
-				"lib/chrome-browser-polyfill.js",
-				"lib/single-file-bootstrap.js",
-				"lib/single-file-extension-bootstrap.js",
-				"lib/single-file-infobar.js"
-			]
-		}
-	],
-	"background": {
-		"page": "src/core/bg/background.html",
-		"persistent": false
-	},
-	"options_page": "src/ui/pages/options.html",
-	"sidebar_action": {
-		"browser_style": true,
-		"default_title": "SingleFile",
-		"default_panel": "src/ui/pages/panel.html",
-		"default_icon": "src/ui/resources/icon_128.png",
-		"open_at_install": false
-	},
-	"options_ui": {
-		"browser_style": true,
-		"page": "src/ui/pages/options.html",
-		"open_in_tab": false
-	},
-	"browser_action": {
-		"default_icon": {
-			"16": "src/ui/resources/icon_16.png",
-			"48": "src/ui/resources/icon_48.png",
-			"64": "src/ui/resources/icon_64.png",
-			"128": "src/ui/resources/icon_128.png"
-		},
-		"default_title": "__MSG_buttonDefaultTooltip__"
-	},
-	"commands": {
-		"save-selected-tabs": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+Y"
-			},
-			"description": "__MSG_commandSaveSelectedTabs__"
-		},
-		"save-all-tabs": {
-			"suggested_key": {
-				"default": "Ctrl+Shift+U"
-			},
-			"description": "__MSG_commandSaveAllTabs__"
-		}
-	},
-	"web_accessible_resources": [
-		"lib/single-file-hooks-frames.js",
-		"lib/single-file-infobar.js",
-		"lib/single-file-extension-editor-init.js",
-		"lib/single-file-extension-editor.js",
-		"lib/single-file-extension-editor-helper.js",
-		"src/lib/readability/Readability.js",
-		"src/lib/readability/Readability-readerable.js",
-		"src/ui/pages/editor-note-web.css",
-		"src/ui/pages/editor-mask-web.css",
-		"src/ui/pages/editor-frame-web.css"
-	],
-	"oauth2": {
-		"client_id": "207618107333-3pj2pmelhnl4sf3rpctghs9cean3q8nj.apps.googleusercontent.com",
-		"scopes": [
-			"https://www.googleapis.com/auth/drive.file"
-		]
-	},
-	"permissions": [
-		"identity",
-		"menus",
-		"contextMenus",
-		"downloads",
-		"storage",
-		"tabs",
-		"<all_urls>"
-	],
-	"optional_permissions": [
-		"identity",
-		"clipboardWrite",
-		"nativeMessaging",
-		"bookmarks",
-		"webRequest",
-		"webRequestBlocking"
-	],
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "{531906d3-e22f-4a6c-a102-8057b88a1a63}"
-		}
-	},
-	"devtools_page": "src/core/devtools/devtools.html",
-	"incognito": "spanning",
-	"manifest_version": 2,
-	"default_locale": "en"
+  "name": "SingleFile",
+  "author": "Gildas Lormeau",
+  "homepage_url": "https://github.com/gildas-lormeau/SingleFile",
+  "icons": {
+    "16": "src/ui/resources/icon_16.png",
+    "48": "src/ui/resources/icon_48.png",
+    "64": "src/ui/resources/icon_64.png",
+    "128": "src/ui/resources/icon_128.png"
+  },
+  "version": "1.21.41",
+  "description": "__MSG_extensionDescription__",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/chrome-browser-polyfill.js",
+        "lib/single-file-frames.js",
+        "lib/single-file-extension-frames.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/chrome-browser-polyfill.js",
+        "lib/single-file-bootstrap.js",
+        "lib/single-file-extension-bootstrap.js",
+        "lib/single-file-infobar.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "src/core/bg/background.html",
+    "persistent": false
+  },
+  "options_ui": {
+    "browser_style": true,
+    "page": "src/ui/pages/options.html",
+    "open_in_tab": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "src/ui/resources/icon_16.png",
+      "48": "src/ui/resources/icon_48.png",
+      "64": "src/ui/resources/icon_64.png",
+      "128": "src/ui/resources/icon_128.png"
+    },
+    "default_title": "__MSG_buttonDefaultTooltip__"
+  },
+  "commands": {
+    "save-selected-tabs": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "__MSG_commandSaveSelectedTabs__"
+    },
+    "save-all-tabs": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U"
+      },
+      "description": "__MSG_commandSaveAllTabs__"
+    }
+  },
+  "web_accessible_resources": [
+    "lib/single-file-hooks-frames.js",
+    "lib/single-file-infobar.js",
+    "lib/single-file-extension-editor-init.js",
+    "lib/single-file-extension-editor.js",
+    "lib/single-file-extension-editor-helper.js",
+    "src/lib/readability/Readability.js",
+    "src/lib/readability/Readability-readerable.js",
+    "src/ui/pages/editor-note-web.css",
+    "src/ui/pages/editor-mask-web.css",
+    "src/ui/pages/editor-frame-web.css"
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "devtools_page": "src/core/devtools/devtools.html",
+  "manifest_version": 2,
+  "default_locale": "en"
 }
