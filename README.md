@@ -17,3 +17,5 @@ The extension can be downloaded from the App Store: https://apps.apple.com/us/ap
 1. Run `./init.sh` to retrieve the source code of the extension from GitHub
 2. Run `./build-dev.sh` (development) or `./build.sh` (production) to build the extension
 3. Build the project in Xcode
+
+Note: When building for development, the script expects the `single-file` folder to be a sibling of the `SingleFile-Safari` folder.
