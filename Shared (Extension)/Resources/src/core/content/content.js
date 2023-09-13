@@ -35,12 +35,19 @@ const MOZ_EXTENSION_PROTOCOL = "moz-extension:";
 
 let processor, processing;
 
-singlefile.init({ fetch, frameFetch });
-browser.runtime.onMessage.addListener(message => {
-	if (message.method == "content.save" || message.method == "content.cancelSave" || message.method == "content.getSelectedLinks" || message.method == "content.error") {
-		return onMessage(message);
+if (!bootstrap || !bootstrap.initializedSingleFile) {
+	singlefile.init({ fetch, frameFetch });
+	browser.runtime.onMessage.addListener(message => {
+		if (message.method == "content.save" || message.method == "content.cancelSave" || message.method == "content.getSelectedLinks" || message.method == "content.error" || message.method == "content.prompt") {
+			return onMessage(message);
+		}
+	});
+	if (bootstrap) {
+		bootstrap.initializedSingleFile = true;
+	} else {
+		globalThis.singlefileBootstrap = { initializedSingleFile: true };
 	}
-});
+}
 
 async function onMessage(message) {
 	if (!location.href.startsWith(MOZ_EXTENSION_PROTOCOL)) {
@@ -66,6 +73,10 @@ async function onMessage(message) {
 		}
 		if (message.method == "content.error") {
 			onError(message.error, message.link);
+			return {};
+		}
+		if (message.method == "content.prompt") {
+			return ui.prompt(message.message, message.value);
 		}
 	}
 }
