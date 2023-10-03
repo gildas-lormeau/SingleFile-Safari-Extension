@@ -126,10 +126,16 @@ const DEFAULT_CONFIG = {
 	includeBOM: false,
 	warnUnsavedPage: true,
 	displayInfobarInEditor: false,
+	compressContent: false,
+	createRootDirectory: false,
+	selfExtractingArchive: true,
+	extractDataFromPage: true,
+	insertTextBody: false,
 	autoSaveExternalSave: false,
 	insertMetaNoIndex: false,
 	insertMetaCSP: true,
 	passReferrerOnError: false,
+	password: "",
 	insertSingleFileComment: true,
 	removeSavedDate: false,
 	blockMixedContent: false,
@@ -190,7 +196,7 @@ export {
 	removeAuthInfo
 };
 
-async function upgrade(ignoreOldProfiles) {
+async function upgrade() {
 	const { sync } = await browser.storage.local.get();
 	if (sync) {
 		configStorage = browser.storage.sync;
@@ -199,16 +205,16 @@ async function upgrade(ignoreOldProfiles) {
 	}
 	const config = await configStorage.get();
 	if (!config[PROFILE_NAME_PREFIX + DEFAULT_PROFILE_NAME]) {
-		if (config.profiles && !ignoreOldProfiles) {
+		if (config.profiles) {
 			const profileNames = Object.keys(config.profiles);
 			for (const profileName of profileNames) {
 				await setProfile(profileName, config.profiles[profileName]);
 			}
-			// uncomment when migration is done
-			// await configStorage.remove(["profiles"]);
 		} else {
 			await setProfile(DEFAULT_PROFILE_NAME, DEFAULT_CONFIG);
 		}
+	} else if (config.profiles) {
+		await configStorage.remove(["profiles"]);
 	}
 	if (!config.rules) {
 		await configStorage.set({ rules: DEFAULT_RULES });
@@ -219,6 +225,16 @@ async function upgrade(ignoreOldProfiles) {
 	if (!config.processInForeground) {
 		await configStorage.set({ processInForeground: false });
 	}
+	const profileNames = await getProfileNames();
+	profileNames.map(async profileName => {
+		const profile = await getProfile(profileName);
+		for (const key of Object.keys(DEFAULT_CONFIG)) {
+			if (profile[key] === undefined) {
+				profile[key] = DEFAULT_CONFIG[key];
+			}
+		}
+		await setProfile(profileName, profile);
+	});
 }
 
 async function getRule(url, ignoreWildcard) {
@@ -538,7 +554,7 @@ async function resetProfiles() {
 	await tabsData.set(allTabsData);
 	let profileKeyNames = await getProfileKeyNames();
 	await configStorage.remove([...profileKeyNames, "rules", "maxParallelWorkers", "processInForeground"]);
-	await upgrade(true);
+	await upgrade();
 }
 
 async function resetProfile(profileName) {

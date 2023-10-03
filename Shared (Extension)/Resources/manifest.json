@@ -8,7 +8,7 @@
     "64": "src/ui/resources/icon_64.png",
     "128": "src/ui/resources/icon_128.png"
   },
-  "version": "1.21.65",
+  "version": "1.22.0",
   "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
@@ -75,6 +75,8 @@
     "lib/single-file-extension-editor-init.js",
     "lib/single-file-extension-editor.js",
     "lib/single-file-extension-editor-helper.js",
+    "lib/single-file-zip.min.js",
+    "lib/single-file-z-worker.js",
     "src/lib/readability/Readability.js",
     "src/lib/readability/Readability-readerable.js",
     "src/ui/pages/editor-note-web.css",
