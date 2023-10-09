@@ -8,7 +8,7 @@
     "64": "src/ui/resources/icon_64.png",
     "128": "src/ui/resources/icon_128.png"
   },
-  "version": "1.22.2",
+  "version": "1.22.4",
   "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
@@ -30,6 +30,7 @@
       ],
       "run_at": "document_start",
       "js": [
+        "lib/web-stream.js",
         "lib/chrome-browser-polyfill.js",
         "lib/single-file-bootstrap.js",
         "lib/single-file-extension-bootstrap.js",
@@ -77,6 +78,7 @@
     "lib/single-file-extension-editor-helper.js",
     "lib/single-file-zip.min.js",
     "lib/single-file-z-worker.js",
+    "lib/web-stream.js",
     "src/lib/readability/Readability.js",
     "src/lib/readability/Readability-readerable.js",
     "src/ui/pages/editor-note-web.css",
