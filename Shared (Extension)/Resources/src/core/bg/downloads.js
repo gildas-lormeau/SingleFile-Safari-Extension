@@ -250,7 +250,16 @@ async function downloadCompressedContent(message, tab) {
 		});
 		if (message.openEditor) {
 			ui.onEdit(tabId);
-			await editor.open({ tabIndex: tab.index + 1, filename: message.filename, content: Array.from(new Uint8Array(await blob.arrayBuffer())), compressContent: true });
+			await editor.open({
+				tabIndex: tab.index + 1,
+				filename: message.filename,
+				content: Array.from(new Uint8Array(await blob.arrayBuffer())),
+				compressContent: message.compressContent,
+				selfExtractingArchive: message.selfExtractingArchive,
+				extractDataFromPage: message.extractDataFromPage
+			});
+		} else if (message.foregroundSave) {
+			await downloadPageForeground(message.taskId, message.filename, blob, tabId, message.foregroundSave);
 		} else {
 			try {
 				const prompt = filename => promptFilename(tabId, filename);
@@ -446,8 +455,8 @@ function saveToClipboard(pageData) {
 	}
 }
 
-async function downloadPageForeground(taskId, filename, content, tabId) {
-	const serializer = yabson.getSerializer({ filename, taskId, content: await content.arrayBuffer() });
+async function downloadPageForeground(taskId, filename, content, tabId, foregroundSave) {
+	const serializer = yabson.getSerializer({ filename, taskId, foregroundSave, content: await content.arrayBuffer() });
 	for await (const data of serializer) {
 		await browser.tabs.sendMessage(tabId, {
 			method: "content.download",
