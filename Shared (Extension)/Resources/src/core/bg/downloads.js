@@ -194,14 +194,16 @@ async function downloadContent(contents, tab, incognito, message) {
 					incognito,
 					filenameConflictAction: message.filenameConflictAction,
 					filenameReplacementCharacter: message.filenameReplacementCharacter,
+					bookmarkId: message.bookmarkId,
+					replaceBookmarkURL: message.replaceBookmarkURL,
 					includeInfobar: message.includeInfobar
 				});
 			}
-			if (message.replaceBookmarkURL && response && response.url) {
+			if (message.bookmarkId && message.replaceBookmarkURL && response && response.url) {
 				await bookmarks.update(message.bookmarkId, { url: response.url });
 			}
 			ui.onEnd(tabId);
-			if (message.openSavedPage) {
+			if (message.openSavedPage && !message.openEditor) {
 				const createTabProperties = { active: true, url: "/src/ui/pages/viewer.html?blobURI=" + URL.createObjectURL(new Blob(contents, { type: MIMETYPE_HTML })), windowId: tab.windowId };
 				if (tab.index != null) {
 					createTabProperties.index = tab.index + 1;
@@ -285,7 +287,8 @@ async function downloadCompressedContent(message, tab) {
 						filenameConflictAction: message.filenameConflictAction,
 						filenameReplacementCharacter: message.filenameReplacementCharacter,
 						bookmarkId: message.bookmarkId,
-						replaceBookmarkURL: message.replaceBookmarkURL
+						replaceBookmarkURL: message.replaceBookmarkURL,
+						includeInfobar: message.includeInfobar
 					});
 				} else {
 					await downloadPageForeground(message.taskId, message.filename, blob, tabId);
@@ -295,7 +298,7 @@ async function downloadCompressedContent(message, tab) {
 				await bookmarks.update(message.bookmarkId, { url: response.url });
 			}
 			ui.onEnd(tabId);
-			if (message.openSavedPage) {
+			if (message.openSavedPage && !message.openEditor) {
 				const createTabProperties = { active: true, url: "/src/ui/pages/viewer.html?compressed&blobURI=" + URL.createObjectURL(blob), windowId: tab.windowId };
 				if (tab.index != null) {
 					createTabProperties.index = tab.index + 1;
@@ -307,7 +310,7 @@ async function downloadCompressedContent(message, tab) {
 	} catch (error) {
 		if (!error.message || error.message != "upload_cancelled") {
 			console.error(error); // eslint-disable-line no-console
-			ui.onError(tabId, error.message);
+			ui.onError(tabId, error.message, error.link);
 		}
 	} finally {
 		if (message.url) {

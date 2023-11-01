@@ -75,6 +75,7 @@ if (globalThis.window == globalThis.top && location && location.href && (locatio
 async function extractFile() {
 	if (document.documentElement.dataset.sfz !== undefined) {
 		const data = await getContent();
+		document.querySelectorAll("#sfz-error-message").forEach(element => element.remove());
 		executeBootstrap(data);
 	} else {
 		if ((document.body && document.body.childNodes.length == 1 && document.body.childNodes[0].tagName == "PRE" && /<html[^>]* data-sfz[^>]*>/i.test(document.body.childNodes[0].textContent))) {
@@ -111,7 +112,11 @@ function getContent() {
 
 function executeBootstrap(data) {
 	const scriptElement = document.createElement("script");
-	scriptElement.textContent = "(() => { document.currentScript.remove(); const bootstrapReady = this.bootstrap && this.bootstrap([" + (new Uint8Array(data)).toString() + "]); if (bootstrapReady) { bootstrapReady.then(() => document.dispatchEvent(new CustomEvent(\"single-file-display-infobar\"))); } })()";
+	scriptElement.textContent = "(()=>{" +
+		"document.currentScript.remove();" +
+		"if (document.readyState=='complete') {run()} else {globalThis.addEventListener('load', run)}" +
+		"function run() {this.bootstrap([" + (new Uint8Array(data)).toString() + "])}" +
+		"})()";
 	document.body.appendChild(scriptElement);
 }
 
