@@ -112,10 +112,16 @@ button {
     border-width: 1px;
     color: black;
     white-space: nowrap;
+    cursor: pointer;
 }
 
-button:not([disabled]):hover {
+button:not(:disabled):hover {
     background-color: #ededed;
+}
+
+button:disabled {
+    opacity: .25;
+    cursor: default;
 }
 
 body>header button,
@@ -402,7 +408,7 @@ html.side-panel,
         background-color: #ccc;
     }
 
-    button:hover {
+    button:not(:disabled):hover {
         color: #2A2A2E;
     }
 
