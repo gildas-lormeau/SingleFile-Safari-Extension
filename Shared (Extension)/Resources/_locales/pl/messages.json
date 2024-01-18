@@ -283,10 +283,6 @@
 		"message": "ZIP",
 		"description": "Options page label: 'ZIP'"
 	},
-	"optionPassword": {
-		"message": "hasło",
-		"description": "Options page label: 'password'"
-	},
 	"optionCreateRootDirectory": {
 		"message": "utwórz katalog główny",
 		"description": "Options page label: 'create a root directory'"
@@ -295,9 +291,17 @@
 		"message": "nie dołączaj danych po danych ZIP",
 		"description": "Options page label: 'do not append data after the ZIP data'"
 	},
+	"optionPassword": {
+		"message": "hasło",
+		"description": "Options page label: 'password'"
+	},
 	"optionInsertTextBody": {
 		"message": "uczyń tekst przeszukiwalnym",
 		"description": "Options page label: 'make text searchable'"
+	},
+	"optionInsertEmbeddedImage": {
+		"message": "wstaw osadzony obraz",
+		"description": "Options page label: 'insert embedded image'"
 	},
 	"optionsInfobarSubTitle": {
 		"message": "Pasek informacyjny",
@@ -739,6 +743,10 @@
 		"message": "Zawartość ramki",
 		"description": "Label 'Frame contents' in the log panel"
 	},
+	"logPanelEmbeddedImage": {
+		"message": "Osadzony obraz",
+		"description": "Label 'Embedded image' in the log panel"
+	},
 	"logPanelStep": {
 		"message": "Krok",
 		"description": "Label 'Step' (for 'Step x / 4') in the log panel"
@@ -746,6 +754,14 @@
 	"logPanelWidth": {
 		"message": "130",
 		"description": "Width of the log panel in pixels, it should be adjusted for the longest label beginning with 'log' (e.g. 'logPanelDeferredImages')"
+	},
+	"topPanelError": {
+		"message": "Błąd SingleFile: ",
+		"description": "Label 'SingleFile error: ' in the top panel when displaying an error message"
+	},
+	"topPanelEmbeddedImageButton": {
+		"message": "Otwórz obraz...",
+		"description": "Top panel button 'Open image...' when embedding an image"
 	},
 	"profileDefaultSettings": {
 		"message": "Ustawienia domyślne",

@@ -39,19 +39,20 @@ export {
 	EDITOR_URL
 };
 
-async function open({ tabIndex, content, filename, compressContent, selfExtractingArchive, extractDataFromPage, insertTextBody }) {
+async function open({ tabIndex, content, filename, compressContent, selfExtractingArchive, extractDataFromPage, insertTextBody, embeddedImage }) {
 	const createTabProperties = { active: true, url: EDITOR_PAGE_URL };
 	if (tabIndex != null) {
 		createTabProperties.index = tabIndex;
 	}
 	const tab = await browser.tabs.create(createTabProperties);
-	tabsData.set(tab.id, { 
-		content, 
-		filename, 
-		compressContent, 
-		selfExtractingArchive, 
+	tabsData.set(tab.id, {
+		content,
+		filename,
+		compressContent,
+		selfExtractingArchive,
 		extractDataFromPage,
-		insertTextBody
+		insertTextBody,
+		embeddedImage
 	});
 }
 
@@ -84,6 +85,7 @@ async function onMessage(message, sender) {
 					}
 				} else {
 					message.content = content;
+					options.embeddedImage = tabData.embeddedImage;
 					message.options = options;
 				}
 				await browser.tabs.sendMessage(tab.id, message);
@@ -111,14 +113,15 @@ async function onMessage(message, sender) {
 			const updateTabProperties = { url: EDITOR_PAGE_URL };
 			await browser.tabs.update(tab.id, updateTabProperties);
 			const content = message.compressContent ? contents.flat() : contents.join("");
-			tabsData.set(tab.id, { 
-				url: tab.url, 
-				content, 
-				filename: message.filename, 
+			tabsData.set(tab.id, {
+				url: tab.url,
+				content,
+				filename: message.filename,
 				compressContent: message.compressContent,
 				selfExtractingArchive: message.selfExtractingArchive,
 				extractDataFromPageTags: message.extractDataFromPageTags,
-				insertTextBody: message.insertTextBody
+				insertTextBody: message.insertTextBody,
+				embeddedImage: message.embeddedImage
 			});
 		}
 		return {};

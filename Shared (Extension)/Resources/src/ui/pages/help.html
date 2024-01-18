@@ -243,6 +243,13 @@
 							encoded in UTF-8 but the page is declared in ISO-8859-1.
 						</p>
 					</li>
+					<li data-options-label="insertEmbeddedImageLabel">
+						<span class="option">Option: insert embedded images</span>
+						<p>Check this option to embed an image in all types of ZIP file, making them compatible with the
+							PNG format. This image is displayed when the archive renamed as a PNG file is opened in an
+							image viewer.
+						</p>
+					</li>
 				</ul>
 				<p>HTML content</p>
 				<ul>
@@ -921,6 +928,7 @@
 					<li><code>{profile-name}</code>: the name of the profile used to save the page</li>
 					<li><code>{filename-extension}</code>: the extension of the filename depending on the file format
 						(i.e. "html", "u.zip.html", "zip.html", "zip")</li>
+					<li><code>{save-action}</code>: the action used to save the page (i.e. "page", "selection")</li>
 				</ul>
 			</li>
 			<li><a id="template-functions" href="#template-functions">Template functions</a>
