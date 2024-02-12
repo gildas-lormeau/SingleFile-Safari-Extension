@@ -21,7 +21,7 @@
  *   Source.
  */
 
-/* global browser, document, globalThis, location, URL, Blob, MouseEvent */
+/* global browser, document, globalThis, location, URL, Blob, MouseEvent, setTimeout */
 
 import * as download from "./../common/download.js";
 import { fetch, frameFetch } from "./../../lib/single-file/fetch/content/content-fetch.js";
@@ -254,6 +254,9 @@ async function processPage(options) {
 			};
 			preInitializationAllPromises.then(() => resolve(preInitializationAllPromises));
 		});
+	}
+	if (options.delayBeforeProcessing) {
+		await new Promise(resolve => setTimeout(resolve, options.delayBeforeProcessing * 1000));
 	}
 	framesSessionId = options.frames && options.frames.sessionId;
 	const selectedFrame = options.frames && options.frames.find(frameData => frameData.requestedFrame);
