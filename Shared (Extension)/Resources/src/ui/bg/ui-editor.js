@@ -30,6 +30,7 @@ import * as yabson from "./../../lib/yabson/yabson.js";
 
 const EMBEDDED_IMAGE_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelEmbeddedImageButton");
 const SHARE_PAGE_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelSharePageButton");
+const SHARE_SELECTION_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelShareSelectionButton");
 const ERROR_TITLE_MESSAGE = browser.i18n.getMessage("topPanelError");
 
 const FOREGROUND_SAVE = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && !/Vivaldi/.test(navigator.userAgent) && !/OPR/.test(navigator.userAgent);
@@ -303,6 +304,7 @@ addEventListener("message", event => {
 					pageData.viewport = message.viewport;
 					pageData.url = message.url;
 					pageData.filename = message.filename || tabData.filename;
+					pageData.mimeType = "text/html";
 					if (message.foregroundSave) {
 						tabData.options.backgroundSave = false;
 						tabData.options.foregroundSave = true;
@@ -312,7 +314,8 @@ addEventListener("message", event => {
 		} else {
 			const pageData = {
 				content: message.content,
-				filename: message.filename || tabData.filename
+				filename: message.filename || tabData.filename,
+				mimeType: "text/html"
 			};
 			tabData.options.compressContent = false;
 			download.downloadPage(pageData, tabData.options);
@@ -429,12 +432,13 @@ async function downloadContent(message) {
 				method: "download",
 				filename: result.value.filename,
 				content: Array.from(new Uint8Array(result.value.content)),
+				mimeType: result.value.mimeType,
 				sharePage: result.value.sharePage
 			}), "*");
 		} else {
 			const link = document.createElement("a");
 			link.download = result.value.filename;
-			link.href = URL.createObjectURL(new Blob([result.value.content]), "text/html");
+			link.href = URL.createObjectURL(new Blob([result.value.content], { type: result.value.mimeType }));
 			link.dispatchEvent(new MouseEvent("click"));
 			URL.revokeObjectURL(link.href);
 		}
@@ -533,6 +537,7 @@ function savePage() {
 		labels: {
 			EMBEDDED_IMAGE_BUTTON_MESSAGE,
 			SHARE_PAGE_BUTTON_MESSAGE,
+			SHARE_SELECTION_BUTTON_MESSAGE,
 			ERROR_TITLE_MESSAGE
 		}
 	}), "*");

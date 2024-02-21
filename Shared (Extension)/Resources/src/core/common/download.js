@@ -28,11 +28,12 @@ import { getSharePageBar, setLabels } from "./../../ui/common/common-content-ui.
 
 const MAX_CONTENT_SIZE = 16 * (1024 * 1024);
 
-let EMBEDDED_IMAGE_BUTTON_MESSAGE, SHARE_PAGE_BUTTON_MESSAGE, ERROR_TITLE_MESSAGE;
+let EMBEDDED_IMAGE_BUTTON_MESSAGE, SHARE_PAGE_BUTTON_MESSAGE, SHARE_SELECTION_BUTTON_MESSAGE, ERROR_TITLE_MESSAGE;
 
 try {
 	EMBEDDED_IMAGE_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelEmbeddedImageButton");
 	SHARE_PAGE_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelSharePageButton");
+	SHARE_SELECTION_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelShareSelectionButton");
 	ERROR_TITLE_MESSAGE = browser.i18n.getMessage("topPanelError");
 } catch (error) {
 	// ignored
@@ -42,6 +43,7 @@ let sharePageBar;
 setLabels({
 	EMBEDDED_IMAGE_BUTTON_MESSAGE,
 	SHARE_PAGE_BUTTON_MESSAGE,
+	SHARE_SELECTION_BUTTON_MESSAGE,
 	ERROR_TITLE_MESSAGE
 });
 
@@ -62,6 +64,7 @@ async function downloadPage(pageData, options) {
 		confirmFilename: options.confirmFilename,
 		filenameConflictAction: options.filenameConflictAction,
 		filename: pageData.filename,
+		mimeType: pageData.mimeType,
 		saveToClipboard: options.saveToClipboard,
 		saveToGDrive: options.saveToGDrive,
 		saveToDropbox: options.saveToDropbox,
@@ -101,7 +104,7 @@ async function downloadPage(pageData, options) {
 		sharePage: options.sharePage
 	};
 	if (options.compressContent) {
-		const blob = new Blob([await yabson.serialize(pageData)], { type: "application/octet-stream" });
+		const blob = new Blob([await yabson.serialize(pageData)], { type: pageData.mimeType });
 		const blobURL = URL.createObjectURL(blob);
 		message.blobURL = blobURL;
 		const result = await browser.runtime.sendMessage(message);
@@ -123,7 +126,8 @@ async function downloadPage(pageData, options) {
 			} while (data.length);
 			await browser.runtime.sendMessage({
 				method: "downloads.download",
-				compressContent: true
+				compressContent: true,
+				mimeType: pageData.mimeType
 			});
 		}
 		if (options.backgroundSave) {
@@ -131,7 +135,7 @@ async function downloadPage(pageData, options) {
 		}
 	} else {
 		if ((options.backgroundSave && !options.sharePage) || options.openEditor || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox) {
-			const blobURL = URL.createObjectURL(new Blob([pageData.content], { type: "text/html" }));
+			const blobURL = URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType }));
 			message.blobURL = blobURL;
 			const result = await browser.runtime.sendMessage(message);
 			URL.revokeObjectURL(blobURL);
@@ -155,7 +159,7 @@ async function downloadPage(pageData, options) {
 				await downloadPageForeground(pageData, options);
 			}
 			if (options.openSavedPage) {
-				open(URL.createObjectURL(new Blob([pageData.content], { type: "text/html" })));
+				open(URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType })));
 			}
 			browser.runtime.sendMessage({ method: "ui.processEnd" });
 		}
@@ -165,30 +169,31 @@ async function downloadPage(pageData, options) {
 
 async function downloadPageForeground(pageData, options) {
 	if (options.sharePage && navigator.share) {
-		await sharePage(pageData);
+		await sharePage(pageData, options);
 	} else {
 		if (pageData.filename && pageData.filename.length) {
 			const link = document.createElement("a");
 			link.download = pageData.filename;
-			link.href = URL.createObjectURL(new Blob([pageData.content], { type: "text/html" }));
+			link.href = URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType }));
 			link.dispatchEvent(new MouseEvent("click"));
 			return new Promise(resolve => setTimeout(() => { URL.revokeObjectURL(link.href); resolve(); }, 1000));
 		}
 	}
 }
 
-async function sharePage(pageData) {
+async function sharePage(pageData, options) {
 	sharePageBar = getSharePageBar();
-	const cancelled = await sharePageBar.display();
+	debugger;
+	const cancelled = await sharePageBar.display(options.selected);
 	if (!cancelled) {
-		const data = { files: [new File([pageData.content], pageData.filename)] };
+		const data = { files: [new File([pageData.content], pageData.filename, { type: pageData.mimeType })] };
 		try {
 			await navigator.share(data);
 			sharePageBar.hide();
 		} catch (error) {
 			sharePageBar.hide();
 			if (error.name === "AbortError") {
-				await sharePage(pageData);
+				await sharePage(pageData, options);
 			} else {
 				throw error;
 			}
@@ -196,15 +201,15 @@ async function sharePage(pageData) {
 	}
 }
 
-function saveToClipboard(page) {
+function saveToClipboard(pageData) {
 	const command = "copy";
 	document.addEventListener(command, listener);
 	document.execCommand(command);
 	document.removeEventListener(command, listener);
 
 	function listener(event) {
-		event.clipboardData.setData("text/html", page.content);
-		event.clipboardData.setData("text/plain", page.content);
+		event.clipboardData.setData(pageData.mimeType, pageData.content);
+		event.clipboardData.setData("text/plain", pageData.content);
 		event.preventDefault();
 	}
 }
