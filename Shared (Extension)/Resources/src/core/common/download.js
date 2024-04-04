@@ -168,6 +168,9 @@ async function downloadPage(pageData, options) {
 }
 
 async function downloadPageForeground(pageData, options) {
+	if (Array.isArray(pageData.content)) {
+		pageData.content = new Uint8Array(pageData.content);
+	}
 	if (options.sharePage && navigator.share) {
 		await sharePage(pageData, options);
 	} else {
@@ -183,7 +186,6 @@ async function downloadPageForeground(pageData, options) {
 
 async function sharePage(pageData, options) {
 	sharePageBar = getSharePageBar();
-	debugger;
 	const cancelled = await sharePageBar.display(options.selected);
 	if (!cancelled) {
 		const data = { files: [new File([pageData.content], pageData.filename, { type: pageData.mimeType })] };
