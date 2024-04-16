@@ -13,8 +13,8 @@
 		8E136F51291F07240036F08D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E136F4F291F07240036F08D /* Main.storyboard */; };
 		8E136F5A291F07240036F08D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E136F59291F07240036F08D /* AppDelegate.swift */; };
 		8E136F5D291F07240036F08D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E136F5B291F07240036F08D /* Main.storyboard */; };
-		8E136F64291F07240036F08D /* SingleFile Safari Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E136F63291F07240036F08D /* SingleFile Safari Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8E136F6E291F07240036F08D /* SingleFile Safari Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E136F6D291F07240036F08D /* SingleFile Safari Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8E136F64291F07240036F08D /* SingleFile Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E136F63291F07240036F08D /* SingleFile Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8E136F6E291F07240036F08D /* SingleFile Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E136F6D291F07240036F08D /* SingleFile Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E136F74291F07240036F08D /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E136F2F291F07230036F08D /* Main.html */; };
 		8E136F75291F07240036F08D /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 8E136F2F291F07230036F08D /* Main.html */; };
 		8E136F76291F07240036F08D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E136F31291F07230036F08D /* Icon.png */; };
@@ -45,14 +45,14 @@
 			containerPortal = 8E136F29291F07220036F08D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8E136F62291F07240036F08D;
-			remoteInfo = "SingleFile Safari Extension (iOS)";
+			remoteInfo = "SingleFile Extension (iOS)";
 		};
 		8E136F6F291F07240036F08D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8E136F29291F07220036F08D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8E136F6C291F07240036F08D;
-			remoteInfo = "SingleFile Safari Extension (macOS)";
+			remoteInfo = "SingleFile Extension (macOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -63,7 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8E136F64291F07240036F08D /* SingleFile Safari Extension.appex in Embed Foundation Extensions */,
+				8E136F64291F07240036F08D /* SingleFile Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,7 +74,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8E136F6E291F07240036F08D /* SingleFile Safari Extension.appex in Embed Foundation Extensions */,
+				8E136F6E291F07240036F08D /* SingleFile Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,21 +91,21 @@
 		8E136F37291F07240036F08D /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		8E136F39291F07240036F08D /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
 		8E136F3B291F07240036F08D /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
-		8E136F45291F07240036F08D /* SingleFile Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SingleFile Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E136F45291F07240036F08D /* SingleFile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SingleFile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E136F48291F07240036F08D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E136F4A291F07240036F08D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8E136F4D291F07240036F08D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E136F50291F07240036F08D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E136F52291F07240036F08D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E136F57291F07240036F08D /* SingleFile for Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SingleFile for Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E136F57291F07240036F08D /* SingleFile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SingleFile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E136F59291F07240036F08D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E136F5C291F07240036F08D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8E136F5E291F07240036F08D /* SingleFile Safari.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SingleFile Safari.entitlements"; sourceTree = "<group>"; };
-		8E136F63291F07240036F08D /* SingleFile Safari Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SingleFile Safari Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E136F5E291F07240036F08D /* SingleFile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SingleFile.entitlements"; sourceTree = "<group>"; };
+		8E136F63291F07240036F08D /* SingleFile Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SingleFile Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E136F68291F07240036F08D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E136F6D291F07240036F08D /* SingleFile Safari Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SingleFile Safari Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E136F6D291F07240036F08D /* SingleFile Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SingleFile Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E136F72291F07240036F08D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E136F73291F07240036F08D /* SingleFile Safari.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SingleFile Safari.entitlements"; sourceTree = "<group>"; };
+		8E136F73291F07240036F08D /* SingleFile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SingleFile.entitlements"; sourceTree = "<group>"; };
 		8E136FA2291F0A4A0036F08D /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		8E136FA3291F0A4A0036F08D /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,10 +199,10 @@
 		8E136F46291F07240036F08D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E136F45291F07240036F08D /* SingleFile Safari.app */,
-				8E136F57291F07240036F08D /* SingleFile for Safari.app */,
-				8E136F63291F07240036F08D /* SingleFile Safari Extension.appex */,
-				8E136F6D291F07240036F08D /* SingleFile Safari Extension.appex */,
+				8E136F45291F07240036F08D /* SingleFile.app */,
+				8E136F57291F07240036F08D /* SingleFile.app */,
+				8E136F63291F07240036F08D /* SingleFile Extension.appex */,
+				8E136F6D291F07240036F08D /* SingleFile Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -224,7 +224,7 @@
 			children = (
 				8E136F59291F07240036F08D /* AppDelegate.swift */,
 				8E136F5B291F07240036F08D /* Main.storyboard */,
-				8E136F5E291F07240036F08D /* SingleFile Safari.entitlements */,
+				8E136F5E291F07240036F08D /* SingleFile.entitlements */,
 			);
 			path = "macOS (App)";
 			sourceTree = "<group>";
@@ -241,7 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				8E136F72291F07240036F08D /* Info.plist */,
-				8E136F73291F07240036F08D /* SingleFile Safari.entitlements */,
+				8E136F73291F07240036F08D /* SingleFile.entitlements */,
 			);
 			path = "macOS (Extension)";
 			sourceTree = "<group>";
@@ -249,9 +249,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8E136F44291F07240036F08D /* SingleFile Safari (iOS) */ = {
+		8E136F44291F07240036F08D /* SingleFile (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E136F98291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari (iOS)" */;
+			buildConfigurationList = 8E136F98291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile (iOS)" */;
 			buildPhases = (
 				8E136F41291F07240036F08D /* Sources */,
 				8E136F42291F07240036F08D /* Frameworks */,
@@ -263,14 +263,14 @@
 			dependencies = (
 				8E136F66291F07240036F08D /* PBXTargetDependency */,
 			);
-			name = "SingleFile Safari (iOS)";
-			productName = "SingleFile Safari (iOS)";
-			productReference = 8E136F45291F07240036F08D /* SingleFile Safari.app */;
+			name = "SingleFile (iOS)";
+			productName = "SingleFile (iOS)";
+			productReference = 8E136F45291F07240036F08D /* SingleFile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E136F56291F07240036F08D /* SingleFile Safari (macOS) */ = {
+		8E136F56291F07240036F08D /* SingleFile (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E136F9F291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari (macOS)" */;
+			buildConfigurationList = 8E136F9F291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile (macOS)" */;
 			buildPhases = (
 				8E136F53291F07240036F08D /* Sources */,
 				8E136F54291F07240036F08D /* Frameworks */,
@@ -282,14 +282,14 @@
 			dependencies = (
 				8E136F70291F07240036F08D /* PBXTargetDependency */,
 			);
-			name = "SingleFile Safari (macOS)";
-			productName = "SingleFile Safari (macOS)";
-			productReference = 8E136F57291F07240036F08D /* SingleFile for Safari.app */;
+			name = "SingleFile (macOS)";
+			productName = "SingleFile (macOS)";
+			productReference = 8E136F57291F07240036F08D /* SingleFile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8E136F62291F07240036F08D /* SingleFile Safari Extension (iOS) */ = {
+		8E136F62291F07240036F08D /* SingleFile Extension (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E136F94291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari Extension (iOS)" */;
+			buildConfigurationList = 8E136F94291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Extension (iOS)" */;
 			buildPhases = (
 				8E136F5F291F07240036F08D /* Sources */,
 				8E136F60291F07240036F08D /* Frameworks */,
@@ -299,14 +299,14 @@
 			);
 			dependencies = (
 			);
-			name = "SingleFile Safari Extension (iOS)";
-			productName = "SingleFile Safari Extension (iOS)";
-			productReference = 8E136F63291F07240036F08D /* SingleFile Safari Extension.appex */;
+			name = "SingleFile Extension (iOS)";
+			productName = "SingleFile Extension (iOS)";
+			productReference = 8E136F63291F07240036F08D /* SingleFile Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8E136F6C291F07240036F08D /* SingleFile Safari Extension (macOS) */ = {
+		8E136F6C291F07240036F08D /* SingleFile Extension (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E136F9B291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari Extension (macOS)" */;
+			buildConfigurationList = 8E136F9B291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Extension (macOS)" */;
 			buildPhases = (
 				8E136F69291F07240036F08D /* Sources */,
 				8E136F6A291F07240036F08D /* Frameworks */,
@@ -316,9 +316,9 @@
 			);
 			dependencies = (
 			);
-			name = "SingleFile Safari Extension (macOS)";
-			productName = "SingleFile Safari Extension (macOS)";
-			productReference = 8E136F6D291F07240036F08D /* SingleFile Safari Extension.appex */;
+			name = "SingleFile Extension (macOS)";
+			productName = "SingleFile Extension (macOS)";
+			productReference = 8E136F6D291F07240036F08D /* SingleFile Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -358,10 +358,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8E136F44291F07240036F08D /* SingleFile Safari (iOS) */,
-				8E136F56291F07240036F08D /* SingleFile Safari (macOS) */,
-				8E136F62291F07240036F08D /* SingleFile Safari Extension (iOS) */,
-				8E136F6C291F07240036F08D /* SingleFile Safari Extension (macOS) */,
+				8E136F44291F07240036F08D /* SingleFile (iOS) */,
+				8E136F56291F07240036F08D /* SingleFile (macOS) */,
+				8E136F62291F07240036F08D /* SingleFile Extension (iOS) */,
+				8E136F6C291F07240036F08D /* SingleFile Extension (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -459,12 +459,12 @@
 /* Begin PBXTargetDependency section */
 		8E136F66291F07240036F08D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8E136F62291F07240036F08D /* SingleFile Safari Extension (iOS) */;
+			target = 8E136F62291F07240036F08D /* SingleFile Extension (iOS) */;
 			targetProxy = 8E136F65291F07240036F08D /* PBXContainerItemProxy */;
 		};
 		8E136F70291F07240036F08D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8E136F6C291F07240036F08D /* SingleFile Safari Extension (macOS) */;
+			target = 8E136F6C291F07240036F08D /* SingleFile Extension (macOS) */;
 			targetProxy = 8E136F6F291F07240036F08D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -624,11 +624,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile for Safari";
+				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -636,13 +636,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari.Extension";
-				PRODUCT_NAME = "SingleFile Safari Extension";
+				PRODUCT_NAME = "SingleFile Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -658,11 +658,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile for Safari";
+				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -670,13 +670,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari.Extension";
-				PRODUCT_NAME = "SingleFile Safari Extension";
+				PRODUCT_NAME = "SingleFile Extension";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -695,11 +695,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile for Safari";
+				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -711,7 +711,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -719,7 +719,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari";
-				PRODUCT_NAME = "SingleFile Safari";
+				PRODUCT_NAME = "SingleFile";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -736,11 +736,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile for Safari";
+				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -752,7 +752,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -760,7 +760,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari";
-				PRODUCT_NAME = "SingleFile Safari";
+				PRODUCT_NAME = "SingleFile";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -773,17 +773,17 @@
 		8E136F9C291F07240036F08D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/SingleFile Safari.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/SingleFile.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile Safari Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -791,13 +791,13 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari.Extension";
-				PRODUCT_NAME = "SingleFile Safari Extension";
+				PRODUCT_NAME = "SingleFile Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -808,17 +808,17 @@
 		8E136F9D291F07240036F08D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/SingleFile Safari.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/SingleFile.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile Safari Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "SingleFile Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -826,13 +826,13 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari.Extension";
-				PRODUCT_NAME = "SingleFile Safari Extension";
+				PRODUCT_NAME = "SingleFile Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -846,11 +846,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "macOS (App)/SingleFile Safari.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/SingleFile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -863,7 +863,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -871,7 +871,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari";
-				PRODUCT_NAME = "SingleFile for Safari";
+				PRODUCT_NAME = "SingleFile";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -885,11 +885,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "macOS (App)/SingleFile Safari.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/SingleFile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 98;
+				CURRENT_PROJECT_VERSION = 99;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = FPM6D68GAR;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -902,7 +902,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -910,7 +910,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.frapps.SingleFile-Safari";
-				PRODUCT_NAME = "SingleFile for Safari";
+				PRODUCT_NAME = "SingleFile";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -930,7 +930,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E136F94291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari Extension (iOS)" */ = {
+		8E136F94291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Extension (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E136F95291F07240036F08D /* Debug */,
@@ -939,7 +939,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E136F98291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari (iOS)" */ = {
+		8E136F98291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E136F99291F07240036F08D /* Debug */,
@@ -948,7 +948,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E136F9B291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari Extension (macOS)" */ = {
+		8E136F9B291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Extension (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E136F9C291F07240036F08D /* Debug */,
@@ -957,7 +957,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E136F9F291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile Safari (macOS)" */ = {
+		8E136F9F291F07240036F08D /* Build configuration list for PBXNativeTarget "SingleFile (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E136FA0291F07240036F08D /* Debug */,
