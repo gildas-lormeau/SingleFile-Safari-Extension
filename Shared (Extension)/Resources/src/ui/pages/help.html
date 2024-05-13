@@ -222,6 +222,13 @@
 							increases the CPU consumption and the time needed to save or read a page.</p>
 						</p>
 					</li>
+					<li data-options-label="insertEmbeddedImageLabel">
+						<span class="option">Option: embed image</span>
+						<p>Check one of the options to embed an image when saving the page as a ZIP file
+							(self-extracting or not). This allows you to display the saved page as a PNG image when
+							the filename extension is changed to ".png".
+						</p>
+					</li>
 					<li data-options-label="createRootDirectoryLabel">
 						<span class="option">Option: create a root directory</span>
 						<p>Check this option to create a root directory in the ZIP file. The directory name consists of
@@ -241,13 +248,6 @@
 							file. This makes it possible, for example, to search for pages from the text. Note that if
 							the selected fomrmat is "self-extracting ZIP (universal)", the text content is
 							encoded in UTF-8 but the page is declared in ISO-8859-1.
-						</p>
-					</li>
-					<li data-options-label="insertEmbeddedImageLabel">
-						<span class="option">Option: insert embedded images</span>
-						<p>Check this option to embed an image in all types of ZIP file, making them compatible with the
-							PNG format. This image is displayed when the archive renamed as a PNG file is opened in an
-							image viewer.
 						</p>
 					</li>
 				</ul>
@@ -525,6 +525,26 @@
 							find more info <a href="https://github.com/gildas-lormeau/single-file-companion"
 								target="_blank">here</a></p>
 						<p class="notice">It is recommended to <u>uncheck</u> this option</p>
+					</li>
+					<li data-options-label="saveToRestFormApiLabel"> <span class="option">Option: upload to a REST Form
+							API</span>
+						<p>Check this option to save the page on an API endpoint accepting form data.</p>
+						<p class="notice">It is recommended to <u>uncheck</u> this option</p>
+					</li>
+					<li data-options-label="saveToRestFormApiUrlLabel"> <span class="option">Option: URL</span>
+						<p>Enter the URL of the API endpoint.</p>
+					</li>
+					<li data-options-label="saveToRestFormApiTokenLabel"> <span class="option">Option: authorization
+							token</span>
+						<p>Provide the the value of the "Bearer" token to authenticate the request.</p>
+					</li>
+					<li data-options-label="saveToRestFormApiFileFieldNameLabel"> <span class="option">Option: archive
+							data field name</span>
+						<p>Enter the name of the field that will contain the data of the saved page.</p>
+					</li>
+					<li data-options-label="saveToRestFormApiUrlFieldNameLabel"> <span class="option">Option: archive
+							URL field name</span>
+						<p>Enter the name of the field that will contain the URL of the saved page.</p>
 					</li>
 				</ul>
 				<p>Network</p>
@@ -838,6 +858,7 @@
 					`{page-title}[10ch]` to limit the title to 10 characters).
 				</p>
 				<ul>
+					<li><code>{navigator-language}</code>: the language of the browser</li>
 					<li><code>{page-title}</code>: the title of the page</li>
 					<li><code>{page-heading}</code>: the content of the H1 tag in the page</li>
 					<li><code>{page-language}</code>: the language of the page</li>
@@ -1082,6 +1103,15 @@
 					<li><code>%page-element-attribute&lt;selector|attribute&gt;</code>: the value of the specified
 						attribute of the first element matching the specified selector (e.g.
 						"%page-element-attribute&lt;h1|class&gt;" for the class attribute of the first H1 element)
+					</li>
+					<li><code>%date-locale&lt;locales&gt;</code>: the localized value of the date and time (e.g.
+						"%date-locale&lt;en-US&gt;" for the date and time in the US English format)
+					</li>
+					<li><code>%time-locale&lt;locales&gt;</code>: the localized value of the time (e.g.
+						"%time-locale&lt;en-US&gt;" for the time in the US English format)
+					</li>
+					<li><code>%datetime-locale&lt;locales&gt;</code>: the localized value of the date and time (e.g.
+						"%datetime-locale&lt;en-US&gt;" for the date and time in the US English format)
 					</li>
 				</ul>
 			</li>

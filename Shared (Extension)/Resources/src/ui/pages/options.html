@@ -95,7 +95,8 @@
 				<label for="fileFormatSelectInput" id="fileFormatSelectLabel"></label>
 				<select id="fileFormatSelectInput">
 					<option id="fileFormatSelectHTMLLabel" value="html"></option>
-					<option id="fileFormatSelectSelfExtractingUniversalLabel" value="self-extracting-zip-universal"></option>
+					<option id="fileFormatSelectSelfExtractingUniversalLabel" value="self-extracting-zip-universal">
+					</option>
 					<option id="fileFormatSelectSelfExtractingLabel" value="self-extracting-zip"></option>
 					<option id="fileFormatSelectZIPLabel" value="zip"></option>
 				</select>
@@ -103,6 +104,18 @@
 			<div class="option vertical">
 				<label for="passwordInput" id="passwordLabel"></label>
 				<input type="text" id="passwordInput">
+			</div>
+			<div class="option">
+				<label for="insertEmbeddedImageInput" id="insertEmbeddedImageLabel"></label>
+				<input type="checkbox" id="insertEmbeddedImageInput" name="embeddedImageInput">
+			</div>
+			<div class="option second-level">
+				<label for="insertEmbeddedScreenshotImageInput" id="insertEmbeddedScreenshotImageLabel"></label>
+				<input type="radio" id="insertEmbeddedScreenshotImageInput" name="embeddedImageInput">
+			</div>
+			<div class="option second-level">
+				<label for="insertEmbeddedCustomImageInput" id="insertEmbeddedCustomImageLabel"></label>
+				<input type="radio" id="insertEmbeddedCustomImageInput" name="embeddedImageInput">
 			</div>
 			<div class="option">
 				<label for="createRootDirectoryInput" id="createRootDirectoryLabel"></label>
@@ -115,10 +128,6 @@
 			<div class="option">
 				<label for="insertTextBodyInput" id="insertTextBodyLabel"></label>
 				<input type="checkbox" id="insertTextBodyInput">
-			</div>
-			<div class="option">
-				<label for="insertEmbeddedImageInput" id="insertEmbeddedImageLabel"></label>
-				<input type="checkbox" id="insertEmbeddedImageInput">
 			</div>
 		</details>
 		<details>
@@ -294,6 +303,26 @@
 			<div class="option" id="saveWithCompanionOption">
 				<label for="saveWithCompanionInput" id="saveWithCompanionLabel"></label>
 				<input type="radio" id="saveWithCompanionInput" name="destinationInput">
+			</div>
+			<div class="option">
+				<label for="saveToRestFormApiInput" id="saveToRestFormApiLabel"></label>
+				<input type="radio" id="saveToRestFormApiInput" name="destinationInput">
+			</div>
+			<div class="option second-level">
+				<label for="saveToRestFormApiUrlInput" id="saveToRestFormApiUrlLabel"></label>
+				<input type="text" id="saveToRestFormApiUrlInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="saveToRestFormApiTokenInput" id="saveToRestFormApiTokenLabel"></label>
+				<input type="password" id="saveToRestFormApiTokenInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="saveToRestFormApiFileFieldNameInput" id="saveToRestFormApiFileFieldNameLabel"></label>
+				<input type="text" id="saveToRestFormApiFileFieldNameInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="saveToRestFormApiUrlFieldNameInput" id="saveToRestFormApiUrlFieldNameLabel"></label>
+				<input type="text" id="saveToRestFormApiUrlFieldNameInput" class="medium-input">
 			</div>
 		</details>
 		<details>

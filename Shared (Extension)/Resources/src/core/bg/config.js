@@ -109,6 +109,7 @@ const DEFAULT_CONFIG = {
 	webDAVUser: "",
 	webDAVPassword: "",
 	saveToGitHub: false,
+	saveToRestFormApi: false,
 	githubToken: "",
 	githubUser: "",
 	githubRepository: "SingleFile-Archives",
@@ -135,6 +136,7 @@ const DEFAULT_CONFIG = {
 	extractDataFromPage: true,
 	preventAppendedData: false,
 	insertEmbeddedImage: false,
+	insertEmbeddedScreenshotImage: false,
 	insertTextBody: false,
 	autoSaveExternalSave: false,
 	insertMetaNoIndex: false,
@@ -164,7 +166,11 @@ const DEFAULT_CONFIG = {
 	blockVideos: true,
 	blockAudios: true,
 	delayBeforeProcessing: 0,
-	_migratedTemplateFormat: true
+	_migratedTemplateFormat: true,
+	saveToRestFormApiUrl: "",
+	saveToRestFormApiFileFieldName: "",
+	saveToRestFormApiUrlFieldName: "",
+	saveToRestFormApiToken: ""
 };
 
 const DEFAULT_RULES = [{
@@ -640,7 +646,7 @@ async function exportConfig() {
 	const config = await getConfig();
 	const textContent = JSON.stringify({ profiles: config.profiles, rules: config.rules, maxParallelWorkers: config.maxParallelWorkers, processInForeground: config.processInForeground }, null, 2);
 	const filename = `singlefile-settings-${(new Date()).toISOString().replace(/:/g, "_")}.json`;
-	if (IS_NOT_SAFARI) {
+	if (BACKGROUND_SAVE_SUPPORTED) {
 		const url = URL.createObjectURL(new Blob([textContent], { type: "text/json" }));
 		try {
 			await download({

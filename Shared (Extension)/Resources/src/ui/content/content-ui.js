@@ -54,6 +54,7 @@ export {
 	markSelection,
 	unmarkSelection,
 	promptMessage as prompt,
+	setVisible,
 	onStartPage,
 	onEndPage,
 	onLoadResource,
@@ -66,13 +67,21 @@ export {
 	onStartStage,
 	onEndStage,
 	onPageLoading,
-	onLoadPage,
-	onStartStageTask,
-	onEndStageTask
+	onLoadPage
 };
 
 function promptMessage(message, defaultValue) {
 	return prompt(message, defaultValue);
+}
+
+function setVisible(visible) {
+	const maskElement = document.querySelector(MASK_TAGNAME);
+	if (maskElement) {
+		maskElement.style.setProperty("display", visible ? "block" : "none");
+	}
+	if (logsWindowElement) {
+		logsWindowElement.style.setProperty("display", visible ? "block" : "none");
+	}
 }
 
 function onStartPage(options) {
@@ -140,10 +149,6 @@ function onEndStage(step, options) {
 function onPageLoading() { }
 
 function onLoadPage() { }
-
-function onStartStageTask() { }
-
-function onEndStageTask() { }
 
 function getSelectedLinks() {
 	let selectionFound;
