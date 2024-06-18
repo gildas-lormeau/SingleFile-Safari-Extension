@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 cd ./single-file
 npx rollup -c rollup.config.dev.js
