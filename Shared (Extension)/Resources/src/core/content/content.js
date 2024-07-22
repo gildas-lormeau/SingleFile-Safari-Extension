@@ -21,7 +21,7 @@
  *   Source.
  */
 
-/* global browser, document, globalThis, location, setTimeout, URL */
+/* global browser, document, globalThis, location, setTimeout, URL, setInterval, clearInterval */
 
 import * as download from "./../common/download.js";
 import { fetch, frameFetch } from "./../../lib/single-file/fetch/content/content-fetch.js";
@@ -148,6 +148,9 @@ async function onMessage(message) {
 }
 
 async function savePage(message) {
+	const pingInterval = setInterval(() => {
+		browser.runtime.sendMessage({ method: "ping" }).then(() => { });
+	}, 15000);
 	const options = message.options;
 	let selectionFound;
 	if (options.selected || options.optionallySelected) {
@@ -168,10 +171,18 @@ async function savePage(message) {
 			try {
 				const pageData = await processPage(options);
 				if (pageData) {
-					if (((!options.backgroundSave && !options.saveToClipboard) || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi) && options.confirmFilename) {
-						pageData.filename = ui.prompt("Save as", pageData.filename) || pageData.filename;
+					if (((!options.backgroundSave && !options.saveToClipboard) || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi || options.saveToS3) && options.confirmFilename && !options.openEditor) {
+						const filename = ui.prompt("Save as", pageData.filename);
+						if (filename) {
+							pageData.filename = filename;
+							await download.downloadPage(pageData, options);
+						} else {
+							browser.runtime.sendMessage({ method: "downloads.cancel" });
+							browser.runtime.sendMessage({ method: "ui.processCancelled" });
+						}
+					} else {
+						await download.downloadPage(pageData, options);
 					}
-					await download.downloadPage(pageData, options);
 				}
 			} catch (error) {
 				if (!processor.cancelled) {
@@ -189,12 +200,13 @@ async function savePage(message) {
 			bootstrap.pageInfo.processing = false;
 		}
 	}
+	clearInterval(pingInterval);
 }
 
 async function processPage(options) {
 	const frames = singlefile.processors.frameTree;
 	let framesSessionId;
-	options.keepFilename = options.saveToGDrive || options.saveToGitHub || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi;
+	options.keepFilename = options.saveToGDrive || options.saveToGitHub || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi || options.saveToS3;
 	singlefile.helper.initDoc(document);
 	ui.onStartPage(options);
 	processor = new singlefile.SingleFile(options);

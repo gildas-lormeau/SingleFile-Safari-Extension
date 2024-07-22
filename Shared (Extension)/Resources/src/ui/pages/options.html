@@ -49,7 +49,7 @@
 			<summary id="filenameLabel"></summary>
 			<div class="option vertical">
 				<label for="filenameTemplateInput" id="filenameTemplateLabel"></label>
-				<input type="text" id="filenameTemplateInput">
+				<textarea id="filenameTemplateInput"></textarea>
 			</div>
 			<div class="option">
 				<label for="filenameMaxLengthInput" id="filenameMaxLengthLabel"></label>
@@ -169,7 +169,7 @@
 			</div>
 			<div class="option vertical">
 				<label for="infobarTemplateInput" id="infobarTemplateLabel"></label>
-				<input type="text" id="infobarTemplateInput">
+				<textarea id="infobarTemplateInput"></textarea>
 			</div>
 			<div class="option">
 				<label for="confirmInfobarInput" id="confirmInfobarLabel"></label>
@@ -295,6 +295,30 @@
 			<div class="option" id="saveToGDriveOption">
 				<label for="saveToGDriveInput" id="saveToGDriveLabel"></label>
 				<input type="radio" id="saveToGDriveInput" name="destinationInput">
+			</div>
+			<div class="option" id="saveToS3Option">
+				<label for="saveToS3Input" id="saveToS3Label"></label>
+				<input type="radio" id="saveToS3Input" name="destinationInput">
+			</div>
+			<div class="option second-level">
+				<label for="S3DomainInput" id="S3DomainLabel"></label>
+				<input type="text" id="S3DomainInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="S3RegionInput" id="S3RegionLabel"></label>
+				<input type="text" id="S3RegionInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="S3BucketInput" id="S3BucketLabel"></label>
+				<input type="text" id="S3BucketInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="S3AccessKeyInput" id="S3AccessKeyLabel"></label>
+				<input type="text" id="S3AccessKeyInput" class="medium-input">
+			</div>
+			<div class="option second-level">
+				<label for="S3SecretKeyInput" id="S3SecretKeyLabel"></label>
+				<input type="password" id="S3SecretKeyInput" class="medium-input">
 			</div>
 			<div class="option" id="saveToDropboxOption">
 				<label for="saveToDropboxInput" id="saveToDropboxLabel"></label>

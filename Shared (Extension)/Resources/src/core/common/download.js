@@ -21,9 +21,10 @@
  *   Source.
  */
 
-/* global browser, document, URL, Blob, MouseEvent, setTimeout, open, navigator, File */
+/* global browser, document, URL, Blob, MouseEvent, setTimeout, open, navigator, File, setInterval, clearInterval */
 
 import * as yabson from "./../../lib/yabson/yabson.js";
+import * as ui from "./../../ui/content/content-ui.js";
 import { getSharePageBar, setLabels } from "./../../ui/common/common-content-ui.js";
 
 const MAX_CONTENT_SIZE = 16 * (1024 * 1024);
@@ -106,8 +107,17 @@ async function downloadPage(pageData, options) {
 		saveToRestFormApiUrl: options.saveToRestFormApiUrl,
 		saveToRestFormApiFileFieldName: options.saveToRestFormApiFileFieldName,
 		saveToRestFormApiUrlFieldName: options.saveToRestFormApiUrlFieldName,
-		saveToRestFormApiToken: options.saveToRestFormApiToken
+		saveToRestFormApiToken: options.saveToRestFormApiToken,
+		saveToS3: options.saveToS3,
+		S3Domain: options.S3Domain,
+		S3Region: options.S3Region,
+		S3Bucket: options.S3Bucket,
+		S3AccessKey: options.S3AccessKey,
+		S3SecretKey: options.S3SecretKey
 	};
+	const pingInterval = setInterval(() => {
+		browser.runtime.sendMessage({ method: "ping" }).then(() => { });
+	}, 15000);
 	if (options.compressContent) {
 		const blob = new Blob([await yabson.serialize(pageData)], { type: pageData.mimeType });
 		const blobURL = URL.createObjectURL(blob);
@@ -118,17 +128,14 @@ async function downloadPage(pageData, options) {
 			message.embeddedImage = embeddedImage;
 			message.blobURL = null;
 			message.pageData = pageData;
-			let data, indexData = 0;
-			const dataArray = await yabson.serialize(message);
-			do {
-				data = Array.from(dataArray.slice(indexData, indexData + MAX_CONTENT_SIZE));
-				indexData += MAX_CONTENT_SIZE;
+			const serializer = yabson.getSerializer(message);
+			for await (const chunk of serializer) {
 				await browser.runtime.sendMessage({
 					method: "downloads.download",
 					compressContent: true,
-					data
+					data: Array.from(chunk)
 				});
-			} while (data.length);
+			}
 			await browser.runtime.sendMessage({
 				method: "downloads.download",
 				compressContent: true,
@@ -139,23 +146,33 @@ async function downloadPage(pageData, options) {
 			await browser.runtime.sendMessage({ method: "downloads.end", taskId: options.taskId });
 		}
 	} else {
-		if ((options.backgroundSave && !options.sharePage) || options.openEditor || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi) {
-			const blobURL = URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType }));
-			message.blobURL = blobURL;
-			const result = await browser.runtime.sendMessage(message);
-			URL.revokeObjectURL(blobURL);
-			if (result.error) {
-				message.blobURL = null;
-				for (let blockIndex = 0; blockIndex * MAX_CONTENT_SIZE < pageData.content.length; blockIndex++) {
-					message.truncated = pageData.content.length > MAX_CONTENT_SIZE;
-					if (message.truncated) {
-						message.finished = (blockIndex + 1) * MAX_CONTENT_SIZE > pageData.content.length;
-						message.content = pageData.content.substring(blockIndex * MAX_CONTENT_SIZE, (blockIndex + 1) * MAX_CONTENT_SIZE);
-					} else {
-						message.content = pageData.content;
+		if ((options.backgroundSave && !options.sharePage) || options.openEditor || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi || options.saveToS3) {
+			let filename = pageData.filename;
+			if ((options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox || options.saveToRestFormApi || options.saveToS3) && options.confirmFilename && !options.openEditor) {
+				filename = ui.prompt("Save as", pageData.filename);
+			}
+			if (filename) {
+				message.filename = pageData.filename = filename;
+				const blobURL = URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType }));
+				message.blobURL = blobURL;
+				const result = await browser.runtime.sendMessage(message);
+				URL.revokeObjectURL(blobURL);
+				if (result.error) {
+					message.blobURL = null;
+					for (let blockIndex = 0; blockIndex * MAX_CONTENT_SIZE < pageData.content.length; blockIndex++) {
+						message.truncated = pageData.content.length > MAX_CONTENT_SIZE;
+						if (message.truncated) {
+							message.finished = (blockIndex + 1) * MAX_CONTENT_SIZE > pageData.content.length;
+							message.content = pageData.content.substring(blockIndex * MAX_CONTENT_SIZE, (blockIndex + 1) * MAX_CONTENT_SIZE);
+						} else {
+							message.content = pageData.content;
+						}
+						await browser.runtime.sendMessage(message);
 					}
-					await browser.runtime.sendMessage(message);
 				}
+			} else {
+				browser.runtime.sendMessage({ method: "downloads.cancel" });
+				browser.runtime.sendMessage({ method: "ui.processCancelled" });
 			}
 		} else {
 			if (options.saveToClipboard) {
@@ -170,6 +187,7 @@ async function downloadPage(pageData, options) {
 		}
 		await browser.runtime.sendMessage({ method: "downloads.end", taskId: options.taskId, hash: pageData.hash, woleetKey: options.woleetKey });
 	}
+	clearInterval(pingInterval);
 }
 
 async function downloadPageForeground(pageData, options) {
@@ -179,7 +197,17 @@ async function downloadPageForeground(pageData, options) {
 	if (options.sharePage && navigator.share) {
 		await sharePage(pageData, options);
 	} else {
-		if (pageData.filename && pageData.filename.length) {
+		let filename = pageData.filename;
+		if (options.confirmFilename) {
+			filename = ui.prompt("Save as", pageData.filename);
+			if (filename) {
+				pageData.filename = filename;
+			} else {
+				browser.runtime.sendMessage({ method: "downloads.cancel" });
+				browser.runtime.sendMessage({ method: "ui.processCancelled" });
+			}
+		}
+		if (filename) {
 			const link = document.createElement("a");
 			link.download = pageData.filename;
 			link.href = URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType }));
