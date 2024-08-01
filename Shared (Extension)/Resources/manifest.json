@@ -41,6 +41,13 @@
   "background": {
     "page": "src/core/bg/background.html"
   },
+  "sidebar_action": {
+    "browser_style": true,
+    "default_title": "SingleFile",
+    "default_panel": "src/ui/pages/panel.html",
+    "default_icon": "src/ui/resources/icon_128.png",
+    "open_at_install": false
+  },
   "options_ui": {
     "browser_style": true,
     "page": "src/ui/pages/options.html",
@@ -85,10 +92,17 @@
     "src/ui/pages/editor-frame-web.css"
   ],
   "permissions": [
-    "downloads",
+    "menus",
+    "storage",
     "tabs",
     "<all_urls>"
   ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{531906d3-e22f-4a6c-a102-8057b88a1a63}"
+    },
+    "gecko_android": {}
+  },
   "devtools_page": "src/core/devtools/devtools.html",
   "manifest_version": 2,
   "default_locale": "en"
