@@ -39,7 +39,7 @@
     }
   ],
   "background": {
-    "page": "src/core/bg/background.html"
+    "page": "src/core/bg/background.html", "persistent": false
   },
   "sidebar_action": {
     "browser_style": true,
@@ -92,7 +92,7 @@
     "src/ui/pages/editor-frame-web.css"
   ],
   "permissions": [
-    "menus",
+    "contextMenus",
     "storage",
     "tabs",
     "<all_urls>"
