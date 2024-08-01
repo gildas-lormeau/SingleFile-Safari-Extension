@@ -175,6 +175,10 @@
 		"message": "neem de infobalk op in de opgeslagen pagina",
 		"description": "Options page label: 'include the infobar in the saved page'"
 	},
+	"optionOpenInfobar": {
+		"message": "infobalk openhouden",
+		"description": "Options page label: 'keep infobar open'"
+	},
 	"optionRemoveInfobarSavedDate": {
 		"message": "sla de opgeslagen datum niet op",
 		"description": "Options page label: 'do not include the saved date'"
@@ -668,27 +672,27 @@
 		"description": "Options page label: 'branch name'"
 	},
 	"optionSaveToS3": {
-		"message": "upload to Amazon S3",
+		"message": "upload naar Amazon S3",
 		"description": "Options page label: 'upload to Amazon S3'"
 	},
 	"optionS3Domain": {
-		"message": "domain",
+		"message": "domein",
 		"description": "Options page label: 'domain'"
 	},
 	"optionS3Region": {
-		"message": "region",
+		"message": "regio",
 		"description": "Options page label: 'region'"
 	},
 	"optionS3Bucket": {
-		"message": "bucket name",
+		"message": "bucketnaam",
 		"description": "Options page label: 'bucket name'"
 	},
 	"optionS3AccessKey": {
-		"message": "access key",
+		"message": "toegangssleutel",
 		"description": "Options page label: 'access key'"
 	},
 	"optionS3SecretKey": {
-		"message": "secret key",
+		"message": "geheime sleutel",
 		"description": "Options page label: 'secret key'"
 	},
 	"optionSaveWithWebDAV": {
