@@ -221,6 +221,7 @@ async function downloadContent(contents, tab, incognito, message) {
 			} else if (message.saveToRestFormApi) {
 				response = await saveToRestFormApi(
 					message.taskId,
+					message.filename,
 					contents.join(""),
 					tab.url,
 					message.saveToRestFormApiToken,
@@ -348,6 +349,7 @@ async function downloadCompressedContent(message, tab) {
 			} else if (message.saveToRestFormApi) {
 				response = await saveToRestFormApi(
 					message.taskId,
+					message.filename,
 					blob,
 					tab.url,
 					message.saveToRestFormApiToken,
@@ -605,13 +607,13 @@ function saveToClipboard(pageData) {
 	}
 }
 
-async function saveToRestFormApi(taskId, content, url, token, restApiUrl, fileFieldName, urlFieldName) {
+async function saveToRestFormApi(taskId, filename, content, url, token, restApiUrl, fileFieldName, urlFieldName) {
 	try {
 		const taskInfo = business.getTaskInfo(taskId);
 		if (!taskInfo || !taskInfo.cancelled) {
 			const client = new RestFormApi(token, restApiUrl, fileFieldName, urlFieldName);
 			business.setCancelCallback(taskId, () => client.abort());
-			return await client.upload(content, url);
+			return await client.upload(filename, content, url);
 		}
 	} catch (error) {
 		throw new Error(error.message + " (RestFormApi)");

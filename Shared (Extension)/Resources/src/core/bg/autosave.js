@@ -207,6 +207,7 @@ async function saveContent(message, tab) {
 					} else if (options.saveToRestFormApi) {
 						await downloads.saveToRestFormApi(
 							message.taskId,
+							pageData.filename,
 							content,
 							options.url,
 							options.saveToRestFormApiToken,
@@ -220,14 +221,14 @@ async function saveContent(message, tab) {
 						}
 						await downloads.saveToS3(
 							message.taskId,
+							pageData.filename,
 							content,
-							options.url,
 							options.S3Domain,
 							options.S3Region,
 							options.S3Bucket,
 							options.S3AccessKey,
 							options.S3SecretKey,
-							options.S3KeyPrefix
+							{ filenameConflictAction: options.filenameConflictAction }
 						);
 					} else {
 						if (!(content instanceof Blob)) {
