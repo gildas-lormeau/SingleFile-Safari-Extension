@@ -362,6 +362,14 @@
 							to save a page.</p>
 						<p class="notice">It is recommended to <u>uncheck</u> this option</p>
 					</li>
+					<li data-options-label="groupDuplicateStylesheetsLabel"> <span class="option">Option: group
+							duplicate stylesheets together</span>
+						<p>Check this option to group together all the duplicate inline stylesheets. Checking this
+							option should not alter the document and can considerably reduce the size of the file. This
+							option is ignored with archive formats based on ZIP files. Please note that this option
+							requires JavaScript to be enabled in order to function properly.</p>
+						<p class="notice">It is recommended to <u>uncheck</u> this option</p>
+					</li>
 					<li data-options-label="moveStylesInHeadLabel"> <span class="option">Option: move in the head
 							element the styles found outside of it</span>
 						<p>
@@ -988,10 +996,11 @@
 					<li><code>{filename-extension}</code>: the extension of the filename depending on the file format
 						(i.e. "html", "u.zip.html", "zip.html", "zip")</li>
 					<li><code>{save-action}</code>: the action used to save the page (i.e. "page", "selection")</li>
-					<li><code>{options-json}</code>: the JSON representation of the options used to save the page</li>
+					<li><code>{options-json}</code>: the JSON representation of the options used to save the page. Each
+						property name is written in camel case (e.g. "blockScripts")</li>
 					<li><code>{options-text}</code>: the text representation of the options used to save the page. The
 						text representation is formatted with a list of options and their values separated by a line
-						break (e.g. "option1: value1\noption2: value2")</li>
+						break (e.g. "saveRawPage: false\includeInfobar: true...")</li>
 				</ul>
 			</li>
 			<li><a id="template-functions" href="#template-functions">Template functions</a>
