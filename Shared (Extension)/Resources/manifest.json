@@ -4,11 +4,12 @@
   "homepage_url": "https://github.com/gildas-lormeau/SingleFile",
   "icons": {
     "16": "src/ui/resources/icon_16.png",
+    "32": "src/ui/resources/icon_32.png",
     "48": "src/ui/resources/icon_48.png",
     "64": "src/ui/resources/icon_64.png",
     "128": "src/ui/resources/icon_128.png"
   },
-  "version": "1.22.70",
+  "version": "1.22.71",
   "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
@@ -56,6 +57,7 @@
   "browser_action": {
     "default_icon": {
       "16": "src/ui/resources/icon_16.png",
+      "32": "src/ui/resources/icon_32.png",
       "48": "src/ui/resources/icon_48.png",
       "64": "src/ui/resources/icon_64.png",
       "128": "src/ui/resources/icon_128.png"
