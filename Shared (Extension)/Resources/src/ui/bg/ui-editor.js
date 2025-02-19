@@ -21,7 +21,7 @@
  *   Source.
  */
 
-/* global browser, document, matchMedia, addEventListener, navigator, prompt, URL, MouseEvent, Blob, setInterval, DOMParser */
+/* global browser, document, matchMedia, addEventListener, navigator, prompt, URL, MouseEvent, Blob, setInterval, DOMParser, fetch */
 
 import * as download from "../../core/common/download.js";
 import { onError } from "./../common/common-content-ui.js";
@@ -565,6 +565,11 @@ function savePage() {
 		compressHTML: tabData.options.compressHTML,
 		includeInfobar: tabData.options.includeInfobar,
 		openInfobar: tabData.options.openInfobar,
+		infobarPositionAbsolute: tabData.options.infobarPositionAbsolute,
+		infobarPositionTop: tabData.options.infobarPositionTop,
+		infobarPositionBottom: tabData.options.infobarPositionBottom,
+		infobarPositionLeft: tabData.options.infobarPositionLeft,
+		infobarPositionRight: tabData.options.infobarPositionRight,
 		backgroundSave: tabData.options.backgroundSave,
 		updatedResources,
 		filename: tabData.filename,
@@ -582,7 +587,12 @@ function savePage() {
 function displayInfobar() {
 	editorElement.contentWindow.postMessage(JSON.stringify({
 		method: "displayInfobar",
-		openInfobar: tabData.options.openInfobar
+		openInfobar: tabData.options.openInfobar,
+		infobarPositionAbsolute: tabData.options.infobarPositionAbsolute,
+		infobarPositionTop: tabData.options.infobarPositionTop,
+		infobarPositionBottom: tabData.options.infobarPositionBottom,
+		infobarPositionLeft: tabData.options.infobarPositionLeft,
+		infobarPositionRight: tabData.options.infobarPositionRight
 	}), "*");
 }
 
@@ -689,6 +699,7 @@ function deserializeShadowRoots(node) {
 				const contentDocument = (new DOMParser()).parseFromString(element.innerHTML, "text/html");
 				Array.from(contentDocument.head.childNodes).forEach(node => shadowRoot.appendChild(node));
 				Array.from(contentDocument.body.childNodes).forEach(node => shadowRoot.appendChild(node));
+				// eslint-disable-next-line no-unused-vars
 			} catch (error) {
 				// ignored
 			}

@@ -21,7 +21,7 @@
  *   Source.
  */
 
-/* global globalThis, window, document, fetch, DOMParser, getComputedStyle, setTimeout, clearTimeout, NodeFilter, Readability, isProbablyReaderable, matchMedia, TextDecoder, Node, URL, prompt, MutationObserver, FileReader, Worker, navigator */
+/* global window, document, fetch, DOMParser, getComputedStyle, setTimeout, clearTimeout, NodeFilter, Readability, isProbablyReaderable, matchMedia, TextDecoder, Node, URL, prompt, MutationObserver, FileReader, Worker, navigator */
 
 import { setLabels } from "./../../ui/common/common-content-ui.js";
 import { downloadPageForeground } from "../../core/common/download.js";
@@ -981,7 +981,7 @@ pre code {
 
 	let NOTES_WEB_STYLESHEET, MASK_WEB_STYLESHEET, HIGHLIGHTS_WEB_STYLESHEET;
 	let selectedNote, anchorElement, maskNoteElement, maskPageElement, highlightSelectionMode, removeHighlightMode, resizingNoteMode, movingNoteMode, highlightColor, collapseNoteTimeout, cuttingOuterMode, cuttingMode, cuttingTouchTarget, cuttingPath, cuttingPathIndex, previousContent;
-	let removedElements = [], removedElementIndex = 0, initScriptContent, pageResources, pageUrl, pageCompressContent, includeInfobar, openInfobar;
+	let removedElements = [], removedElementIndex = 0, initScriptContent, pageResources, pageUrl, pageCompressContent, includeInfobar, openInfobar, infobarPositionAbsolute, infobarPositionTop, infobarPositionBottom, infobarPositionLeft, infobarPositionRight;
 
 	globalThis.zip = singlefile.helper.zip;
 	initEventListeners();
@@ -1078,6 +1078,11 @@ pre code {
 				onUpdate(true);
 				includeInfobar = message.includeInfobar;
 				openInfobar = message.openInfobar;
+				infobarPositionAbsolute = message.infobarPositionAbsolute;
+				infobarPositionTop = message.infobarPositionTop;
+				infobarPositionBottom = message.infobarPositionBottom;
+				infobarPositionLeft = message.infobarPositionLeft;
+				infobarPositionRight = message.infobarPositionRight;
 				let content = getContent(message.compressHTML, message.updatedResources);
 				if (initScriptContent) {
 					content = content.replace(/<script data-template-shadow-root src.*?<\/script>/g, initScriptContent);
@@ -1133,7 +1138,14 @@ pre code {
 				printPage();
 			}
 			if (message.method == "displayInfobar") {
-				singlefile.helper.displayIcon(document, true, { openInfobar: message.openInfobar });
+				singlefile.helper.displayIcon(document, true, {
+					openInfobar: message.openInfobar,
+					infobarPositionAbsolute: message.infobarPositionAbsolute,
+					infobarPositionTop: message.infobarPositionTop,
+					infobarPositionBottom: message.infobarPositionBottom,
+					infobarPositionLeft: message.infobarPositionLeft,
+					infobarPositionRight: message.infobarPositionRight
+				});
 				const infobarDoc = document.implementation.createHTMLDocument();
 				infobarDoc.body.appendChild(document.querySelector(singlefile.helper.INFOBAR_TAGNAME));
 				serializeShadowRoots(infobarDoc.body);
@@ -1182,6 +1194,7 @@ pre code {
 			try {
 				const worker = new Worker(zipOptions.workerScripts.inflate[0]);
 				worker.terminate();
+				// eslint-disable-next-line no-unused-vars
 			} catch (error) {
 				delete zipOptions.workerScripts;
 			}
@@ -2113,6 +2126,11 @@ pre code {
 		if (includeInfobar) {
 			const options = singlefile.helper.extractInfobarData(doc);
 			options.openInfobar = openInfobar;
+			options.infobarPositionAbsolute = infobarPositionAbsolute;
+			options.infobarPositionTop = infobarPositionTop;
+			options.infobarPositionRight = infobarPositionRight;
+			options.infobarPositionBottom = infobarPositionBottom;
+			options.infobarPositionLeft = infobarPositionLeft;
 			singlefile.helper.appendInfobar(doc, options);
 		}
 		doc.querySelectorAll("." + HIGHLIGHT_CLASS).forEach(noteElement => noteElement.classList.remove(HIGHLIGHT_HIDDEN_CLASS));
@@ -2247,6 +2265,7 @@ pre code {
 						const contentDocument = (new DOMParser()).parseFromString(element.innerHTML, "text/html");
 						Array.from(contentDocument.head.childNodes).forEach(node => shadowRoot.appendChild(node));
 						Array.from(contentDocument.body.childNodes).forEach(node => shadowRoot.appendChild(node));
+						// eslint-disable-next-line no-unused-vars
 					} catch (error) {
 						// ignored
 					}
@@ -2391,6 +2410,7 @@ pre code {
 		} else if (chrome && chrome.dom && chrome.dom.openOrClosedShadowRoot) {
 			try {
 				return chrome.dom.openOrClosedShadowRoot(element);
+				// eslint-disable-next-line no-unused-vars
 			} catch (error) {
 				return element.shadowRoot;
 			}

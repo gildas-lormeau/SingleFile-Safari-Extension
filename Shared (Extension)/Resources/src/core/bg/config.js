@@ -33,7 +33,9 @@ const REGEXP_RULE_PREFIX = "regexp:";
 const PROFILE_NAME_PREFIX = "profile_";
 
 const IS_NOT_SAFARI = !/Safari/.test(navigator.userAgent) || /Chrome/.test(navigator.userAgent) || /Vivaldi/.test(navigator.userAgent) || /OPR/.test(navigator.userAgent);
-const BACKGROUND_SAVE_SUPPORTED = !(/Mobile.*Firefox/.test(navigator.userAgent) || /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && !/Vivaldi/.test(navigator.userAgent) && !/OPR/.test(navigator.userAgent));
+const IS_MOBILE_FIREFOX = /Mobile.*Firefox/.test(navigator.userAgent);
+const BACKGROUND_SAVE_SUPPORTED = !(IS_MOBILE_FIREFOX || /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent) && !/Vivaldi/.test(navigator.userAgent) && !/OPR/.test(navigator.userAgent));
+const AUTOCLOSE_SUPPORTED = !IS_MOBILE_FIREFOX;
 const BADGE_COLOR_SUPPORTED = IS_NOT_SAFARI;
 const AUTO_SAVE_SUPPORTED = IS_NOT_SAFARI;
 const SELECTABLE_TABS_SUPPORTED = IS_NOT_SAFARI;
@@ -184,7 +186,12 @@ const DEFAULT_CONFIG = {
 	S3AccessKey: "",
 	S3SecretKey: "",
 	resolveLinks: true,
-	groupDuplicateStylesheets: false
+	groupDuplicateStylesheets: false,
+	infobarPositionAbsolute: false,
+	infobarPositionTop: "16px",
+	infobarPositionRight: "16px",
+	infobarPositionBottom: "",
+	infobarPositionLeft: ""
 };
 
 const DEFAULT_RULES = [{
@@ -228,6 +235,7 @@ export {
 	DISABLED_PROFILE_NAME,
 	CURRENT_PROFILE_NAME,
 	BACKGROUND_SAVE_SUPPORTED,
+	AUTOCLOSE_SUPPORTED,
 	BADGE_COLOR_SUPPORTED,
 	AUTO_SAVE_SUPPORTED,
 	SELECTABLE_TABS_SUPPORTED,
@@ -310,7 +318,8 @@ function updateFilenameTemplate(template) {
 			template = template.replaceAll(`{${variable}}`, `%if-empty<{${variable}}|${value}>`);
 		});
 		return template;
-	} catch (_error) {
+		// eslint-disable-next-line no-unused-vars
+	} catch (error) {
 		// ignored
 	}
 }
@@ -343,6 +352,20 @@ function testRegExpRule(rule) {
 }
 
 async function onMessage(message) {
+	if (message.method.endsWith(".get")) {
+		return await getConfig();
+	}
+	if (message.method.endsWith(".set")) {
+		const { config } = message;
+		const profiles = config.profiles;
+		const rules = config.rules;
+		const maxParallelWorkers = config.maxParallelWorkers;
+		const processInForeground = config.processInForeground;
+		const profileKeyNames = await getProfileKeyNames();
+		await configStorage.remove([...profileKeyNames, "rules", "maxParallelWorkers", "processInForeground"]);
+		await configStorage.set({ rules, maxParallelWorkers, processInForeground });
+		Object.keys(profiles).forEach(profileName => setProfile(profileName, profiles[profileName]));
+	}
 	if (message.method.endsWith(".deleteRules")) {
 		await deleteRules(message.profileName);
 	}
@@ -382,6 +405,7 @@ async function onMessage(message) {
 			DEFAULT_PROFILE_NAME,
 			CURRENT_PROFILE_NAME,
 			BACKGROUND_SAVE_SUPPORTED,
+			AUTOCLOSE_SUPPORTED,
 			BADGE_COLOR_SUPPORTED,
 			AUTO_SAVE_SUPPORTED,
 			SELECTABLE_TABS_SUPPORTED,

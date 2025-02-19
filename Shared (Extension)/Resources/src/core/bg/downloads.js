@@ -132,6 +132,7 @@ async function downloadTabPage(message, tab) {
 				message.content = await (await fetch(message.blobURL)).text();
 				await downloadContent([message.content], tab, tab.incognito, message);
 			}
+			// eslint-disable-next-line no-unused-vars
 		} catch (error) {
 			return { error: true };
 		}
@@ -244,7 +245,12 @@ async function downloadContent(contents, tab, incognito, message) {
 					bookmarkId: message.bookmarkId,
 					replaceBookmarkURL: message.replaceBookmarkURL,
 					includeInfobar: message.includeInfobar,
-					openInfobar: message.openInfobar
+					openInfobar: message.openInfobar,
+					infobarPositionAbsolute: message.infobarPositionAbsolute,
+					infobarPositionTop: message.infobarPositionTop,
+					infobarPositionBottom: message.infobarPositionBottom,
+					infobarPositionLeft: message.infobarPositionLeft,
+					infobarPositionRight: message.infobarPositionRight
 				});
 				if (!response) {
 					throw new Error("upload_cancelled");
@@ -372,7 +378,12 @@ async function downloadCompressedContent(message, tab) {
 					bookmarkId: message.bookmarkId,
 					replaceBookmarkURL: message.replaceBookmarkURL,
 					includeInfobar: message.includeInfobar,
-					openInfobar: message.openInfobar
+					openInfobar: message.openInfobar,
+					infobarPositionAbsolute: message.infobarPositionAbsolute,
+					infobarPositionTop: message.infobarPositionTop,
+					infobarPositionBottom: message.infobarPositionBottom,
+					infobarPositionLeft: message.infobarPositionLeft,
+					infobarPositionRight: message.infobarPositionRight
 				});
 			}
 			if (message.bookmarkId && message.replaceBookmarkURL && response && response.url) {

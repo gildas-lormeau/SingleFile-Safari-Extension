@@ -1,102 +1,102 @@
 {
 	"extensionDescription": {
-		"message": "Guardar uma página completa num único ficheiro HTML",
+		"message": "Extensionin təsviri.",
 		"description": "Description of the extension."
 	},
 	"commandSaveSelectedTabs": {
-		"message": "Guardar os separadores selecionados ou o seu conteúdo selecionado",
+		"message": "Seçilmiş tabları yaddaşa qeyd et",
 		"description": "Command (Ctrl+Shift+Y): 'Save the selected tabs or their selected contents'"
 	},
 	"commandSaveAllTabs": {
-		"message": "Guardar todos os separadores",
+		"message": "Bütün tabları yaddaşa qeyd et",
 		"description": "Command (Ctrl+Shift+U): 'Save all tabs'"
 	},
 	"menuSavePage": {
-		"message": "Guardar página com SingleFile",
+		"message": "Səhifəni SingleFile ilə yaddaşa qeyd et",
 		"description": "Menu entry: 'Save page with SingleFile'"
 	},
 	"menuSaveSelectedLinks": {
-		"message": "Guardar links selecionados",
+		"message": "Seçilmiş linkləri yaddaşa qeyd et",
 		"description": "Menu entry: 'Save selected links'"
 	},
 	"menuEditPage": {
-		"message": "Anotar a página...",
+		"message": "Səhifəni redaktə et...",
 		"description": "Menu entry: 'Annotate the page...'"
 	},
 	"menuEditAndSavePage": {
-		"message": "Anotar e guardar a página...",
+		"message": "Səhifəni redaktə et və yaddaşa qeyd et...",
 		"description": "Menu entry: 'Annotate and save the page...'"
 	},
 	"menuSaveWithProfile": {
-		"message": "Guardar página com perfil",
+		"message": "Profil ilə yaddaşa qeyd et",
 		"description": "Menu entry: 'Save with profile'"
 	},
 	"menuViewPendingSaves": {
-		"message": "Ver transferências pendentes...",
+		"message": "Gözləyən yaddaşları göstər...",
 		"description": "Menu entry: 'View pending saves...'"
 	},
 	"menuSelectProfile": {
-		"message": "Selecionar o perfil predefinido",
+		"message": "Standart profil seç",
 		"description": "Menu entry: 'Select the default profile'"
 	},
 	"menuUpdateRule": {
-		"message": "Selecionar o perfil da regra atual",
+		"message": "Qayda yenilə",
 		"description": "Menu entry: 'Select the profile of the current rule'"
 	},
 	"menuCreateDomainRule": {
-		"message": "Selecionar o perfil do domínio atual",
+		"message": "Domain qaydası yarat",
 		"description": "Menu entry: 'Select the profile of the current domain'"
 	},
 	"menuSaveSelection": {
-		"message": "Guardar seleção",
+		"message": "Seçimi yaddaşa qeyd et",
 		"description": "Menu entry: 'Save selection'"
 	},
 	"menuSaveFrame": {
-		"message": "Guardar frame",
+		"message": "Frame-i yaddaşa qeyd et",
 		"description": "Menu entry: 'Save frame'"
 	},
 	"menuSaveTabs": {
-		"message": "Guardar separadores",
+		"message": "Tabları yaddaşa qeyd et",
 		"description": "Menu entry (SingleFile button only): 'Save tabs'"
 	},
 	"menuSaveSelectedTabs": {
-		"message": "Guardar separadores selecionados",
+		"message": "Seçilmiş tabları yaddaşa qeyd et",
 		"description": "Menu entry: 'Save selected tabs'"
 	},
 	"menuSaveUnpinnedTabs": {
-		"message": "Guardar separadores não fixados",
+		"message": "Sabit olmayan tabları yaddaşa qeyd et",
 		"description": "Menu entry: 'Save unpinned tabs'"
 	},
 	"menuSaveAllTabs": {
-		"message": "Guardar todos os separadores",
+		"message": "Bütün tabları yaddaşa qeyd et",
 		"description": "Menu entry: 'Save all tabs'"
 	},
 	"menuBatchSaveUrls": {
-		"message": "Guardar URLs em lote...",
+		"message": "URL-ləri toplu yaddaşa qeyd et...",
 		"description": "Menu entry: 'Batch save URLs...'"
 	},
 	"menuAutoSave": {
-		"message": "Guardar automaticamente",
+		"message": "Avtomatik yaddaşa qeyd",
 		"description": "Menu entry: 'Auto-save'"
 	},
 	"menuAutoSaveDisabled": {
-		"message": "Desativado",
+		"message": "Deaktiv edildi",
 		"description": "Menu entry: 'Auto-save' > Disabled'"
 	},
 	"menuAutoSaveTab": {
-		"message": "Guardar automaticamente este separador",
+		"message": "Bu tabı avtomatik yaddaşa qeyd et",
 		"description": "Menu entry: 'Auto-save' > Auto-save this tab'"
 	},
 	"menuAutoSaveUnpinnedTabs": {
-		"message": "Guardar automaticamente separadores não fixados",
+		"message": "Sabit olmayan tabları avtomatik yaddaşa qeyd et",
 		"description": "Menu entry: 'Auto-save' > Auto-save unpinned tabs'"
 	},
 	"menuAutoSaveAllTabs": {
-		"message": "Guardar automaticamente todos os separadores",
+		"message": "Bütün tabları avtomatik yaddaşa qeyd et",
 		"description": "Menu entry: 'Auto-save' > Auto-save all tabs'"
 	},
 	"buttonDefaultTooltip": {
-		"message": "Guardar página com SingleFile",
+		"message": "SingleFile ilə səhifəni yaddaşa qeyd et",
 		"description": "Button title: 'Save page with SingleFile'"
 	},
 	"buttonBlockedBadge": {
@@ -104,11 +104,11 @@
 		"description": "Button badge when the page is blocked: '🚫'"
 	},
 	"buttonBlockedTooltip": {
-		"message": "Esta página não pode ser guardada com o SingleFile",
+		"message": "Bu səhifə SingleFile ilə yaddaşa qeyd edilə bilmir",
 		"description": "Button title: 'This page cannot be saved with SingleFile'"
 	},
 	"buttonInitializingTooltip": {
-		"message": "A iniciar SingleFile",
+		"message": "SingleFile Başlatırlır",
 		"description": "Button title during initialization: 'Initializing SingleFile (x/2)'"
 	},
 	"buttonInitializingBadge": {
@@ -116,11 +116,11 @@
 		"description": "Badge label during initialization: '•••'"
 	},
 	"buttonSaveProgressTooltip": {
-		"message": "Guardar progresso: ",
+		"message": "Yaddaşa qeyd etmək progressi: ",
 		"description": "Button title during save: 'Save progress: xx%'"
 	},
 	"buttonUploadProgressTooltip": {
-		"message": "Carregar progresso: ",
+		"message": "Yükləmə progressi: ",
 		"description": "Button title during save: 'Upload progress: xx%'"
 	},
 	"buttonOKBadge": {
@@ -128,11 +128,11 @@
 		"description": "Badge label: 'OK'"
 	},
 	"buttonErrorBadge": {
-		"message": "ERRO",
+		"message": "Xəta",
 		"description": "Badge label for unexpected errors"
 	},
 	"buttonAutoSaveActiveTooltip": {
-		"message": "Guardar automaticamente ativo",
+		"message": "Avtomatik yaddaşa qeyd aktivdir",
 		"description": "Button title: 'Auto-save active'"
 	},
 	"buttonAutoSaveActiveBadge": {
@@ -140,135 +140,135 @@
 		"description": "Badge label when auto-save is active"
 	},
 	"optionsTitle": {
-		"message": "Opções",
+		"message": "SingleFile seçimləri",
 		"description": "Options page title"
 	},
 	"optionsUserInterfaceSubTitle": {
-		"message": "Interface do utilizador",
+		"message": "İstifadəçi interfeysi",
 		"description": "Options sub-title: 'User interface'"
 	},
 	"optionAddMenuEntry": {
-		"message": "adicionar entrada no menu de contexto da página web",
+		"message": "səhifənin kontekst menyusuna əlavə edin",
 		"description": "Options page label: 'add entry in the context menu of the webpage'"
 	},
 	"optionDisplayShadow": {
-		"message": "sobrepor uma sombra na página durante o processamento",
+		"message": "işləmə zamanı səhifəyə gölge əlavə edin",
 		"description": "Options page label: 'overlay a shadow on the page during processing'"
 	},
 	"optionDisplayInfobar": {
-		"message": "mostrar uma barra de informações ao visualizar uma página guardada",
+		"message": "yaddaşa qeyd edilmiş səhifəni baxarkən infobar göstərin",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
 	"optionInfobarTemplate": {
-		"message": "modelo do conteúdo da barra de informações",
+		"message": "infobar məzmununun şablonu",
 		"description": "Options page label: 'template of the infobar content'"
 	},
 	"optionBlockMixedContent": {
-		"message": "bloco de conteúdo misto",
+		"message": "qarışıq məzmunu blok edin",
 		"description": "Options page label: 'block mixed content'"
 	},
 	"optionSaveOriginalURLs": {
-		"message": "guardar os URLs originais dos recursos incorporados",
+		"message": "mənbə URL-lərini yaddaşa qeyd edin",
 		"description": "Options page label: 'save original URLs of embedded resources'"
 	},
 	"optionIncludeInfobar": {
-		"message": "incluir a barra de informações na página guardada",
+		"message": "infobarı yaddaşa qeyd edin",
 		"description": "Options page label: 'include the infobar in the saved page'"
 	},
 	"optionOpenInfobar": {
-		"message": "manter o infobar aberto",
+		"message": "infobarı yaddaşa qeyd edilmiş səhifəni baxarkən açın",
 		"description": "Options page label: 'keep infobar open'"
 	},
 	"optionRemoveInfobarSavedDate": {
-		"message": "não incluir a data em que foi guardada",
+		"message": "yaddaşa qeyd edilmiş tarixi daxil etməyin",
 		"description": "Options page label: 'do not include the saved date'"
 	},
 	"optionConfirmInfobar": {
-		"message": "abrir uma caixa de diálogo para editar o conteúdo da barra de informações",
+		"message": "infobarın açılmasını təsdiqləyin",
 		"description": "Options page label: 'open a prompt dialog to edit the infobar content'"
 	},
 	"optionAutoClose": {
-		"message": "fechar automaticamente o separador depois de a página ser guardada",
+		"message": "səhifə yaddaşa qeyd edildikdən sonra tabı avtomatik olaraq bağlayın",
 		"description": "Options page label: 'auto-close the tab after the page is saved'"
 	},
 	"optionsFileNameSubTitle": {
-		"message": "Nome de ficheiro",
+		"message": "Fayl adı",
 		"description": "Options sub-title: 'File name'"
 	},
 	"optionFilenameTemplate": {
-		"message": "modelo",
+		"message": "şablon",
 		"description": "Options page label: 'template'"
 	},
 	"optionFilenameMaxLength": {
-		"message": "comprimento máximo",
+		"message": "maksimum uzunluq",
 		"description": "Options page label: 'max length'"
 	},
 	"optionFilenameMaxLengthBytesUnit": {
-		"message": "bytes",
+		"message": "bayt",
 		"description": "Options page label: 'bytes'"
 	},
 	"optionFilenameMaxLengthCharsUnit": {
-		"message": "caracteres",
+		"message": "simvol",
 		"description": "Options page label: 'characters'"
 	},
 	"optionFilenameReplacementCharacter": {
-		"message": "caractere de substituição",
+		"message": "əvəz olunan simvol",
 		"description": "Options page label: 'replacement character'"
 	},
 	"optionReplaceEmojisInFilename": {
-		"message": "substituir emojis por texto",
+		"message": "emoji-ləri mətnlə əvəz edin",
 		"description": "Options page label: 'replace emojis with text'"
 	},
 	"optionSaveFilenameTemplateData": {
-		"message": "save the filename template data into the page",
+		"message": "fayl adı şablon məlumatlarını səhifəyə yaddaşa qeyd edin",
 		"description": "Options page label: 'save the filename template data into the page'"
 	},
 	"optionConfirmFilename": {
-		"message": "abrir a caixa de diálogo \"Guardar como\" para confirmar o nome de ficheiro",
+		"message": "fayl adını təsdiqləmək üçün \"Fərqli qeyd et\" açın",
 		"description": "Options page label: 'open the \"Save as\" dialog to confirm the file name'"
 	},
 	"optionFilenameConflictAction": {
-		"message": "resolução de conflitos de nome de ficheiro",
+		"message": "fayl adı çatışmalarının həllini seçin",
 		"description": "Options page label: 'filename conflict resolution'"
 	},
 	"optionFilenameConflictActionUniquify": {
-		"message": "criar um nome único",
+		"message": "fərqli ad yaratmaq",
 		"description": "Value for 'filename conflict resolution' option: 'create a unique name'"
 	},
 	"optionFilenameConflictActionOverwrite": {
-		"message": "substituir o ficheiro existente",
+		"message": "mövcud faylı üzərindən yazmaq",
 		"description": "Value for 'filename conflict resolution' option: 'overwrite the existing file'"
 	},
 	"optionFilenameConflictActionPrompt": {
-		"message": "solicitar um nome",
+		"message": "fayl adını sorğulamaq",
 		"description": "Value for 'name conflict resolution' option: 'prompt for a name'"
 	},
 	"optionFilenameConflictActionSkip": {
-		"message": "ignorar ficheiros duplicados",
+		"message": "təkrar faylları atlayın",
 		"description": "Value for 'filename conflict resolution' option: 'skip duplicate files'"
 	},
 	"optionsHTMLContentSubTitle": {
-		"message": "Conteúdo HTML",
+		"message": "HTML məzmunu",
 		"description": "Options sub-title: 'HTML content'"
 	},
 	"optionCompressHTML": {
-		"message": "comprimir conteúdo HTML",
+		"message": "HTML məzmununu sıxışdırın",
 		"description": "Options page label: 'compress HTML content'"
 	},
 	"optionRemoveFrames": {
-		"message": "remover frames",
+		"message": "frame-ləri çıxarın",
 		"description": "Options page label: 'remove frames'"
 	},
 	"optionRemoveHiddenElements": {
-		"message": "remover elementos ocultos",
+		"message": "gizli elementləri çıxarın",
 		"description": "Options page label: 'remove hidden elements'"
 	},
 	"optionsFileFormatSubTitle": {
-		"message": "Formato de ficheiro",
+		"message": "Fayl formatı",
 		"description": "Options sub-title: 'File format'"
 	},
 	"optionFileFormat": {
-		"message": "formato",
+		"message": "format",
 		"description": "Options page label: 'format'"
 	},
 	"optionFileFormatSelectHTML": {
@@ -276,11 +276,11 @@
 		"description": "Options page label: 'HTML'"
 	},
 	"optionFileFormatSelectSelfExtractingUniversal": {
-		"message": "ZIP auto-extraível (universal)",
+		"message": "öz-çıxarılma ZIP (universal)",
 		"description": "Options page label: 'self-extracting ZIP (universal)'"
 	},
 	"optionFileFormatSelectSelfExtracting": {
-		"message": "ZIP auto-extraível",
+		"message": "öz-çıxarılma ZIP",
 		"description": "Options page label: 'self-extracting ZIP'"
 	},
 	"optionFileFormatSelectZIP": {
@@ -288,167 +288,167 @@
 		"description": "Options page label: 'ZIP'"
 	},
 	"optionPassword": {
-		"message": "palavra-passe",
+		"message": "şifrə",
 		"description": "Options page label: 'password'"
 	},
 	"optionCreateRootDirectory": {
-		"message": "criar um diretório raiz",
+		"message": "kök qovluğu yarat",
 		"description": "Options page label: 'create a root directory'"
 	},
 	"optionPreventAppendedData": {
-		"message": "não anexar dados após os dados ZIP",
+		"message": "ZIP məzmunundan sonra məlumat əlavə etməyin",
 		"description": "Options page label: 'do not append data after the ZIP data'"
 	},
 	"optionInsertTextBody": {
-		"message": "tornar o texto pesquisável",
+		"message": "mətn məzmununu əlavə edin",
 		"description": "Options page label: 'make text searchable'"
 	},
 	"optionInsertEmbeddedImage": {
-		"message": "imagem incorporada",
+		"message": "gömülü şəkil",
 		"description": "Options page label: 'embed image'"
 	},
 	"optionInsertEmbeddedScreenshotImage": {
-		"message": "captura de ecrã",
+		"message": "screenshot",
 		"description": "Options page label: 'page screenshot'"
 	},
 	"optionInsertEmbeddedCustomImage": {
-		"message": "imagem personalizada",
+		"message": "özəl şəkil",
 		"description": "Options page label: 'custom image'"
 	},
 	"optionsInfobarSubTitle": {
-		"message": "Barra de Informações",
+		"message": "Infobar",
 		"description": "Options sub-title: 'Infobar'"
 	},
 	"optionsImagesSubTitle": {
-		"message": "Imagens",
+		"message": "Şəkillər",
 		"description": "Options sub-title: 'Images'"
 	},
 	"optionGroupDuplicateImages": {
-		"message": "agrupar imagens duplicadas",
+		"message": "şəkilləri qruplaşdırın",
 		"description": "Options page label: 'group duplicate images together'"
 	},
 	"optionLoadDeferredImages": {
-		"message": "guardar imagens diferidas",
+		"message": "gözləyən şəkilləri yükləyin",
 		"description": "Options page label: 'save deferred images'"
 	},
 	"optionLoadDeferredImagesMaxIdleTime": {
-		"message": "tempo máximo de inatividade (ms)",
+		"message": "maksimum boş vaxt (ms)",
 		"description": "Options page label: 'maximum idle time (ms)'"
 	},
 	"optionLoadDeferredImagesKeepZoomLevel": {
-		"message": "diminuir o zoom da página",
+		"message": "zoom səviyyəsini saxlayın",
 		"description": "Options page label: 'zoom out the page'"
 	},
 	"optionLoadDeferredImagesDispatchScrollEvent": {
-		"message": "enviar evento \"scroll\"",
+		"message": "\"scroll\" hadisəsini göndərin",
 		"description": "Options page label: 'dispatch \"scroll\" event'"
 	},
 	"optionLoadDeferredImagesBeforeFrames": {
-		"message": "carregar frames diferidos",
+		"message": "frame-lərdən əvvəl yükləyin",
 		"description": "Options page label: 'load deferred frames'"
 	},
 	"optionRemoveAlternativeImages": {
-		"message": "remover imagens para resoluções de ecrã alternativas",
+		"message": "alternativ ekran çözünürlüklü şəkilləri çıxarın",
 		"description": "Options page label: 'remove images for alternative screen resolutions'"
 	},
 	"optionsFontsSubTitle": {
-		"message": "Tipos de letra",
+		"message": "Şriftlər",
 		"description": "Options sub-title: 'Fonts'"
 	},
 	"optionRemoveUnusedFonts": {
-		"message": "remover tipos de letra não utilizados",
+		"message": "istifadə olunmayan şriftləri çıxarın",
 		"description": "Options page label: 'remove unused fonts'"
 	},
 	"optionRemoveAlternativeFonts": {
-		"message": "remover tipos de letra alternativos",
+		"message": "alternativ şriftləri çıxarın",
 		"description": "Options page label: 'remove alternative fonts'"
 	},
 	"optionsStylesheetsSubTitle": {
-		"message": "Folhas de estilo",
+		"message": "Stil",
 		"description": "Options sub-title: 'Stylesheets'"
 	},
 	"optionCompressCSS": {
-		"message": "comprimir conteúdo CSS",
+		"message": "CSS məzmununu sıxışdırın",
 		"description": "Options page label: 'compress CSS content'"
 	},
 	"optionGroupDuplicateStylesheets": {
-		"message": "agrupar folhas de estilo duplicadas",
+		"message": "stil-ləri qruplaşdırın",
 		"description": "Options page label: 'group duplicate stylesheets together'"
 	},
 	"optionMoveStylesInHead": {
-		"message": "mover para o elemento principal os estilos que se encontram fora dele",
+		"message": "baş elementdə stil-ləri köçürün",
 		"description": "Options page label: 'move in the head element the styles found outside of it'"
 	},
 	"optionRemoveUnusedStyles": {
-		"message": "remover estilos não utilizados",
+		"message": "istifadə olunmayan stil-ləri çıxarın",
 		"description": "Options page label: 'remove unused styles'"
 	},
 	"optionRemoveAlternativeMedias": {
-		"message": "remover folhas de estilo para dispositivos alternativos aos ecrãs",
+		"message": "alternativ cihazlar üçün stil-ləri çıxarın",
 		"description": "Options page label: 'remove stylesheets for alternative devices to screens'"
 	},
 	"optionsNetworkSubTitle": {
-		"message": "Rede",
+		"message": "Şəbəkə",
 		"description": "Options sub-title: 'Network'"
 	},
 	"optionsBlockedResources": {
-		"message": "recursos bloqueados",
+		"message": "bloklanmış resurslar",
 		"description": "Options page label: 'blocked resources'"
 	},
 	"optionsAcceptHeaders": {
-		"message": "cabeçalho \"Accept\"",
+		"message": "\"Accept\" başlığı",
 		"description": "Options page label: '\"Accept\" header'"
 	},
 	"optionResourceScript": {
-		"message": "scripts",
+		"message": "skriptlər",
 		"description": "Options page label: 'scripts'"
 	},
 	"optionResourceVideo": {
-		"message": "vídeos",
+		"message": "videolar",
 		"description": "Options page label: 'videos'"
 	},
 	"optionResourceAudio": {
-		"message": "áudios",
+		"message": "audio",
 		"description": "Options page label: 'audios'"
 	},
 	"optionResourceDocument": {
-		"message": "documentos",
+		"message": "sənədlər",
 		"description": "Options page label: 'documents'"
 	},
 	"optionResourceFont": {
-		"message": "tipos de letra",
+		"message": "şriftlər",
 		"description": "Options page label: 'fonts'"
 	},
 	"optionResourceStylesheet": {
-		"message": "folhas de estilo",
+		"message": "stil-lər",
 		"description": "Options page label: 'stylesheets'"
 	},
 	"optionResourceImage": {
-		"message": "imagens",
+		"message": "şəkillər",
 		"description": "Options page label: 'images'"
 	},
 	"optionsDestinationSubTitle": {
-		"message": "Destino",
+		"message": "Göstərici",
 		"description": "Options sub-title: 'Destination'"
 	},
 	"optionsBookmarkSubTitle": {
-		"message": "Marcadores",
+		"message": "Bookmarks",
 		"description": "Options sub-title: 'Bookmarks'"
 	},
 	"optionsAutoSaveSubTitle": {
-		"message": "Guardar automaticamente",
+		"message": "Avtomatik yaddaşa qeyd",
 		"description": "Options sub-title: 'Auto-save'"
 	},
 	"optionsAutoSettingsSubTitle": {
-		"message": "Regras de configuração automática",
+		"message": "Avtomatik ayarlar qaydaları",
 		"description": "Options sub-title: 'Auto-settings rules'"
 	},
 	"optionsDeleteDisplayedRulesConfirm": {
-		"message": "Confirmar a eliminação de todas as regras apresentadas",
+		"message": "Göstərilən bütün qaydaların silinməsini təsdiqləyin",
 		"description": "Popup text 'Confirm the deletion of all displayed rules'"
 	},
 	"optionsDeleteRulesTooltip": {
-		"message": "Eliminar todas as regras apresentadas",
+		"message": "Göstərilən bütün qaydaları silin",
 		"description": "Popup text 'Delete all displayed rules'"
 	},
 	"optionsAutoSettingsUrl": {
@@ -456,103 +456,103 @@
 		"description": "Options label in the Auto-settings rules: 'URL'"
 	},
 	"optionsAutoSettingsUrlPlaceholder": {
-		"message": "Introduzir um URL completo ou parcial (p. ex., exemplo-pagina.com)",
+		"message": "Tam və ya qısmi URL daxil edin (məsələn, example.com)",
 		"description": "Placeholder in the Auto-settings rules: 'Type a complete or partial URL (e.g. example.com)'"
 	},
 	"optionsAutoSettingsProfile": {
-		"message": "Perfil",
+		"message": "Profil",
 		"description": "Options label in the Auto-settings rules: 'Profile'"
 	},
 	"optionsAutoSettingsAutoSaveProfile": {
-		"message": "Guardar perfil automaticamente",
+		"message": "Auto-save profil",
 		"description": "Options label in the Auto-settings rules: 'Auto-save profile'"
 	},
 	"optionsAutoSettingsShowAllProfiles": {
-		"message": "mostrar todos os perfis",
+		"message": "bütün profiləri göstərin",
 		"description": "Options label in the Auto-settings rules: 'display all profiles'"
 	},
 	"optionsAutoSettingsShowAutoSaveProfile": {
-		"message": "mostrar a coluna 'Guardar perfil automaticamente'",
+		"message": "Auto-save profilini göstərin",
 		"description": "Options label in the Auto-settings rules: 'display 'Auto-save profile' column'"
 	},
 	"optionsUpdateRuleTooltip": {
-		"message": "Atualizar a regra",
+		"message": "Qayda yenilə",
 		"description": "Popup text 'Update the rule' in the options page"
 	},
 	"optionsDeleteRuleTooltip": {
-		"message": "Eliminar a regra",
+		"message": "Qayda sil",
 		"description": "Popup text 'Delete the rule' in the options page"
 	},
 	"optionsAddRuleTooltip": {
-		"message": "Adicionar a regra",
+		"message": "Qayda əlavə et",
 		"description": "Popup text 'Add the rule' in the options page"
 	},
 	"optionsValidateChangesTooltip": {
-		"message": "Validar alterações",
+		"message": "Dəyişiklikləri təsdiqlə",
 		"description": "Popup text 'Validate changes' in the options page"
 	},
 	"optionsCancelChangesTooltip": {
-		"message": "Cancelar alterações",
+		"message": "Dəyişiklikləri ləğv et",
 		"description": "Popup text 'Cancel changes' in the options page"
 	},
 	"optionsDeleteRuleConfirm": {
-		"message": "Confirmar a eliminação da regra selecionada",
+		"message": "Seçilmiş qaydanın silinməsini təsdiqləyin",
 		"description": "Popup text 'Confirm the deletion of the selected rule' in the options page"
 	},
 	"optionAutoSaveLoadOrUnload": {
-		"message": "guardar automaticamente após o carregamento da página ou quando a página é transferida",
+		"message": "səhifə yükləndikdən sonra və ya səhifə yüklənmədən qabaq avtomatik yaddaşa qeyd edin",
 		"description": "auto-save after page load or on page unload"
 	},
 	"optionAutoSaveLoad": {
-		"message": "guardar automaticamente após o carregamento da página",
+		"message": "səhifə yükləndikdən sonra avtomatik yaddaşa qeyd edin",
 		"description": "Options page label: 'auto-save after page load'"
 	},
 	"optionAutoSaveUnload": {
-		"message": "guardar automaticamente quando a página é transferida",
+		"message": "səhifə yüklənmədən qabaq avtomatik yaddaşa qeyd edin",
 		"description": "Options page label: 'auto-save on page unload'"
 	},
 	"optionAutoSaveDiscard": {
-		"message": "guardar automaticamente quando o separador é eliminado",
+		"message": "tabı atdıqda avtomatik yaddaşa qeyd edin",
 		"description": "Options page label: 'auto-save on tab discard'"
 	},
 	"optionAutoSaveRemove": {
-		"message": "guardar automaticamente quando o separador é removido",
+		"message": "tabı çıxardıqda avtomatik yaddaşa qeyd edin",
 		"description": "Options page label: 'auto-save on tab removal'"
 	},
 	"optionAutoSaveDelay": {
-		"message": "guardar automaticamente após espera de carregamento da página (s)",
+		"message": "səhifə yükləndikdən sonra avtomatik yaddaşa qeyd etmə gecikməsi (s)",
 		"description": "Options page label: 'auto-save waiting delay after page load (s)'"
 	},
 	"optionAutoSaveRepeat": {
-		"message": "guardar automaticamente de forma periódica",
+		"message": "avtomatik olaraq yaddaşa qeyd et",
 		"description": "Options page label: 'auto-save periodically'"
 	},
 	"optionAutoSaveRepeatDelay": {
-		"message": "período (s.)",
+		"message": "dövrədən sonra gecikmə (s)",
 		"description": "Options page label: 'period (s)'"
 	},
 	"optionAutoSaveExternalSave": {
-		"message": "guardar a página com o SingleFile Companion",
+		"message": "xarici yaddaşa qeyd et",
 		"description": "Options page label: 'save the page with SingleFile Companion'"
 	},
 	"optionsEditorSubTitle": {
-		"message": "Editor de anotações",
+		"message": "Redaktor",
 		"description": "Options sub-title: 'Annotation editor'"
 	},
 	"optionOpenEditor": {
-		"message": "anotar a página antes de a guardar",
+		"message": "səhifəni yaddaşa qeyd etdikdən sonra redaktoru açın",
 		"description": "Options page label: 'annotate the page before saving'"
 	},
 	"optionOpenSavedPage": {
-		"message": "abrir páginas guardadas num novo separador",
+		"message": "yaddaşa qeyd edilmiş səhifəni yeni tabda açın",
 		"description": "Options page label: 'open saved pages in a new tab'"
 	},
 	"optionAutoOpenEditor": {
-		"message": "abrir páginas guardadas com o SingleFile no editor de anotações",
+		"message": "səhifəni yaddaşa qeyd etdikdən sonra redaktoru avtomatik olaraq açın",
 		"description": "Options page label: 'open pages saved with SingleFile in the annotation editor'"
 	},
 	"optionDefaultEditorMode": {
-		"message": "modo predefinido",
+		"message": "standart rejim",
 		"description": "Options page label: 'default mode'"
 	},
 	"optionDefaultEditorModeNormal": {
@@ -560,151 +560,151 @@
 		"description": "Options page label: 'default mode > normal'"
 	},
 	"optionDefaultEditorModeEdit": {
-		"message": "editar a página",
+		"message": "səhifəni redaktə edin",
 		"description": "Options page label: 'default mode > edit the page'"
 	},
 	"optionDefaultEditorModeFormat": {
-		"message": "formatar a página",
+		"message": "səhifəni formatlayın",
 		"description": "Options page label: 'default mode > format the page'"
 	},
 	"optionDefaultEditorModeCut": {
-		"message": "remover elementos",
+		"message": "elementləri çıxarın",
 		"description": "Options page label: 'default mode > remove elements'"
 	},
 	"optionDefaultEditorModeCutExternal": {
-		"message": "remover elementos externos",
+		"message": "xarici elementləri çıxarın",
 		"description": "Options page label: 'default mode > remove external elements'"
 	},
 	"optionApplySystemTheme": {
-		"message": "aplicar o tema do sistema ao formatar uma página",
+		"message": "sistem mövzusunu tətbiq edin",
 		"description": "Title of the button 'apply the system theme when formatting a page'"
 	},
 	"optionWarnUnsavedPage": {
-		"message": "avisar se sair da página com alterações não guardadas",
+		"message": "yaddaşa qeyd edilməmiş dəyişiklikləri saxlayın",
 		"description": "Title of the button 'warn if leaving page with unsaved changes'"
 	},
 	"optionDisplayInfobarInEditor": {
-		"message": "mostrar a barra de informações",
+		"message": "redaktorun infobarını göstərin",
 		"description": "Title of the button 'display the infobar'"
 	},
 	"optionsMiscSubTitle": {
-		"message": "Diversos",
+		"message": "Müxtəlif",
 		"description": "Options sub-title: 'Misc.'"
 	},
 	"optionBackgroundSave": {
-		"message": "guardar páginas em segundo plano",
+		"message": "səhifələri arxa planda yaddaşa qeyd edin",
 		"description": "Options page label: 'save pages in background'"
 	},
 	"optionDisplayStats": {
-		"message": "mostrar estatísticas na consola após o processamento",
+		"message": "işləmədən sonra statistikaları konsolda göstərin",
 		"description": "Options page label: 'display stats in the console after processing'"
 	},
 	"optionSetMaxResourceSize": {
-		"message": "definir o tamanho máximo",
+		"message": "maksimum ölçü təyin edin",
 		"description": "Options page label: 'set maximum size'"
 	},
 	"optionMaxResourceSize": {
-		"message": "tamanho máximo (MB)",
+		"message": "maksimum ölçü (MB)",
 		"description": "Options page label: 'maximum size (MB)'"
 	},
 	"optionSetMaxResourceDelay": {
-		"message": "definir o tempo máximo de transferência",
+		"message": "maksimum yükləmə vaxtını təyin edin",
 		"description": "Options page label: 'set maximum download time'"
 	},
 	"optionMaxResourceDelay": {
-		"message": "tempo máximo de transferência (s)",
+		"message": "maksimum yükləmə vaxtı (s)",
 		"description": "Options page label: 'maximum download time (s)'"
 	},
 	"optionPassReferrerOnError": {
-		"message": "passar o cabeçalho \"Referer\" após um erro de pedido de origem cruzada",
+		"message": "çap \"Referer\" başlığını keçirin",
 		"description": "Options page label: 'pass \"Referer\" header after a cross-origin request error'"
 	},
 	"optionSaveRawPage": {
-		"message": "guardar página em bruto",
+		"message": "raw səhifəni yaddaşa qeyd edin",
 		"description": "Options page label: 'save raw page'"
 	},
 	"optionInsertMetaCSP": {
-		"message": "definir a política de segurança de conteúdos",
+		"message": "mətni təhlükəsizlik siyasəti ilə əlavə edin",
 		"description": "Options page label: 'set content security policy'"
 	},
 	"optionSaveToClipboard": {
-		"message": "copiar para a área de transferência",
+		"message": "mətni kəsənlərə kopyalayın",
 		"description": "Options page label: 'copy to clipboard'"
 	},
 	"optionSaveToFilesystem": {
-		"message": "guardar no sistema de ficheiros",
+		"message": "fayla yaddaşa qeyd edin",
 		"description": "Options page label: 'save to filesystem'"
 	},
 	"optionSharePage": {
-		"message": "partilhar página",
+		"message": "səhifəni paylaşın",
 		"description": "Options page label: 'share page'"
 	},
 	"optionAddProof": {
-		"message": "adicionar prova de existência",
+		"message": "məzmunun mövcudluğunu əlavə edin",
 		"description": "Options page label: 'add proof of existence'"
 	},
 	"optionsAddProofConfirm": {
-		"message": "Confirme que permite que o SingleFile envie para a API do Woleet um hash SHA256 de cada página que vai guardar. Pode encontrar mais informações sobre esta funcionalidade na página de ajuda ou clicando no ponto de interrogação junto à opção.",
+		"message": "SingleFile-a saxlayacağınız hər səhifənin SHA256 hash-ini Woleet API-yə göndərməyə icazə verdiyinizi təsdiq edin. Bu funksiya haqqında daha çox məlumatı yardım səhifəsində və ya seçimin yanındakı sual işarəsinə klikləməklə tapa bilərsiniz.",
 		"description": "Popup text displayed wen enabling the option 'add proof of existence'"
 	},
 	"optionWoleetKey": {
-		"message": "token de acesso",
+		"message": "giriş tokeni",
 		"description": "Options page label: 'access token'"
 	},
 	"optionSaveToGDrive": {
-		"message": "carregar para o Google Drive",
+		"message": "Google Drive-a yaddaşa qeyd edin",
 		"description": "Options page label: 'upload to Google Drive'"
 	},
 	"optionSaveToDropbox": {
-		"message": "carregar para o Dropbox",
+		"message": "Dropbox-a yaddaşa qeyd edin",
 		"description": "Options page label: 'upload to Dropbox'"
 	},
 	"optionSaveToGitHub": {
-		"message": "carregar para o GitHub",
+		"message": "GitHub-a yaddaşa qeyd edin",
 		"description": "Options page label: 'upload to GitHub'"
 	},
 	"optionGitHubToken": {
-		"message": "token de acesso",
+		"message": "giriş tokeni",
 		"description": "Options page label: 'access token'"
 	},
 	"optionGitHubUser": {
-		"message": "nome de utilizador",
+		"message": "istifadəçi adı",
 		"description": "Options page label: 'user name'"
 	},
 	"optionGitHubRepository": {
-		"message": "nome de repositório",
+		"message": "repo adı",
 		"description": "Options page label: 'repository name'"
 	},
 	"optionGitHubBranch": {
-		"message": "nome do branch (ramo)",
+		"message": "branch adı",
 		"description": "Options page label: 'branch name'"
 	},
 	"optionSaveToS3": {
-		"message": "carregar para a Amazon S3",
+		"message": "Amazon S3-ə yaddaşa qeyd edin",
 		"description": "Options page label: 'upload to Amazon S3'"
 	},
 	"optionS3Domain": {
-		"message": "domínio",
+		"message": "domain",
 		"description": "Options page label: 'domain'"
 	},
 	"optionS3Region": {
-		"message": "região",
+		"message": "region",
 		"description": "Options page label: 'region'"
 	},
 	"optionS3Bucket": {
-		"message": "nome do bucket",
+		"message": "bucket adı",
 		"description": "Options page label: 'bucket name'"
 	},
 	"optionS3AccessKey": {
-		"message": "chave de acesso",
+		"message": "access key",
 		"description": "Options page label: 'access key'"
 	},
 	"optionS3SecretKey": {
-		"message": "chave secreta",
+		"message": "secret key",
 		"description": "Options page label: 'secret key'"
 	},
 	"optionSaveWithWebDAV": {
-		"message": "carregar para um servidor WebDAV",
+		"message": "WebDAV serverinə yaddaşa qeyd edin",
 		"description": "Options page label: 'upload to a WebDAV server'"
 	},
 	"optionWebDAVURL": {
@@ -712,59 +712,59 @@
 		"description": "Options page label: 'URL'"
 	},
 	"optionWebDAVUser": {
-		"message": "identificador de utilizador",
+		"message": "istifadəçi adı",
 		"description": "Options page label: 'user identifier'"
 	},
 	"optionWebDAVPassword": {
-		"message": "palavra-passe",
+		"message": "şifrə",
 		"description": "Options page label: 'password'"
 	},
 	"optionSaveWithCompanion": {
-		"message": "guardar com o SingleFile Companion",
+		"message": "SingleFile Companion ilə yaddaşa qeyd edin",
 		"description": "Options page label: 'save with SingleFile Companion'"
 	},
 	"optionSaveCreatedBookmarks": {
-		"message": "guardar página de um marcador recentemente criado",
+		"message": "yaddaşa qeyd edilmiş səhifənin yerini yaddaşa qeyd edin",
 		"description": "Options page label: 'save the page of a newly created bookmark'"
 	},
 	"optionReplaceBookmarkURL": {
-		"message": "ligar o novo marcador à página guardada",
+		"message": "yaddaşa qeyd edilmiş səhifənin URL-ni əvəz edin",
 		"description": "Options page label: 'link the new bookmark to the saved page'"
 	},
 	"optionAllowedBookmarkFolders": {
-		"message": "pastas permitidas",
+		"message": "icazə verilmiş qovluqlar",
 		"description": "Options page label: 'allowed folders'"
 	},
 	"optionIgnoredBookmarkFolders": {
-		"message": "pastas ignoradas",
+		"message": "sorğulanan qovluqlar",
 		"description": "Options page label: 'ignored folders'"
 	},
 	"optionsHelpLink": {
-		"message": "ajuda",
+		"message": "kömək",
 		"description": "Options help link"
 	},
 	"optionSynchronize": {
-		"message": "opções de sincronização",
+		"message": "seçimləri sinxronlaşdır",
 		"description": "Options label: 'synchronize options'"
 	},
 	"optionsResetButton": {
-		"message": "Repor",
+		"message": "Sıfırla",
 		"description": "Options button: 'Reset'"
 	},
 	"optionsResetTooltip": {
-		"message": "Repor todas as opções para os valores predefinidos",
+		"message": "Seçimləri və ya cari profil sıfırlayın",
 		"description": "Options 'Reset' button tooltip"
 	},
 	"optionsResetConfirm": {
-		"message": "Confirmar a reposição de todas as opções ou do perfil atual",
+		"message": "Bütün seçimləri və ya cari profil sıfırlamaq üçün təsdiqləyin",
 		"description": "Popup text 'Confirm the reset of all options or the current profile' in the options page"
 	},
 	"optionsResetAllButton": {
-		"message": "Repor todas as opções",
+		"message": "Bütün seçimləri sıfırla",
 		"description": "Options confirm button: 'Reset all options'"
 	},
 	"optionsResetCurrentButton": {
-		"message": "Repor o perfil atual",
+		"message": "Cari profili sıfırla",
 		"description": "Options confirm button: 'Reset current profile'"
 	},
 	"optionsOKButton": {
@@ -772,31 +772,31 @@
 		"description": "Options confirm button: 'OK'"
 	},
 	"optionsCancelButton": {
-		"message": "Cancelar",
+		"message": "İmtina",
 		"description": "Options confirm button: 'Cancel'"
 	},
 	"optionsExportButton": {
-		"message": "Exportar",
+		"message": "İxrac",
 		"description": "Options button: 'Export'"
 	},
 	"optionsImportButton": {
-		"message": "Importar",
+		"message": "İçəri al",
 		"description": "Options button: 'Import'"
 	},
 	"logPanelDeferredImages": {
-		"message": "Imagens diferidas",
+		"message": "Gözləyən şəkillər",
 		"description": "Label 'Deferred images' in the log panel"
 	},
 	"logPanelFrameContents": {
-		"message": "Conteúdo do frame",
+		"message": "Frame məzmunu",
 		"description": "Label 'Frame contents' in the log panel"
 	},
 	"logPanelEmbeddedImage": {
-		"message": "Imagem incorporada",
+		"message": "Gömülü şəkil",
 		"description": "Label 'Embedded image' in the log panel"
 	},
 	"logPanelStep": {
-		"message": "Passo",
+		"message": "Addım",
 		"description": "Label 'Step' (for 'Step x / 4') in the log panel"
 	},
 	"logPanelWidth": {
@@ -804,139 +804,139 @@
 		"description": "Width of the log panel in pixels, it should be adjusted for the longest label beginning with 'log' (e.g. 'logPanelDeferredImages')"
 	},
 	"topPanelError": {
-		"message": "Erro do SingleFile: ",
+		"message": "SingleFile xətası: ",
 		"description": "Label 'SingleFile error: ' in the top panel when displaying an error message"
 	},
 	"topPanelEmbeddedImageButton": {
-		"message": "Abrir imagem...",
+		"message": "Şəkil əlavə et...",
 		"description": "Top panel button 'Open image...' when embedding an image"
 	},
 	"topPanelSharePageButton": {
-		"message": "Partilhar página...",
+		"message": "Səhifəni paylaş...",
 		"description": "Top panel button 'Share page...' when sharing a page"
 	},
 	"topPanelShareSelectionButton": {
-		"message": "Partilhar seleção...",
+		"message": "Seçimi paylaş...",
 		"description": "Top panel button 'Share selection...' when sharing selected content"
 	},
 	"profileDefaultSettings": {
-		"message": "Definições predefinidas",
+		"message": "Standart ayarlar",
 		"description": "Label 'Default settings' of the default settings in the options page"
 	},
 	"profileDisabled": {
-		"message": "Desativado",
+		"message": "Deaktiv edilmiş",
 		"description": "Label 'Disabled' of the disabled profile name in the options page"
 	},
 	"profileAddButtonTooltip": {
-		"message": "Adicionar um novo perfil",
+		"message": "Yeni profil əlavə edin",
 		"description": "Tooltip 'Add a new profile' in the options page"
 	},
 	"profileRenameButtonTooltip": {
-		"message": "Mudar o nome do perfil",
+		"message": "Profilin adını dəyişdirin",
 		"description": "Tooltip 'Rename the profile' in the options page"
 	},
 	"profileDeleteButtonTooltip": {
-		"message": "Eliminar o perfil",
+		"message": "Profil silin",
 		"description": "Tooltip 'Delete the profile' in the options page"
 	},
 	"profileAddPrompt": {
-		"message": "Introduzir um nome para este novo perfil",
+		"message": "Yeni profilin adını daxil edin",
 		"description": "Popup text 'Enter a name for this new profile' in the options page"
 	},
 	"profileDeleteConfirm": {
-		"message": "Confirmar a eliminação do perfil selecionado",
+		"message": "Seçilmiş profilin silinməsini təsdiqləyin",
 		"description": "Popup text 'Confirm the deletion of the selected profile' in the options page"
 	},
 	"profileRenamePrompt": {
-		"message": "Introduzir um novo nome para o perfil selecionado",
+		"message": "Seçilmiş profilin yeni adını daxil edin",
 		"description": "Popup text 'Enter a new name for the selected profile' in the options page"
 	},
 	"editorAddYellowNote": {
-		"message": "Adicionar uma nota amarela",
+		"message": "Sarı qeyd əlavə edin",
 		"description": "Title of the button 'Add a yellow note' in the editor"
 	},
 	"editorAddPinkNote": {
-		"message": "Adicionar uma nota cor-de-rosa",
+		"message": "Çəhrayı qeyd əlavə edin",
 		"description": "Title of the button 'Add a pink note' in the editor"
 	},
 	"editorAddBlueNote": {
-		"message": "Adicionar uma nota azul",
+		"message": "Mavi qeyd əlavə edin",
 		"description": "Title of the button 'Add a blue note' in the editor"
 	},
 	"editorAddGreenNote": {
-		"message": "Adicionar uma nota verde",
+		"message": "Yaşıl qeyd əlavə edin",
 		"description": "Title of the button 'Add a green note' in the editor"
 	},
 	"editorHighlightYellow": {
-		"message": "Realçar o texto selecionado a amarelo",
+		"message": "Seçilmiş mətni sarı rəngdə işarələyin",
 		"description": "Title of the button 'Highlight selected text in yellow' in the editor"
 	},
 	"editorHighlightPink": {
-		"message": "Realçar o texto selecionado a cor-de-rosa",
+		"message": "Seçilmiş mətni çəhrayı rəngdə işarələyin",
 		"description": "Title of the button 'Highlight selected text in pink' in the editor"
 	},
 	"editorHighlightBlue": {
-		"message": "Realçar o texto selecionado a azul",
+		"message": "Seçilmiş mətni mavi rəngdə işarələyin",
 		"description": "Title of the button 'Highlight selected text in blue' in the editor"
 	},
 	"editorHighlightGreen": {
-		"message": "Realçar o texto selecionado a verde",
+		"message": "Seçilmiş mətni yaşıl rəngdə işarələyin",
 		"description": "Title of the button 'Highlight selected text in green' in the editor"
 	},
 	"editorToggleNotes": {
-		"message": "Mostrar/ocultar notas",
+		"message": "Qeydləri göstərin/gizlədin",
 		"description": "Title of the button 'Display/hide notes' in the editor"
 	},
 	"editorToggleHighlights": {
-		"message": "Mostrar/ocultar o texto realçado",
+		"message": "İşarələmələri göstərin/gizlədin",
 		"description": "Title of the button 'Display/hide the highlighted text' in the editor"
 	},
 	"editorRemoveHighlight": {
-		"message": "Remover o texto realçado selecionado",
+		"message": "Seçilmiş işarələməni silin",
 		"description": "Title of the button 'Remove the selected highlighted text' in the editor"
 	},
 	"editorEditPage": {
-		"message": "Ativar/desativar o modo só de leitura",
+		"message": "Səhifəni redaktə edin",
 		"description": "Title of the button 'Enable/disable read-only' in the editor"
 	},
 	"editorFormatPage": {
-		"message": "Formatar a página para uma melhor legibilidade",
+		"message": "Səhifəni daha yaxşı oxunacaq şəkildə formatlayın",
 		"description": "Title of the button 'Format the page for better readability' in the editor"
 	},
 	"editorCutInnerPage": {
-		"message": "Ativar/desativar a remoção de elementos internos",
+		"message": "İç elementlərin çıxarılmasını aktivləşdirin/deaktivləşdirin",
 		"description": "Title of the button 'Enable/disable removing of internal elements' in the editor"
 	},
 	"editorCutOuterPage": {
-		"message": "Ativar/desativar a remoção de elementos externos",
+		"message": "Xarici elementlərin çıxarılmasını aktivləşdirin/deaktivləşdirin",
 		"description": "Title of the button 'Enable/disable removing of external elements' in the editor"
 	},
 	"editorUndoCutPage": {
-		"message": "Restaurar o último elemento removido",
+		"message": "Son silinmiş elementi geri qaytarın",
 		"description": "Title of the button 'Restore last removed element' in the editor"
 	},
 	"editorUndoAllCutPage": {
-		"message": "Restaurar todos os elementos removidos",
+		"message": "Bütün silinmiş elementləri geri qaytarın",
 		"description": "Title of the button 'Restore all removed elements' in the editor"
 	},
 	"editorRedoCutPage": {
-		"message": "Remover o último elemento restaurado",
+		"message": "Son geri qaytarılmış elementi silin",
 		"description": "Title of the button 'Remove last restored element' in the editor"
 	},
 	"editorSavePage": {
-		"message": "Guardar a página",
+		"message": "Səhifəni yaddaşa qeyd edin",
 		"description": "Title of the button 'Save the page' in the editor"
 	},
 	"editorPrintPage": {
-		"message": "Imprimir a página",
+		"message": "Səhifəni çap edin",
 		"description": "Title of the button 'Print the page' in the editor"
 	},
 	"pendingsTitle": {
-		"message": "Transferência pendente",
+		"message": "Gözləyənlər",
 		"description": "Title of the pending save page 'Pending saves' in the editor"
 	},
 	"pendingsCancelAllButton": {
-		"message": "Cancelar tudo",
+		"message": "Bütününü ləğv edin",
 		"description": "Pending saves button 'Cancel all'"
 	},
 	"pendingsURLTitle": {
@@ -944,35 +944,35 @@
 		"description": "Title of the first column in the table of the pending saves 'URL'"
 	},
 	"pendingsTitleTitle": {
-		"message": "Título",
+		"message": "başlıq",
 		"description": "Title of the first column in the table of the pending saves 'Title'"
 	},
 	"pendingsStatusTitle": {
-		"message": "estado",
+		"message": "status",
 		"description": "Title of the second column in the table of the pending saves 'status'"
 	},
 	"pendingsPendingStatus": {
-		"message": "pendente",
+		"message": "gözləyən",
 		"description": "Value of 'status' for pending saves"
 	},
 	"pendingsProcessingStatus": {
-		"message": "em curso",
+		"message": "işlənir",
 		"description": "Value of 'status' for current saves"
 	},
 	"pendingsCancellingStatus": {
-		"message": "cancelado",
+		"message": "ləğv edilir",
 		"description": "Value of 'status' for cancelled saves"
 	},
 	"pendingsNoPendings": {
-		"message": "Não há transferências pendentes",
-		"description": "Label displayed when they are no pending saves"
+		"message": "Gözləyən yaddaşlar yoxdur",
+		"description": "Label displayed when there are no pending saves"
 	},
 	"pendingsAddUrlsButton": {
-		"message": "Adicionar URLs",
+		"message": "URL əlavə edin",
 		"description": "button 'Add URLs'"
 	},
 	"pendingsAddUrls": {
-		"message": "Introduzir uma lista de URLs separados por uma nova linha",
+		"message": "Yeni satırlar qeydləri ilə ayrılmış bir URL siyahısı girin",
 		"description": "Label of the add URLs input"
 	},
 	"pendingsAddUrlsOKButton": {
@@ -980,31 +980,31 @@
 		"description": "Add URLs popup confirm button: 'OK'"
 	},
 	"pendingsAddUrlsCancelButton": {
-		"message": "Cancelar",
+		"message": "İmtina",
 		"description": "Add URLs popup cancel button: 'Cancel'"
 	},
 	"batchSaveUrlsTitle": {
-		"message": "Guardar URLs em lote",
+		"message": "Toplu saxlama URL-ləri",
 		"description": "Title of the 'batch save URLs' page"
 	},
 	"batchSaveUrlsNoURLs": {
-		"message": "Sem URLs",
-		"description": "Label displayed when they are no URLs"
+		"message": "URL yoxdur",
+		"description": "Label displayed when there are no URLs"
 	},
 	"batchSaveUrlsAddUrlButton": {
-		"message": "Adicionar URL",
+		"message": "URL əlavə edin",
 		"description": "label of the button 'Add URL'"
 	},
 	"batchSaveUrlsAddUrlsButton": {
-		"message": "Adicionar URLs...",
+		"message": "URL-ləri əlavə edin...",
 		"description": "label of the button 'Add URLs...'"
 	},
 	"batchSaveUrlsRemoveAllButton": {
-		"message": "Remover tudo",
+		"message": "Bütününü silin",
 		"description": "label of the button 'Remove all'"
 	},
 	"batchSaveUrlsSavePagesButton": {
-		"message": "Guardar páginas",
+		"message": "Səhifələri yaddaşa qeyd edin",
 		"description": "label of the button 'Save pages'"
 	},
 	"batchSaveUrlsURLTitle": {
@@ -1012,7 +1012,7 @@
 		"description": "Title of the column in the table of the URLs"
 	},
 	"optionSaveToRestFormApi": {
-		"message": "carregar para um formulário REST API",
+		"message": "REST Form API-yə yaddaşa qeyd edin",
 		"description": "Options page label: 'upload to a REST Form API'"
 	},
 	"optionRestFormApiUrl": {
@@ -1020,31 +1020,31 @@
 		"description": "Options page label: 'URL'"
 	},
 	"optionRestFormApiToken": {
-		"message": "token de autorização",
+		"message": "giriş tokeni",
 		"description": "Options page label: 'authorization token'"
 	},
 	"optionRestFormApiFileFieldName": {
-		"message": "nome do campo de dados do arquivo",
+		"message": "fayl sahə adı",
 		"description": "Options page label: 'archive data field name'"
 	},
 	"optionRestFormApiUrlFieldName": {
-		"message": "nome do campo URL do arquivo",
+		"message": "URL sahə adı",
 		"description": "Options page label: 'archive URL field name'"
 	},
 	"optionsEditorTitle": {
-		"message": "Editor de opções",
+		"message": "Redaktor seçimləri",
 		"description": "Options title: 'Options editor'"
 	},
 	"optionsEditorSaveButton": {
-		"message": "Guardar",
+		"message": "Yaddaşa qeyd edin",
 		"description": "Options editor button: 'Save'"
 	},
 	"optionsEditorConfigSaved": {
-		"message": "Configuração guardada",
+		"message": "Konfiqurasiya yaddaşa qeyd edildi",
 		"description": "Options editor message: 'Configuration saved'"
 	},
 	"optionsEditorInvalidJSON": {
-		"message": "JSON inválido",
+		"message": "Yanlış JSON",
 		"description": "Options editor error message: 'Invalid JSON'"
 	}
 }
