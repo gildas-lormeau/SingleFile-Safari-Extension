@@ -89,6 +89,7 @@ async function downloadPage(pageData, options) {
 		bookmarkId: options.bookmarkId,
 		replaceBookmarkURL: options.replaceBookmarkURL,
 		applySystemTheme: options.applySystemTheme,
+		contentWidth: options.contentWidth,
 		defaultEditorMode: options.defaultEditorMode,
 		includeInfobar: options.includeInfobar,
 		openInfobar: options.openInfobar,
@@ -120,7 +121,8 @@ async function downloadPage(pageData, options) {
 		infobarPositionTop: options.infobarPositionTop,
 		infobarPositionBottom: options.infobarPositionBottom,
 		infobarPositionLeft: options.infobarPositionLeft,
-		infobarPositionRight: options.infobarPositionRight
+		infobarPositionRight: options.infobarPositionRight,
+		originalUrl: options.url
 	};
 	const pingInterval = setInterval(() => {
 		browser.runtime.sendMessage({ method: "ping" }).then(() => { });
@@ -155,7 +157,8 @@ async function downloadPage(pageData, options) {
 				});
 			}
 			if (options.backgroundSave) {
-				await browser.runtime.sendMessage({ method: "downloads.end", taskId: options.taskId });
+				const hash = options.openEditor ? null : pageData.hash;
+				await browser.runtime.sendMessage({ method: "downloads.end", taskId: options.taskId, hash , woleetKey: options.woleetKey });
 			}
 		} else {
 			browser.runtime.sendMessage({ method: "downloads.cancel" });
@@ -201,7 +204,8 @@ async function downloadPage(pageData, options) {
 			}
 			browser.runtime.sendMessage({ method: "ui.processEnd" });
 		}
-		await browser.runtime.sendMessage({ method: "downloads.end", taskId: options.taskId, hash: pageData.hash, woleetKey: options.woleetKey });
+		const hash = options.openEditor ? null : pageData.hash;
+		await browser.runtime.sendMessage({ method: "downloads.end", taskId: options.taskId, hash, woleetKey: options.woleetKey });
 	}
 	clearInterval(pingInterval);
 }
