@@ -21,6 +21,4 @@
  *   Source.
  */
 
-import "./../../lib/single-file/core/content/content-hooks-frames-inline-injection.js";
-import "./../../lib/single-file/core/content/content-hooks-frames-extension-injection.js";
 import "./../../lib/single-file/fetch/content/content-fetch.js";

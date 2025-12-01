@@ -53,6 +53,7 @@ const DEFAULT_FILENAME_REPLACEMENT_CHARACTERS = ["～", "＋", "？", "％", "�
 
 const DEFAULT_CONFIG = {
 	removeHiddenElements: true,
+	removedElementsSelector: "",
 	removeUnusedStyles: true,
 	removeUnusedFonts: true,
 	removeFrames: false,
@@ -116,6 +117,9 @@ const DEFAULT_CONFIG = {
 	webDAVURL: "",
 	webDAVUser: "",
 	webDAVPassword: "",
+	saveWithMCP: false,
+	mcpServerUrl: "",
+	mcpAuthToken: "",
 	saveToGitHub: false,
 	saveToRestFormApi: false,
 	saveToS3: false,
@@ -194,7 +198,8 @@ const DEFAULT_CONFIG = {
 	infobarPositionRight: "16px",
 	infobarPositionBottom: "",
 	infobarPositionLeft: "",
-	removeNoScriptTags: true
+	removeNoScriptTags: true,
+	customShortcut: null
 };
 
 const DEFAULT_RULES = [{
@@ -469,6 +474,7 @@ async function createProfile(profileName, fromProfileName) {
 	}
 	const profileFrom = await getProfile(fromProfileName);
 	const profile = JSON.parse(JSON.stringify(profileFrom));
+	profile.customShortcut = null;
 	await setProfile(profileName, profile);
 }
 

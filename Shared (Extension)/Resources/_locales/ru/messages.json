@@ -11,6 +11,50 @@
 		"message": "Сохранить все вкладки",
 		"description": "Command (Ctrl+Shift+U): 'Save all tabs'"
 	},
+	"commandCustomShortcut": {
+		"message": "Пользовательская горячая клавиша",
+		"description": "Command label: 'Custom shortcut'"
+	},
+	"commandCustomShortcut0": {
+		"message": "Пользовательская горячая клавиша #1",
+		"description": "Command label: 'Custom shortcut #1'"
+	},
+	"commandCustomShortcut1": {
+		"message": "Пользовательская горячая клавиша #2",
+		"description": "Command label: 'Custom shortcut #2'"
+	},
+	"commandCustomShortcut2": {
+		"message": "Пользовательская горячая клавиша #3",
+		"description": "Command label: 'Custom shortcut #3'"
+	},
+	"commandCustomShortcut3": {
+		"message": "Пользовательская горячая клавиша #4",
+		"description": "Command label: 'Custom shortcut #4'"
+	},
+	"commandCustomShortcut4": {
+		"message": "Пользовательская горячая клавиша #5",
+		"description": "Command label: 'Custom shortcut #5'"
+	},
+	"commandCustomShortcut5": {
+		"message": "Пользовательская горячая клавиша #6",
+		"description": "Command label: 'Custom shortcut #6'"
+	},
+	"commandCustomShortcut6": {
+		"message": "Пользовательская горячая клавиша #7",
+		"description": "Command label: 'Custom shortcut #7'"
+	},
+	"commandCustomShortcut7": {
+		"message": "Пользовательская горячая клавиша #8",
+		"description": "Command label: 'Custom shortcut #8'"
+	},
+	"commandCustomShortcut8": {
+		"message": "Пользовательская горячая клавиша #9",
+		"description": "Command label: 'Custom shortcut #9'"
+	},
+	"commandCustomShortcut9": {
+		"message": "Пользовательская горячая клавиша #10",
+		"description": "Command label: 'Custom shortcut #10'"
+	},
 	"menuSavePage": {
 		"message": "Сохранить страницу",
 		"description": "Menu entry: 'Save page with SingleFile'"
@@ -191,6 +235,14 @@
 		"message": "автозакрытие вкладки после сохранения страницы",
 		"description": "Options page label: 'auto-close the tab after the page is saved'"
 	},
+	"optionCustomShortcut": {
+		"message": "горячая клавиша команды",
+		"description": "Options page label: 'keyboard shortcut command'"
+	},
+	"optionCustomShortcutDefault": {
+		"message": "горячая клавиша по умолчанию",
+		"description": "Options page label: 'default shortcut'"
+	},
 	"optionsFileNameSubTitle": {
 		"message": "Имя файла",
 		"description": "Options sub-title: 'File name'"
@@ -262,6 +314,10 @@
 	"optionRemoveHiddenElements": {
 		"message": "удалить скрытые элементы",
 		"description": "Options page label: 'remove hidden elements'"
+	},
+	"optionRemovedElementsSelector": {
+		"message": "селектор удаляемых элементов",
+		"description": "Options page label: 'remove specific elements'"
 	},
 	"optionsFileFormatSubTitle": {
 		"message": "Формат файла",
@@ -722,6 +778,18 @@
 	"optionWebDAVPassword": {
 		"message": "пароль",
 		"description": "Options page label: 'password'"
+	},
+	"optionSaveWithMCP": {
+		"message": "загрузить на MCP-сервер",
+		"description": "Options page label: 'upload to an MCP server'"
+	},
+	"optionMCPServerUrl": {
+		"message": "URL",
+		"description": "Options page label: 'server URL'"
+	},
+	"optionMCPAuthToken": {
+		"message": "токен аутентификации",
+		"description": "Options page label: 'authentication token'"
 	},
 	"optionSaveWithCompanion": {
 		"message": "сохранять с помощью SingleFile Companion",

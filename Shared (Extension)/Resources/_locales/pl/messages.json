@@ -11,6 +11,50 @@
 		"message": "Zapisz wszystkie karty",
 		"description": "Command (Ctrl+Shift+U): 'Save all tabs'"
 	},
+	"commandCustomShortcut": {
+		"message": "Skrót niestandardowy",
+		"description": "Command label: 'Custom shortcut'"
+	},
+	"commandCustomShortcut0": {
+		"message": "Skrót niestandardowy nr 1",
+		"description": "Command label: 'Custom shortcut #1'"
+	},
+	"commandCustomShortcut1": {
+		"message": "Skrót niestandardowy nr 2",
+		"description": "Command label: 'Custom shortcut #2'"
+	},
+	"commandCustomShortcut2": {
+		"message": "Skrót niestandardowy nr 3",
+		"description": "Command label: 'Custom shortcut #3'"
+	},
+	"commandCustomShortcut3": {
+		"message": "Skrót niestandardowy nr 4",
+		"description": "Command label: 'Custom shortcut #4'"
+	},
+	"commandCustomShortcut4": {
+		"message": "Skrót niestandardowy nr 5",
+		"description": "Command label: 'Custom shortcut #5'"
+	},
+	"commandCustomShortcut5": {
+		"message": "Skrót niestandardowy nr 6",
+		"description": "Command label: 'Custom shortcut #6'"
+	},
+	"commandCustomShortcut6": {
+		"message": "Skrót niestandardowy nr 7",
+		"description": "Command label: 'Custom shortcut #7'"
+	},
+	"commandCustomShortcut7": {
+		"message": "Skrót niestandardowy nr 8",
+		"description": "Command label: 'Custom shortcut #8'"
+	},
+	"commandCustomShortcut8": {
+		"message": "Skrót niestandardowy nr 9",
+		"description": "Command label: 'Custom shortcut #9'"
+	},
+	"commandCustomShortcut9": {
+		"message": "Skrót niestandardowy nr 10",
+		"description": "Command label: 'Custom shortcut #10'"
+	},
 	"menuSavePage": {
 		"message": "Zapisz stronę z SingleFile",
 		"description": "Menu entry: 'Save page with SingleFile'"
@@ -191,6 +235,14 @@
 		"message": "automatycznie zamykaj kartę po zapisaniu strony",
 		"description": "Options page label: 'auto-close the tab after the page is saved'"
 	},
+	"optionCustomShortcut": {
+		"message": "polecenie skrótu klawiaturowego",
+		"description": "Options page label: 'keyboard shortcut command'"
+	},
+	"optionCustomShortcutDefault": {
+		"message": "skrót domyślny",
+		"description": "Options page label: 'default shortcut'"
+	},
 	"optionsFileNameSubTitle": {
 		"message": "Nazwa pliku",
 		"description": "Options sub-title: 'File name'"
@@ -262,6 +314,10 @@
 	"optionRemoveHiddenElements": {
 		"message": "usuwaj ukryte elementy",
 		"description": "Options page label: 'remove hidden elements'"
+	},
+	"optionRemovedElementsSelector": {
+		"message": "selektor usuwanych elementów",
+		"description": "Options page label: 'remove specific elements'"
 	},
 	"optionsFileFormatSubTitle": {
 		"message": "Format pliku",
@@ -722,6 +778,18 @@
 	"optionWebDAVPassword": {
 		"message": "hasło",
 		"description": "Options page label: 'password'"
+	},
+	"optionSaveWithMCP": {
+		"message": "przesyłaj na serwer MCP",
+		"description": "Options page label: 'upload to an MCP server'"
+	},
+	"optionMCPServerUrl": {
+		"message": "adres URL serwera",
+		"description": "Options page label: 'server URL'"
+	},
+	"optionMCPAuthToken": {
+		"message": "token uwierzytelniający",
+		"description": "Options page label: 'authentication token'"
 	},
 	"optionSaveWithCompanion": {
 		"message": "zapisuj z SingleFile Companion",

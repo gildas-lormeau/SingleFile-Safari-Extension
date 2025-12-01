@@ -60,6 +60,7 @@ browser.runtime.sendMessage({ method: "config.getConstants" }).then(data => {
 	init();
 });
 const removeHiddenElementsLabel = document.getElementById("removeHiddenElementsLabel");
+const removedElementsSelectorLabel = document.getElementById("removedElementsSelectorLabel");
 const removeUnusedStylesLabel = document.getElementById("removeUnusedStylesLabel");
 const removeUnusedFontsLabel = document.getElementById("removeUnusedFontsLabel");
 const removeFramesLabel = document.getElementById("removeFramesLabel");
@@ -89,6 +90,9 @@ const saveWithWebDAVLabel = document.getElementById("saveWithWebDAVLabel");
 const webDAVURLLabel = document.getElementById("webDAVURLLabel");
 const webDAVUserLabel = document.getElementById("webDAVUserLabel");
 const webDAVPasswordLabel = document.getElementById("webDAVPasswordLabel");
+const saveWithMCPLabel = document.getElementById("saveWithMCPLabel");
+const mcpServerUrlLabel = document.getElementById("mcpServerUrlLabel");
+const mcpAuthTokenLabel = document.getElementById("mcpAuthTokenLabel");
 const saveToGitHubLabel = document.getElementById("saveToGitHubLabel");
 const githubTokenLabel = document.getElementById("githubTokenLabel");
 const githubUserLabel = document.getElementById("githubUserLabel");
@@ -203,6 +207,18 @@ const removeInfobarSavedDateLabel = document.getElementById("removeInfobarSavedD
 const miscLabel = document.getElementById("miscLabel");
 const helpLabel = document.getElementById("helpLabel");
 const synchronizeLabel = document.getElementById("synchronizeLabel");
+const customShortcutLabel = document.getElementById("customShortcutLabel");
+const customShortcutDefaultLabel = document.getElementById("customShortcutDefaultLabel");
+const customShortcut1Label = document.getElementById("customShortcut0Label");
+const customShortcut2Label = document.getElementById("customShortcut1Label");
+const customShortcut3Label = document.getElementById("customShortcut2Label");
+const customShortcut4Label = document.getElementById("customShortcut3Label");
+const customShortcut5Label = document.getElementById("customShortcut4Label");
+const customShortcut6Label = document.getElementById("customShortcut5Label");
+const customShortcut7Label = document.getElementById("customShortcut6Label");
+const customShortcut8Label = document.getElementById("customShortcut7Label");
+const customShortcut9Label = document.getElementById("customShortcut8Label");
+const customShortcut10Label = document.getElementById("customShortcut9Label");
 const addProfileButton = document.getElementById("addProfileButton");
 const deleteProfileButton = document.getElementById("deleteProfileButton");
 const renameProfileButton = document.getElementById("renameProfileButton");
@@ -211,7 +227,9 @@ const exportButton = document.getElementById("exportButton");
 const importButton = document.getElementById("importButton");
 const fileInput = document.getElementById("fileInput");
 const profileNamesInput = document.getElementById("profileNamesInput");
+const customShortcutInput = document.getElementById("customShortcutInput");
 const removeHiddenElementsInput = document.getElementById("removeHiddenElementsInput");
+const removedElementsSelectorInput = document.getElementById("removedElementsSelectorInput");
 const removeUnusedStylesInput = document.getElementById("removeUnusedStylesInput");
 const removeUnusedFontsInput = document.getElementById("removeUnusedFontsInput");
 const removeFramesInput = document.getElementById("removeFramesInput");
@@ -239,6 +257,9 @@ const saveWithWebDAVInput = document.getElementById("saveWithWebDAVInput");
 const webDAVURLInput = document.getElementById("webDAVURLInput");
 const webDAVUserInput = document.getElementById("webDAVUserInput");
 const webDAVPasswordInput = document.getElementById("webDAVPasswordInput");
+const saveWithMCPInput = document.getElementById("saveWithMCPInput");
+const mcpServerUrlInput = document.getElementById("mcpServerUrlInput");
+const mcpAuthTokenInput = document.getElementById("mcpAuthTokenInput");
 const saveToGitHubInput = document.getElementById("saveToGitHubInput");
 const saveToS3Input = document.getElementById("saveToS3Input");
 const githubTokenInput = document.getElementById("githubTokenInput");
@@ -580,6 +601,7 @@ saveWithCompanionInput.addEventListener("click", () => disableDestinationPermiss
 saveToGDriveInput.addEventListener("click", () => disableDestinationPermissions(["clipboardWrite", "nativeMessaging"], false), false);
 saveToDropboxInput.addEventListener("click", () => disableDestinationPermissions(["clipboardWrite", "nativeMessaging"], true, false), false);
 saveWithWebDAVInput.addEventListener("click", () => disableDestinationPermissions(["clipboardWrite", "nativeMessaging"]), false);
+saveWithMCPInput.addEventListener("click", () => disableDestinationPermissions(["clipboardWrite", "nativeMessaging"]), false);
 saveToRestFormApiInput.addEventListener("click", () => disableDestinationPermissions(["clipboardWrite", "nativeMessaging"]), false);
 sharePageInput.addEventListener("click", () => disableDestinationPermissions(["clipboardWrite", "nativeMessaging"]), false);
 saveCreatedBookmarksInput.addEventListener("click", saveCreatedBookmarks, false);
@@ -660,6 +682,7 @@ addProfileButton.title = browser.i18n.getMessage("profileAddButtonTooltip");
 deleteProfileButton.title = browser.i18n.getMessage("profileDeleteButtonTooltip");
 renameProfileButton.title = browser.i18n.getMessage("profileRenameButtonTooltip");
 removeHiddenElementsLabel.textContent = browser.i18n.getMessage("optionRemoveHiddenElements");
+removedElementsSelectorLabel.textContent = browser.i18n.getMessage("optionRemovedElementsSelector");
 removeUnusedStylesLabel.textContent = browser.i18n.getMessage("optionRemoveUnusedStyles");
 removeUnusedFontsLabel.textContent = browser.i18n.getMessage("optionRemoveUnusedFonts");
 removeFramesLabel.textContent = browser.i18n.getMessage("optionRemoveFrames");
@@ -689,6 +712,9 @@ saveWithWebDAVLabel.textContent = browser.i18n.getMessage("optionSaveWithWebDAV"
 webDAVURLLabel.textContent = browser.i18n.getMessage("optionWebDAVURL");
 webDAVUserLabel.textContent = browser.i18n.getMessage("optionWebDAVUser");
 webDAVPasswordLabel.textContent = browser.i18n.getMessage("optionWebDAVPassword");
+saveWithMCPLabel.textContent = browser.i18n.getMessage("optionSaveWithMCP");
+mcpServerUrlLabel.textContent = browser.i18n.getMessage("optionMCPServerUrl");
+mcpAuthTokenLabel.textContent = browser.i18n.getMessage("optionMCPAuthToken");
 saveToGitHubLabel.textContent = browser.i18n.getMessage("optionSaveToGitHub");
 githubTokenLabel.textContent = browser.i18n.getMessage("optionGitHubToken");
 githubUserLabel.textContent = browser.i18n.getMessage("optionGitHubUser");
@@ -817,6 +843,18 @@ showAllProfilesLabel.textContent = browser.i18n.getMessage("optionsAutoSettingsS
 showAutoSaveProfileLabel.textContent = browser.i18n.getMessage("optionsAutoSettingsShowAutoSaveProfile");
 ruleUrlInput.placeholder = ruleEditUrlInput.placeholder = browser.i18n.getMessage("optionsAutoSettingsUrlPlaceholder");
 synchronizeLabel.textContent = browser.i18n.getMessage("optionSynchronize");
+customShortcutLabel.textContent = browser.i18n.getMessage("optionCustomShortcut");
+customShortcutDefaultLabel.textContent = browser.i18n.getMessage("optionCustomShortcutDefault");
+customShortcut1Label.textContent = browser.i18n.getMessage("commandCustomShortcut0");
+customShortcut2Label.textContent = browser.i18n.getMessage("commandCustomShortcut1");
+customShortcut3Label.textContent = browser.i18n.getMessage("commandCustomShortcut2");
+customShortcut4Label.textContent = browser.i18n.getMessage("commandCustomShortcut3");
+customShortcut5Label.textContent = browser.i18n.getMessage("commandCustomShortcut4");
+customShortcut6Label.textContent = browser.i18n.getMessage("commandCustomShortcut5");
+customShortcut7Label.textContent = browser.i18n.getMessage("commandCustomShortcut6");
+customShortcut8Label.textContent = browser.i18n.getMessage("commandCustomShortcut7");
+customShortcut9Label.textContent = browser.i18n.getMessage("commandCustomShortcut8");
+customShortcut10Label.textContent = browser.i18n.getMessage("commandCustomShortcut9");
 resetAllButton.textContent = browser.i18n.getMessage("optionsResetAllButton");
 resetCurrentButton.textContent = browser.i18n.getMessage("optionsResetCurrentButton");
 resetCancelButton.textContent = promptCancelButton.textContent = cancelButton.textContent = browser.i18n.getMessage("optionsCancelButton");
@@ -980,6 +1018,7 @@ async function refresh(profileName) {
 	renameProfileButton.disabled = deleteProfileButton.disabled = profileNamesInput.value == DEFAULT_PROFILE_NAME;
 	const profileOptions = profiles[selectedProfileName];
 	removeHiddenElementsInput.checked = profileOptions.removeHiddenElements;
+	removedElementsSelectorInput.value = profileOptions.removedElementsSelector;
 	removeUnusedStylesInput.checked = profileOptions.removeUnusedStyles;
 	removeUnusedFontsInput.checked = profileOptions.removeUnusedFonts;
 	removeFramesInput.checked = profileOptions.removeFrames;
@@ -1011,6 +1050,11 @@ async function refresh(profileName) {
 	webDAVUserInput.disabled = !profileOptions.saveWithWebDAV;
 	webDAVPasswordInput.value = profileOptions.webDAVPassword;
 	webDAVPasswordInput.disabled = !profileOptions.saveWithWebDAV;
+	saveWithMCPInput.checked = profileOptions.saveWithMCP;
+	mcpServerUrlInput.value = profileOptions.mcpServerUrl;
+	mcpServerUrlInput.disabled = !profileOptions.saveWithMCP;
+	mcpAuthTokenInput.value = profileOptions.mcpAuthToken;
+	mcpAuthTokenInput.disabled = !profileOptions.saveWithMCP;
 	saveToGitHubInput.checked = profileOptions.saveToGitHub;
 	githubTokenInput.value = profileOptions.githubToken;
 	githubTokenInput.disabled = !profileOptions.saveToGitHub;
@@ -1042,7 +1086,7 @@ async function refresh(profileName) {
 	S3SecretKeyInput.value = profileOptions.S3SecretKey;
 	S3SecretKeyInput.disabled = !profileOptions.saveToS3;
 	sharePageInput.checked = profileOptions.sharePage;
-	saveToFilesystemInput.checked = !profileOptions.saveToGDrive && !profileOptions.saveToGitHub && !profileOptions.saveToS3 && !profileOptions.saveWithCompanion && !profileOptions.saveToClipboard && !profileOptions.saveWithWebDAV && !profileOptions.saveToDropbox && !profileOptions.saveToRestFormApi && !profileOptions.sharePage;
+	saveToFilesystemInput.checked = !profileOptions.saveToGDrive && !profileOptions.saveToGitHub && !profileOptions.saveToS3 && !profileOptions.saveWithCompanion && !profileOptions.saveToClipboard && !profileOptions.saveWithWebDAV && !profileOptions.saveWithMCP && !profileOptions.saveToDropbox && !profileOptions.saveToRestFormApi && !profileOptions.sharePage;
 	compressHTMLInput.checked = profileOptions.compressHTML;
 	compressCSSInput.checked = profileOptions.compressCSS;
 	groupDuplicateStylesheetsInput.checked = profileOptions.groupDuplicateStylesheets;
@@ -1091,6 +1135,7 @@ async function refresh(profileName) {
 	removeAlternativeFontsInput.checked = profileOptions.removeAlternativeFonts;
 	removeAlternativeImagesInput.checked = profileOptions.removeAlternativeImages;
 	groupDuplicateImagesInput.checked = profileOptions.groupDuplicateImages;
+	customShortcutInput.value = profileOptions.customShortcut || "";
 	removeAlternativeMediasInput.checked = profileOptions.removeAlternativeMedias;
 	saveCreatedBookmarksInput.checked = profileOptions.saveCreatedBookmarks;
 	passReferrerOnErrorInput.checked = profileOptions.passReferrerOnError;
@@ -1145,11 +1190,33 @@ async function update() {
 	} catch (error) {
 		// ignored
 	}
+	const selectedProfileName = profileNamesInput.value;
+	const selectedCustomShortcut = customShortcutInput.value || null;
+	if (selectedCustomShortcut) {
+		try {
+			const config = await browser.runtime.sendMessage({ method: "config.get" });
+			const profiles = config.profiles || {};
+			await Promise.all(Object.keys(profiles).map(profileName => {
+				if (profileName != selectedProfileName && profiles[profileName].customShortcut == selectedCustomShortcut) {
+					return browser.runtime.sendMessage({
+						method: "config.updateProfile",
+						profileName,
+						profile: Object.assign({}, profiles[profileName], { customShortcut: null })
+					});
+				}
+				return Promise.resolve();
+			}));
+			// eslint-disable-next-line no-unused-vars
+		} catch (error) {
+			// ignored
+		}
+	}
 	pendingSave = browser.runtime.sendMessage({
 		method: "config.updateProfile",
-		profileName: profileNamesInput.value,
+		profileName: selectedProfileName,
 		profile: {
 			removeHiddenElements: removeHiddenElementsInput.checked,
+			removedElementsSelector: removedElementsSelectorInput.value,
 			removeUnusedStyles: removeUnusedStylesInput.checked,
 			removeUnusedFonts: removeUnusedFontsInput.checked,
 			removeFrames: removeFramesInput.checked,
@@ -1179,6 +1246,9 @@ async function update() {
 			webDAVURL: webDAVURLInput.value,
 			webDAVUser: webDAVUserInput.value,
 			webDAVPassword: webDAVPasswordInput.value,
+			saveWithMCP: saveWithMCPInput.checked,
+			mcpServerUrl: mcpServerUrlInput.value,
+			mcpAuthToken: mcpAuthTokenInput.value,
 			saveToGitHub: saveToGitHubInput.checked,
 			githubToken: githubTokenInput.value,
 			githubUser: githubUserInput.value,
@@ -1264,7 +1334,8 @@ async function update() {
 			S3Region: S3RegionInput.value,
 			S3Bucket: S3BucketInput.value,
 			S3AccessKey: S3AccessKeyInput.value,
-			S3SecretKey: S3SecretKeyInput.value
+			S3SecretKey: S3SecretKeyInput.value,
+			customShortcut: selectedCustomShortcut
 		}
 	});
 	try {
