@@ -9,7 +9,7 @@
     "64": "src/ui/resources/icon_64.png",
     "128": "src/ui/resources/icon_128.png"
   },
-  "version": "1.22.89",
+  "version": "1.22.90",
   "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
@@ -122,9 +122,7 @@
     }
   },
   "web_accessible_resources": [
-    "lib/single-file-hooks-frames.js",
     "lib/single-file-infobar.js",
-    "lib/single-file-extension-editor-init.js",
     "lib/single-file-extension-editor.js",
     "lib/single-file-extension-editor-helper.js",
     "lib/single-file-zip.min.js",
