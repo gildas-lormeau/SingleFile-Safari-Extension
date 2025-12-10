@@ -383,6 +383,10 @@
 		"message": "將重複圖片分組到一起",
 		"description": "Options page label: 'group duplicate images together'"
 	},
+	"optionImageReductionFactor": {
+		"message": "圖片縮小係數",
+		"description": "Options page label: 'image reduction factor'"
+	},
 	"optionLoadDeferredImages": {
 		"message": "保存延遲加載的圖片",
 		"description": "Options page label: 'save deferred images'"
@@ -784,11 +788,11 @@
 		"description": "Options page label: 'upload to an MCP server'"
 	},
 	"optionMCPServerUrl": {
-		"message": "服務器 URL",
+		"message": "服務器地址",
 		"description": "Options page label: 'server URL'"
 	},
 	"optionMCPAuthToken": {
-		"message": "身份驗證令牌",
+		"message": "認證令牌",
 		"description": "Options page label: 'authentication token'"
 	},
 	"optionSaveWithCompanion": {

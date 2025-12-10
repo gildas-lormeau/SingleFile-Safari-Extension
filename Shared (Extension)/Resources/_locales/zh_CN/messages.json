@@ -383,6 +383,10 @@
 		"message": "将重复图片分组到一起",
 		"description": "Options page label: 'group duplicate images together'"
 	},
+	"optionImageReductionFactor": {
+		"message": "图片缩小系数",
+		"description": "Options page label: 'image reduction factor'"
+	},
 	"optionLoadDeferredImages": {
 		"message": "保存延迟加载的图片",
 		"description": "Options page label: 'save deferred images'"
@@ -780,15 +784,15 @@
 		"description": "Options page label: 'password'"
 	},
 	"optionSaveWithMCP": {
-		"message": "upload to an MCP server",
+		"message": "保存到 MCP 服务器",
 		"description": "Options page label: 'upload to an MCP server'"
 	},
 	"optionMCPServerUrl": {
-		"message": "server URL",
+		"message": "服务器地址",
 		"description": "Options page label: 'server URL'"
 	},
 	"optionMCPAuthToken": {
-		"message": "authentication token",
+		"message": "认证令牌",
 		"description": "Options page label: 'authentication token'"
 	},
 	"optionSaveWithCompanion": {

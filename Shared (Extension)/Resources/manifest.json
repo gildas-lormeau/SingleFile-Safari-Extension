@@ -9,7 +9,7 @@
     "64": "src/ui/resources/icon_64.png",
     "128": "src/ui/resources/icon_128.png"
   },
-  "version": "1.22.90",
+  "version": "1.22.91",
   "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
@@ -23,7 +23,8 @@
         "lib/single-file-extension-frames.js"
       ],
       "all_frames": true,
-      "match_about_blank": true
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
     },
     {
       "matches": [
