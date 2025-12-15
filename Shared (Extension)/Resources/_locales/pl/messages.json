@@ -1007,6 +1007,10 @@
 		"message": "Wydrukuj stronę",
 		"description": "Title of the button 'Print the page' in the editor"
 	},
+	"editorImportMht": {
+		"message": "Importuj plik MHTML",
+		"description": "Title of the button 'Import MHTML file' in the editor"
+	},
 	"pendingsTitle": {
 		"message": "Oczekujące zapisy",
 		"description": "Title of the pending save page 'Pending saves' in the editor"
@@ -1088,7 +1092,7 @@
 		"description": "Title of the column in the table of the URLs"
 	},
 	"optionSaveToRestFormApi": {
-		"message": "prześlij do API formularza REST",
+		"message": "przesyłaj do API formularza REST",
 		"description": "Options page label: 'upload to a REST Form API'"
 	},
 	"optionRestFormApiUrl": {
