@@ -441,7 +441,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "KEY_FILE=\"${PROJECT_DIR}/single-file/.woleet-key\"\nWOLEET_API_KEY=\"${WOLEET_API_KEY:-$([ -f \"$KEY_FILE\" ] && cat \"$KEY_FILE\")}\"\nif [ -n \"$WOLEET_API_KEY\" ]; then\n    for FILE in \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lib/single-file-extension-background.js\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/src/lib/woleet/woleet.js\"; do\n        sed -i \"\" \"s|WOLEET_API_KEY_PLACEHOLDER|$WOLEET_API_KEY|\" \"$FILE\"\n    done\nfi\n";
+			shellScript = "KEY_FILE=\"${PROJECT_DIR}/single-file/.woleet-key\"\nWOLEET_API_KEY=\"${WOLEET_API_KEY:-$([ -f \"$KEY_FILE\" ] && cat \"$KEY_FILE\")}\"\nif [ -n \"$WOLEET_API_KEY\" ]; then\n    for FILE in \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lib/single-file-extension-background.js\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/src/lib/woleet/woleet.js\"; do\n        CONTENT=$(sed \"s|WOLEET_API_KEY_PLACEHOLDER|$WOLEET_API_KEY|\" \"$FILE\")\n        printf '%s\\n' \"$CONTENT\" > \"$FILE\"\n    done\nfi\n";
 		};
 		5F0000000000000000000002 /* Inject Woleet API Key */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -463,7 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "KEY_FILE=\"${PROJECT_DIR}/single-file/.woleet-key\"\nWOLEET_API_KEY=\"${WOLEET_API_KEY:-$([ -f \"$KEY_FILE\" ] && cat \"$KEY_FILE\")}\"\nif [ -n \"$WOLEET_API_KEY\" ]; then\n    for FILE in \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lib/single-file-extension-background.js\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/src/lib/woleet/woleet.js\"; do\n        sed -i \"\" \"s|WOLEET_API_KEY_PLACEHOLDER|$WOLEET_API_KEY|\" \"$FILE\"\n    done\nfi\n";
+			shellScript = "KEY_FILE=\"${PROJECT_DIR}/single-file/.woleet-key\"\nWOLEET_API_KEY=\"${WOLEET_API_KEY:-$([ -f \"$KEY_FILE\" ] && cat \"$KEY_FILE\")}\"\nif [ -n \"$WOLEET_API_KEY\" ]; then\n    for FILE in \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lib/single-file-extension-background.js\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/src/lib/woleet/woleet.js\"; do\n        CONTENT=$(sed \"s|WOLEET_API_KEY_PLACEHOLDER|$WOLEET_API_KEY|\" \"$FILE\")\n        printf '%s\\n' \"$CONTENT\" > \"$FILE\"\n    done\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
