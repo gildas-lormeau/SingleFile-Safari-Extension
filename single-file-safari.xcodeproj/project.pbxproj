@@ -294,6 +294,7 @@
 				8E136F5F291F07240036F08D /* Sources */,
 				8E136F60291F07240036F08D /* Frameworks */,
 				8E136F61291F07240036F08D /* Resources */,
+				5F0000000000000000000001 /* Inject Woleet API Key */,
 			);
 			buildRules = (
 			);
@@ -311,6 +312,7 @@
 				8E136F69291F07240036F08D /* Sources */,
 				8E136F6A291F07240036F08D /* Frameworks */,
 				8E136F6B291F07240036F08D /* Resources */,
+				5F0000000000000000000002 /* Inject Woleet API Key */,
 			);
 			buildRules = (
 			);
@@ -417,6 +419,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5F0000000000000000000001 /* Inject Woleet API Key */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/single-file/.woleet-key",
+			);
+			name = "Inject Woleet API Key";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/lib/single-file-extension-background.js",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/src/lib/woleet/woleet.js",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEY_FILE=\"${PROJECT_DIR}/single-file/.woleet-key\"\nWOLEET_API_KEY=\"${WOLEET_API_KEY:-$([ -f \"$KEY_FILE\" ] && cat \"$KEY_FILE\")}\"\nif [ -n \"$WOLEET_API_KEY\" ]; then\n    for FILE in \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lib/single-file-extension-background.js\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/src/lib/woleet/woleet.js\"; do\n        sed -i \"\" \"s|WOLEET_API_KEY_PLACEHOLDER|$WOLEET_API_KEY|\" \"$FILE\"\n    done\nfi\n";
+		};
+		5F0000000000000000000002 /* Inject Woleet API Key */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(PROJECT_DIR)/single-file/.woleet-key",
+			);
+			name = "Inject Woleet API Key";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/lib/single-file-extension-background.js",
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/src/lib/woleet/woleet.js",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEY_FILE=\"${PROJECT_DIR}/single-file/.woleet-key\"\nWOLEET_API_KEY=\"${WOLEET_API_KEY:-$([ -f \"$KEY_FILE\" ] && cat \"$KEY_FILE\")}\"\nif [ -n \"$WOLEET_API_KEY\" ]; then\n    for FILE in \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lib/single-file-extension-background.js\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/src/lib/woleet/woleet.js\"; do\n        sed -i \"\" \"s|WOLEET_API_KEY_PLACEHOLDER|$WOLEET_API_KEY|\" \"$FILE\"\n    done\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E136F41291F07240036F08D /* Sources */ = {
