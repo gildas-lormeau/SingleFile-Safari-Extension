@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      -
+        name: Checkout sources
+        uses: actions/checkout@v4
+      # the committed resources must stay keyless, the Woleet API key is only
+      # injected into the built app by the "Inject Woleet API Key" Xcode build phase
+      -
+        name: Check the Woleet API key stays out of the repository
+        run: |
+          grep -q WOLEET_API_KEY_PLACEHOLDER "Shared (Extension)/Resources/src/lib/woleet/woleet.js"
+          grep -q WOLEET_API_KEY_PLACEHOLDER "Shared (Extension)/Resources/lib/single-file-extension-background.js"
+          if git grep -q "eyJhbGciOiJIUzI1NiJ9" -- ':!.github'; then
+            echo "a committed file contains a JWT"
+            exit 1
+          fi
