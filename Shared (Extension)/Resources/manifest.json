@@ -54,8 +54,7 @@
     }
   ],
   "background": {
-    "page": "src/core/bg/background.html",
-    "persistent": false
+    "page": "src/core/bg/background.html", "persistent": false
   },
   "sidebar_action": {
     "browser_style": true,
