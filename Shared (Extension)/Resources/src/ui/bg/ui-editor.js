@@ -21,11 +21,11 @@
  *   Source.
  */
 
-/* global browser, document, matchMedia, addEventListener, navigator, prompt, URL, MouseEvent, Blob, setInterval, DOMParser, fetch, TextDecoder, singlefile */
+/* global browser, document, matchMedia, addEventListener, navigator, prompt, URL, MouseEvent, Blob, setInterval, DOMParser, fetch, TextDecoder, singlefile, location, history */
 
 import * as download from "../../core/common/download.js";
 import { onError } from "./../common/common-content-ui.js";
-import * as zip from "./../../../lib/single-file-zip.js";
+import * as zip from "./../../../lib/single-file-archive.js";
 import * as yabson from "./../../lib/yabson/yabson.js";
 
 const EMBEDDED_IMAGE_BUTTON_MESSAGE = browser.i18n.getMessage("topPanelEmbeddedImageButton");
@@ -62,8 +62,16 @@ const savePageButton = document.querySelector(".save-page-button");
 const printPageButton = document.querySelector(".print-page-button");
 const importMhtButton = document.querySelector(".import-mht-button");
 const lastButton = toolbarElement.querySelector(".buttons:last-of-type [type=button]:last-of-type");
+const archiveButtonsElement = document.querySelector(".archive-buttons");
+const editButtonsElements = document.querySelectorAll(".edit-buttons");
+const archiveTocButton = document.querySelector(".archive-toc-button");
+const archivePageTitleElement = document.querySelector(".archive-page-title");
 
-let tabData, tabDataContents = [], downloadParser;
+const ARCHIVE_TOC_MESSAGE = browser.i18n.getMessage("editorArchiveToc") || "Table of contents";
+const ARCHIVE_ROUTE_PREFIX = "#sfz/";
+const ARCHIVE_TOC_ROUTE = "?toc";
+
+let tabData, tabDataContents = [], downloadParser, archivePages;
 
 addYellowNoteButton.title = browser.i18n.getMessage("editorAddYellowNote");
 addPinkNoteButton.title = browser.i18n.getMessage("editorAddPinkNote");
@@ -86,6 +94,10 @@ redoCutPageButton.title = browser.i18n.getMessage("editorRedoCutPage");
 savePageButton.title = browser.i18n.getMessage("editorSavePage");
 printPageButton.title = browser.i18n.getMessage("editorPrintPage");
 importMhtButton.title = browser.i18n.getMessage("editorImportMht");
+archiveTocButton.title = ARCHIVE_TOC_MESSAGE;
+
+archiveTocButton.onmouseup = () => displayArchiveRoute(ARCHIVE_TOC_ROUTE);
+addEventListener("hashchange", applyArchiveRoute);
 
 addYellowNoteButton.onmouseup = () => editorElement.contentWindow.postMessage(JSON.stringify({ method: "addNote", color: "note-yellow" }), "*");
 addPinkNoteButton.onmouseup = () => editorElement.contentWindow.postMessage(JSON.stringify({ method: "addNote", color: "note-pink" }), "*");
@@ -301,86 +313,138 @@ addEventListener("message", async event => {
 	if (message.method == "setContent") {
 		tabData.options.openEditor = false;
 		tabData.options.openSavedPage = false;
-		if (message.compressContent) {
-			tabData.options.compressContent = true;
-			if (tabData.selfExtractingArchive !== undefined) {
-				tabData.options.selfExtractingArchive = tabData.selfExtractingArchive;
-			}
-			if (tabData.disableCompression !== undefined) {
-				tabData.options.disableCompression = tabData.disableCompression;
-			}
-			if (tabData.extractDataFromPageTags !== undefined) {
-				tabData.options.extractDataFromPage = tabData.extractDataFromPageTags;
-			}
-			if (tabData.insertTextBody !== undefined) {
-				tabData.options.insertTextBody = tabData.insertTextBody;
-			}
-			if (tabData.embeddedImage !== undefined || tabData.options.insertEmbeddedScreenshotImage) {
-				if (tabData.options.insertEmbeddedScreenshotImage) {
-					toolbarElement.style.display = "none";
-					editorElement.style.height = message.documentHeight + "px";
-					document.documentElement.style.height = message.documentHeight + "px";
-					const infobarElement = document.querySelector(INFOBAR_TAGNAME);
-					if (infobarElement) {
-						infobarElement.style.display = "none";
-					}
-					const screenshotBlobURI = await browser.runtime.sendMessage({
-						method: "tabs.getScreenshot",
-						width: document.documentElement.scrollWidth,
-						height: document.documentElement.scrollHeight,
-						innerHeight: globalThis.innerHeight
-					});
-					tabData.options.embeddedImage = new Uint8Array(await (await fetch(screenshotBlobURI)).arrayBuffer());
-					editorElement.style.height = "";
-					document.documentElement.style.height = "";
-					toolbarElement.style.display = "";
-					if (infobarElement) {
-						infobarElement.style.display = "";
-					}
-				} else {
-					tabData.options.embeddedImage = tabData.embeddedImage;
+		try {
+			if (message.multiPageArchive) {
+				await saveArchive(message);
+			} else if (message.compressContent) {
+				tabData.options.compressContent = true;
+				if (tabData.selfExtractingArchive !== undefined) {
+					tabData.options.selfExtractingArchive = tabData.selfExtractingArchive;
 				}
+				if (tabData.disableCompression !== undefined) {
+					tabData.options.disableCompression = tabData.disableCompression;
+				}
+				if (tabData.extractDataFromPageTags !== undefined) {
+					tabData.options.extractDataFromPage = tabData.extractDataFromPageTags;
+				}
+				if (tabData.insertTextBody !== undefined) {
+					tabData.options.insertTextBody = tabData.insertTextBody;
+				}
+				if (tabData.embeddedImage !== undefined || tabData.options.insertEmbeddedScreenshotImage) {
+					if (tabData.options.insertEmbeddedScreenshotImage) {
+						toolbarElement.style.display = "none";
+						editorElement.style.height = message.documentHeight + "px";
+						document.documentElement.style.height = message.documentHeight + "px";
+						const infobarElement = document.querySelector(INFOBAR_TAGNAME);
+						if (infobarElement) {
+							infobarElement.style.display = "none";
+						}
+						const screenshotBlobURI = await browser.runtime.sendMessage({
+							method: "tabs.getScreenshot",
+							width: document.documentElement.scrollWidth,
+							height: document.documentElement.scrollHeight,
+							innerHeight: globalThis.innerHeight
+						});
+						tabData.options.embeddedImage = new Uint8Array(await (await fetch(screenshotBlobURI)).arrayBuffer());
+						editorElement.style.height = "";
+						document.documentElement.style.height = "";
+						toolbarElement.style.display = "";
+						if (infobarElement) {
+							infobarElement.style.display = "";
+						}
+					} else {
+						tabData.options.embeddedImage = tabData.embeddedImage;
+					}
+				}
+				if (tabData.insertMetaCSP !== undefined) {
+					tabData.options.insertMetaCSP = tabData.insertMetaCSP;
+				}
+				const pageData = await getContentPageData(message.archiveContent || tabData.content, message.content, { password: tabData.options.password });
+				pageData.content = message.content;
+				pageData.title = message.title;
+				pageData.doctype = message.doctype;
+				pageData.viewport = message.viewport;
+				pageData.url = message.url;
+				pageData.filename = message.filename || tabData.filename;
+				pageData.mimeType = "text/html";
+				if (message.foregroundSave) {
+					tabData.options.backgroundSave = false;
+					tabData.options.foregroundSave = true;
+				}
+				if (tabData.options.addProof) {
+					pageData.hash = await singlefile.helper.digest("SHA-256", message.content);
+				}
+				tabData.options.url = message.url;
+				await download.downloadPage(pageData, tabData.options);
+			} else {
+				const pageData = {
+					content: message.content,
+					filename: message.filename || tabData.filename,
+					mimeType: "text/html",
+					title: message.title,
+					url: message.url
+				};
+				if (tabData.options.addProof) {
+					pageData.hash = await singlefile.helper.digest("SHA-256", message.content);
+				}
+				tabData.options.compressContent = false;
+				tabData.options.url = message.url;
+				await download.downloadPage(pageData, tabData.options);
 			}
-			if (tabData.insertMetaCSP !== undefined) {
-				tabData.options.insertMetaCSP = tabData.insertMetaCSP;
-			}
-			const pageData = await getContentPageData(tabData.content, message.content, { password: tabData.options.password });
-			pageData.content = message.content;
-			pageData.title = message.title;
-			pageData.doctype = message.doctype;
-			pageData.viewport = message.viewport;
-			pageData.url = message.url;
-			pageData.filename = message.filename || tabData.filename;
-			pageData.mimeType = "text/html";
-			if (message.foregroundSave) {
-				tabData.options.backgroundSave = false;
-				tabData.options.foregroundSave = true;
-			}
-			if (tabData.options.addProof) {
-				pageData.hash = await singlefile.helper.digest("SHA-256", message.content);
-			}
-			tabData.options.url = message.url;
-			await download.downloadPage(pageData, tabData.options);
-		} else {
-			const pageData = {
-				content: message.content,
-				filename: message.filename || tabData.filename,
-				mimeType: "text/html",
-				title: message.title,
-				url: message.url
-			};
-			if (tabData.options.addProof) {
-				pageData.hash = await singlefile.helper.digest("SHA-256", message.content);
-			}
-			tabData.options.compressContent = false;
-			tabData.options.url = message.url;
-			await download.downloadPage(pageData, tabData.options);
+		} catch (error) {
+			onError(error.message);
 		}
 	}
 	if (message.method == "onUpdate") {
 		tabData.docSaved = message.saved;
 	}
+	if (message.method == "onInitArchive") {
+		archivePages = message.pages;
+		archiveButtonsElement.hidden = false;
+		importMhtButton.hidden = true;
+		formatPageButton.hidden = true;
+		if (message.filename) {
+			tabData.filename = message.filename;
+		}
+		tabData.docSaved = true;
+		if (!applyArchiveRoute()) {
+			const routeIndex = tabData.url ? tabData.url.indexOf(ARCHIVE_ROUTE_PREFIX) : -1;
+			if (routeIndex != -1) {
+				displayArchiveRoute(tabData.url.substring(routeIndex + ARCHIVE_ROUTE_PREFIX.length), true);
+			} else {
+				displayArchiveRoute(ARCHIVE_TOC_ROUTE, true);
+			}
+		}
+	}
+	if (message.method == "onNavigateArchivePage") {
+		displayArchiveRoute(message.pagePath);
+	}
+	if (message.method == "onArchivePageDisplayed") {
+		const page = archivePages && archivePages.find(page => page.path == message.pagePath);
+		archivePageTitleElement.textContent = message.title || (page && (page.title || page.url)) || "";
+		archivePageTitleElement.title = archivePageTitleElement.textContent;
+		document.title = "[SingleFile] " + archivePageTitleElement.textContent;
+		tabData.options.disableFormatPage = !message.formatPageEnabled;
+		formatPageButton.hidden = !message.formatPageEnabled;
+		editButtonsElements.forEach(element => element.hidden = false);
+		tabData.docSaved = !message.modified;
+	}
+	if (message.method == "onArchiveTocDisplayed") {
+		archivePageTitleElement.textContent = ARCHIVE_TOC_MESSAGE;
+		archivePageTitleElement.title = "";
+		formatPageButton.hidden = true;
+		editButtonsElements.forEach(element => element.hidden = true);
+		tabData.docSaved = !message.modified;
+	}
 	if (message.method == "onInit") {
+		archivePages = undefined;
+		archiveButtonsElement.hidden = true;
+		editButtonsElements.forEach(element => element.hidden = false);
+		if (location.hash) {
+			history.replaceState(null, "", location.pathname + location.search);
+		}
+		savePageButton.hidden = false;
+		importMhtButton.hidden = false;
 		tabData.options.disableFormatPage = !message.formatPageEnabled;
 		formatPageButton.hidden = !message.formatPageEnabled;
 		document.title = "[SingleFile] " + message.title;
@@ -440,6 +504,126 @@ browser.runtime.onMessage.addListener(message => {
 addEventListener("load", () => {
 	browser.runtime.sendMessage({ method: "editor.getTabData" });
 });
+
+async function saveArchive(message) {
+	const options = tabData.options;
+	const manifest = message.manifest || {};
+	const manifestPages = manifest.pages || [];
+	const aliases = manifest.aliases || {};
+	const originalData = new Uint8Array(message.archiveContent);
+	const zipReader = new zip.ZipReader(new zip.Uint8ArrayReader(originalData));
+	const entries = await zipReader.getEntries();
+	if (entries.some(entry => entry.encrypted)) {
+		await zipReader.close();
+		throw new Error("Saving encrypted multi-page archives is not supported yet.");
+	}
+	const entryMap = new Map(entries.map(entry => [entry.filename, entry]));
+	const modifiedPages = new Map(message.pages.map(page => [page.path, page]));
+	const pages = manifestPages.map(page => {
+		const modifiedPage = modifiedPages.get(page.path);
+		return {
+			url: page.url,
+			originalUrls: page.originalUrls,
+			title: modifiedPage ? modifiedPage.title : page.title,
+			getData: () => getPageData(page.path)
+		};
+	});
+	const zipScript = await (await fetch("/lib/single-file-zip.min.js")).text();
+	const selfExtractingArchive = tabData.selfExtractingArchive !== undefined ?
+		tabData.selfExtractingArchive :
+		!(originalData[0] == 0x50 && originalData[1] == 0x4B);
+	const data = await zip.createPagesArchive(pages, {
+		selfExtractingArchive,
+		extractDataFromPage: tabData.extractDataFromPageTags !== undefined ? tabData.extractDataFromPageTags : options.extractDataFromPage,
+		preventAppendedData: options.preventAppendedData,
+		includeBOM: options.includeBOM,
+		insertMetaCSP: tabData.insertMetaCSP !== undefined ? tabData.insertMetaCSP : options.insertMetaCSP,
+		insertCanonicalLink: options.insertCanonicalLink,
+		insertMetaNoIndex: options.insertMetaNoIndex,
+		insertSingleFileComment: true,
+		zipScript,
+		tocPage: message.tocPage,
+		dedupPages: Boolean(manifest.aliases),
+		markUnarchivedLinks: Boolean(manifest.markUnarchivedLinks),
+		pageTransitions: manifest.pageTransitions
+	});
+	await zipReader.close();
+	const downloadOptions = Object.assign({}, options, {
+		compressContent: false,
+		includeBOM: false,
+		saveToClipboard: false,
+		url: manifestPages.length ? manifestPages[0].url : tabData.url
+	});
+	if (message.foregroundSave) {
+		downloadOptions.backgroundSave = false;
+		downloadOptions.foregroundSave = true;
+	}
+	await download.downloadPage({
+		content: data,
+		filename: tabData.filename || "archive.zip.html",
+		mimeType: selfExtractingArchive ? "text/html" : "application/zip"
+	}, downloadOptions);
+	editorElement.contentWindow.postMessage(JSON.stringify({ method: "archiveSaved" }), "*");
+	tabData.docSaved = true;
+
+	async function getPageData(pagePath) {
+		const pageEntries = entries.filter(entry => pagePath ?
+			entry.filename.startsWith(pagePath) :
+			!entry.filename.startsWith("pages/") && !entry.filename.startsWith("sfz-"));
+		const dataWriter = new zip.Uint8ArrayWriter();
+		const zipWriter = new zip.ZipWriter(dataWriter);
+		const modifiedPage = modifiedPages.get(pagePath);
+		for (const entry of pageEntries) {
+			if (!entry.directory) {
+				const relativeFilename = entry.filename.substring(pagePath.length);
+				if (modifiedPage && relativeFilename == "index.html") {
+					await zipWriter.add(relativeFilename, new zip.TextReader(modifiedPage.content), {
+						comment: entry.comment
+					});
+				} else {
+					const sourceEntry = (aliases[entry.filename] && entryMap.get(aliases[entry.filename])) || entry;
+					const rawData = await sourceEntry.getData(new zip.Uint8ArrayWriter(), { passThrough: true, checkSignature: false });
+					await zipWriter.add(relativeFilename, new zip.Uint8ArrayReader(rawData), {
+						passThrough: true,
+						compressionMethod: sourceEntry.compressionMethod,
+						uncompressedSize: sourceEntry.uncompressedSize,
+						signature: sourceEntry.signature,
+						comment: entry.comment,
+						lastModDate: entry.lastModDate
+					});
+				}
+			}
+		}
+		await zipWriter.close();
+		return await dataWriter.getData();
+	}
+}
+
+function displayArchiveRoute(route, replaceRoute) {
+	const hash = ARCHIVE_ROUTE_PREFIX + route;
+	if (location.hash == hash) {
+		applyArchiveRoute();
+	} else if (replaceRoute) {
+		location.replace(hash);
+	} else {
+		location.hash = hash;
+	}
+}
+
+function applyArchiveRoute() {
+	if (!archivePages || !location.hash.startsWith(ARCHIVE_ROUTE_PREFIX)) {
+		return false;
+	}
+	const route = location.hash.substring(ARCHIVE_ROUTE_PREFIX.length);
+	if (route == ARCHIVE_TOC_ROUTE) {
+		editorElement.contentWindow.postMessage(JSON.stringify({ method: "displayArchiveToc" }), "*");
+	} else if (archivePages.some(page => page.path == route)) {
+		editorElement.contentWindow.postMessage(JSON.stringify({ method: "displayArchivePage", pagePath: route }), "*");
+	} else {
+		displayArchiveRoute(ARCHIVE_TOC_ROUTE, true);
+	}
+	return true;
+}
 
 addEventListener("beforeunload", event => {
 	if (tabData.options.warnUnsavedPage && !tabData.docSaved) {
@@ -595,6 +779,8 @@ function enableCutOuterPage() {
 }
 
 function savePage() {
+	const options = tabData.options;
+	const saveWithDestination = Boolean(options.saveToClipboard || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveWithMCP || options.saveToDropbox || options.saveToRestFormApi || options.saveToS3);
 	editorElement.contentWindow.postMessage(JSON.stringify({
 		method: "getContent",
 		compressHTML: tabData.options.compressHTML,
@@ -607,7 +793,7 @@ function savePage() {
 		infobarPositionRight: tabData.options.infobarPositionRight,
 		backgroundSave: tabData.options.backgroundSave,
 		filename: tabData.filename,
-		foregroundSave: FOREGROUND_SAVE,
+		foregroundSave: FOREGROUND_SAVE && !saveWithDestination,
 		sharePage: tabData.options.sharePage,
 		labels: {
 			EMBEDDED_IMAGE_BUTTON_MESSAGE,

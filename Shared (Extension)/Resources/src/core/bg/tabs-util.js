@@ -34,10 +34,6 @@ async function queryTabs(options) {
 	return tabs.sort((tab1, tab2) => tab1.index - tab2.index);
 }
 
-// The authorization code is only accepted when it comes from the tab opened by
-// launchWebAuthFlow() for the current flow (authFlow.tabId), and when the state
-// parameter matches the one generated for that flow. This prevents a third-party
-// tab navigating to the redirect URL from injecting an authorization code.
 function extractAuthCode(authURL, authFlow = {}) {
 	return new Promise((resolve, reject) => {
 		let listenerRemoved;
