@@ -659,6 +659,36 @@
 		"message": "Różne",
 		"description": "Options sub-title: 'Misc.'"
 	},
+	"optionsExternalCapturePermissionsSubTitle": {
+		"message": "Zewnętrzne API przechwytywania",
+		"description": "Options sub-title: 'External capture API'"
+	},
+	"optionExternalCaptureAllowedIds": {
+		"message": "dozwolone rozszerzenia, po jednym w wierszu",
+		"description": "Options page label: 'allowed extensions, one per line'"
+	},
+	"optionExternalCaptureDeniedIds": {
+		"message": "zablokowane rozszerzenia, po jednym w wierszu",
+		"description": "Options page label: 'blocked extensions, one per line'"
+	},
+	"optionsExternalCapturePendingRequest": {
+		"message": "Rozszerzenie $EXTENSION_ID$ chce użyć SingleFile do przechwytywania stron w tej przeglądarce i otrzymywania ich zawartości HTML. Jeśli na to zezwolisz, będzie mogło przechwycić dowolną kartę w dowolnym momencie bez ponownego pytania, dopóki nie usuniesz go z poniższej listy.",
+		"description": "Options page prompt to approve an external extension capture request.",
+		"placeholders": {
+			"extension_id": {
+				"content": "$1",
+				"example": "archivebox@example.com"
+			}
+		}
+	},
+	"optionsExternalCaptureApproveButton": {
+		"message": "Zezwól",
+		"description": "Options button: 'Allow'"
+	},
+	"optionsExternalCaptureDenyButton": {
+		"message": "Odmów",
+		"description": "Options button: 'Deny'"
+	},
 	"optionBackgroundSave": {
 		"message": "zapisuj strony w tle",
 		"description": "Options page label: 'save pages in background'"
@@ -1015,6 +1045,10 @@
 		"message": "Importuj plik MHTML",
 		"description": "Title of the button 'Import MHTML file' in the editor"
 	},
+	"editorArchiveToc": {
+		"message": "Spis treści",
+		"description": "Title of the table of contents button displayed in the editor when viewing a multi-page archive"
+	},
 	"pendingsTitle": {
 		"message": "Oczekujące zapisy",
 		"description": "Title of the pending save page 'Pending saves' in the editor"
@@ -1049,7 +1083,7 @@
 	},
 	"pendingsNoPendings": {
 		"message": "Brak oczekujących zapisów",
-		"description": "Label displayed when they are no pending saves"
+		"description": "Label displayed when there are no pending saves"
 	},
 	"pendingsAddUrlsButton": {
 		"message": "Dodaj adresy URL",
@@ -1073,7 +1107,7 @@
 	},
 	"batchSaveUrlsNoURLs": {
 		"message": "Brak adresów URL",
-		"description": "Label displayed when they are no URLs"
+		"description": "Label displayed when there are no URLs"
 	},
 	"batchSaveUrlsAddUrlButton": {
 		"message": "Dodaj adres URL",
