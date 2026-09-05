@@ -21,7 +21,7 @@
  *   Source.
  */
 
-/* global window, document, fetch, DOMParser, getComputedStyle, setTimeout, clearTimeout, NodeFilter, Readability, isProbablyReaderable, matchMedia, TextDecoder, Node, prompt, MutationObserver, FileReader */
+/* global window, document, fetch, DOMParser, getComputedStyle, setTimeout, clearTimeout, NodeFilter, Readability, isProbablyReaderable, matchMedia, TextDecoder, Node, prompt, MutationObserver, FileReader, ResizeObserver, requestAnimationFrame */
 
 import { setLabels } from "./../../ui/common/common-content-ui.js";
 import { downloadPageForeground } from "../../core/common/download.js";
@@ -111,6 +111,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 			}
 			if (message.method == "displayNotes") {
 				document.querySelectorAll(NOTE_TAGNAME).forEach(noteElement => noteElement.shadowRoot.querySelector("." + NOTE_CLASS).classList.remove(NOTE_HIDDEN_CLASS));
+				reflowNotes();
 			}
 			if (message.method == "hideNotes") {
 				document.querySelectorAll(NOTE_TAGNAME).forEach(noteElement => noteElement.shadowRoot.querySelector("." + NOTE_CLASS).classList.add(NOTE_HIDDEN_CLASS));
@@ -352,7 +353,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 				if (infobarElement) {
 					infobarElement.remove();
 				}
-				await initPage();
+				initPage();
 				if (!archivePages) {
 					let icon;
 					const origContentDocument = (new DOMParser()).parseFromString(origDocContent, "text/html");
@@ -407,26 +408,10 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 					element.setAttribute(DISABLED_NOSCRIPT_ATTRIBUTE_NAME, element.innerHTML);
 					element.textContent = "";
 				});
-				contentDocument.querySelectorAll("iframe").forEach(element => {
-					const pointerEvents = "pointer-events";
-					element.style.setProperty("-sf-" + pointerEvents, element.style.getPropertyValue(pointerEvents), element.style.getPropertyPriority(pointerEvents));
-					element.style.setProperty(pointerEvents, "none", "important");
-				});
+				disableFramePointerEvents(contentDocument);
 				document.replaceChild(contentDocument.documentElement, document.documentElement);
 				singlefile.helper.fixInvalidNesting(document);
-				document.querySelectorAll("[data-single-file-note-refs]").forEach(noteRefElement => noteRefElement.dataset.singleFileNoteRefs = noteRefElement.dataset.singleFileNoteRefs.replace(/,/g, " "));
-				deserializeShadowRoots(document);
-				document.querySelectorAll(NOTE_TAGNAME).forEach(containerElement => attachNoteListeners(containerElement, true));
-				insertHighlightStylesheet(document);
-				maskPageElement = getMaskElement(PAGE_MASK_CLASS, PAGE_MASK_CONTAINER_CLASS);
-				maskNoteElement = getMaskElement(NOTE_MASK_CLASS);
-				document.documentElement.onmousedown = onMouseDown;
-				document.documentElement.onmouseup = document.documentElement.ontouchend = onMouseUp;
-				document.documentElement.onmouseover = onMouseOver;
-				document.documentElement.onmouseout = onMouseOut;
-				document.documentElement.onkeydown = onKeyDown;
-				document.documentElement.ontouchstart = document.documentElement.ontouchmove = onTouchMove;
-				window.onclick = event => event.preventDefault();
+				initPageContent();
 				const iconElement = document.querySelector("link[rel*=icon]");
 				window.parent.postMessage(JSON.stringify({
 					method: "onInit",
@@ -495,7 +480,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 			pageUrl = stashedPage.url;
 			pageCompressContent = true;
 			document.replaceChild(stashedPage.content, document.documentElement);
-			await initPage();
+			initPage();
 		} else {
 			await init({ content: pageArchiveContent, password: archivePassword, compressContent: true, pagePath });
 		}
@@ -621,17 +606,27 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 		}
 	}
 
-	async function initPage() {
-		document.querySelectorAll("iframe").forEach(element => {
+	function initPage() {
+		disableFramePointerEvents(document);
+		initPageContent();
+	}
+
+	function disableFramePointerEvents(doc) {
+		doc.querySelectorAll("iframe").forEach(element => {
 			const pointerEvents = "pointer-events";
-			element.style.setProperty("-sf-" + pointerEvents, element.style.getPropertyValue(pointerEvents), element.style.getPropertyPriority(pointerEvents));
+			if (element.style.getPropertyValue(pointerEvents) != "none" || element.style.getPropertyPriority(pointerEvents) != "important") {
+				element.style.setProperty("--sf-" + pointerEvents, element.style.getPropertyValue(pointerEvents), element.style.getPropertyPriority(pointerEvents));
+			}
 			element.style.setProperty(pointerEvents, "none", "important");
 		});
+	}
+
+	function initPageContent() {
 		document.querySelectorAll("[data-single-file-note-refs]").forEach(noteRefElement => noteRefElement.dataset.singleFileNoteRefs = noteRefElement.dataset.singleFileNoteRefs.replace(/,/g, " "));
 		deserializeShadowRoots(document);
 		reflowNotes();
-		await waitResourcesLoad();
-		reflowNotes();
+		waitResourcesLoad().then(reflowNotes);
+		watchNotesLayout();
 		document.querySelectorAll(NOTE_TAGNAME).forEach(containerElement => attachNoteListeners(containerElement, true));
 		insertHighlightStylesheet(document);
 		maskPageElement = getMaskElement(PAGE_MASK_CLASS, PAGE_MASK_CONTAINER_CLASS);
@@ -702,6 +697,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 		document.documentElement.insertBefore(containerElement, maskPageElement.getRootNode().host);
 		noteElement.classList.add(NOTE_SELECTED_CLASS);
 		selectedNote = noteElement;
+		saveNoteOffset(containerElement);
 		onUpdate(false);
 	}
 
@@ -773,6 +769,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 				deleteNoteRef(containerElement, noteId);
 				addNoteRef(document.documentElement, noteId);
 			}
+			saveNoteOffset(containerElement);
 			onUpdate(false);
 		};
 		removeNoteElement.ontouchend = removeNoteElement.onclick = event => {
@@ -1204,6 +1201,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 		noteElement.style.setProperty("position", "absolute");
 		noteElement.style.setProperty("left", (clientX - boundingRectPositionedElement.x - deltaX - borderX) + "px");
 		noteElement.style.setProperty("top", (clientY - boundingRectPositionedElement.y - deltaY - borderY) + "px");
+		saveNoteOffset(containerElement);
 	}
 
 	function resetAnchorNote(containerElement) {
@@ -1213,6 +1211,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 		deleteNoteRef(containerElement, noteId);
 		addNoteRef(document.documentElement, noteId);
 		document.documentElement.insertBefore(containerElement, maskPageElement.getRootNode().host);
+		saveNoteOffset(containerElement);
 	}
 
 	function getPosition(event) {
@@ -1321,9 +1320,11 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 			previousContent = getContent(false);
 		}
 		const shadowRoots = {};
+		const noteOffsets = {};
 		const classesToPreserve = ["single-file-highlight", "single-file-highlight-yellow", "single-file-highlight-green", "single-file-highlight-pink", "single-file-highlight-blue"];
 		document.querySelectorAll(NOTE_TAGNAME).forEach(containerElement => {
 			shadowRoots[containerElement.dataset.noteId] = containerElement.shadowRoot;
+			noteOffsets[containerElement.dataset.noteId] = { x: containerElement.dataset.noteOffsetX, y: containerElement.dataset.noteOffsetY };
 			const className = "singlefile-note-id-" + containerElement.dataset.noteId;
 			containerElement.classList.add(className);
 			classesToPreserve.push(className);
@@ -1352,6 +1353,11 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 			const noteId = (Array.from(containerElement.classList).find(className => /singlefile-note-id-\d+/.test(className))).split("singlefile-note-id-")[1];
 			containerElement.classList.remove("singlefile-note-id-" + noteId);
 			containerElement.dataset.noteId = noteId;
+			const noteOffset = noteOffsets[noteId];
+			if (noteOffset && noteOffset.x !== undefined && noteOffset.y !== undefined && document.querySelector("[data-single-file-note-refs~=\"" + noteId + "\"]")) {
+				containerElement.dataset.noteOffsetX = noteOffset.x;
+				containerElement.dataset.noteOffsetY = noteOffset.y;
+			}
 			if (!containerElement.shadowRoot) {
 				containerElement.attachShadow({ mode: "open" });
 				containerElement.shadowRoot.appendChild(shadowRoots[noteId]);
@@ -1407,7 +1413,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 			if (pageCompressContent) {
 				document.replaceChild(previousContent, document.documentElement);
 				deserializeShadowRoots(document);
-				await initPage();
+				initPage();
 			} else {
 				await init({ content: previousContent }, { reset: true });
 			}
@@ -1426,6 +1432,7 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 	}
 
 	function getContent(compressHTML) {
+		saveNoteOffsets();
 		unhighlightCutElement();
 		serializeShadowRoots(document);
 		singlefile.helper.markInvalidNesting(document);
@@ -1463,8 +1470,14 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 		});
 		doc.querySelectorAll("iframe").forEach(element => {
 			const pointerEvents = "pointer-events";
-			element.style.setProperty(pointerEvents, element.style.getPropertyValue("-sf-" + pointerEvents), element.style.getPropertyPriority("-sf-" + pointerEvents));
-			element.style.removeProperty("-sf-" + pointerEvents);
+			const savedProperty = "--sf-" + pointerEvents;
+			const savedValue = element.style.getPropertyValue(savedProperty);
+			if (savedValue) {
+				element.style.setProperty(pointerEvents, savedValue, element.style.getPropertyPriority(savedProperty));
+				element.style.removeProperty(savedProperty);
+			} else {
+				element.style.removeProperty(pointerEvents);
+			}
 		});
 		doc.body.removeAttribute("contentEditable");
 		if (pageCompressContent) {
@@ -1518,30 +1531,66 @@ import { convert } from "../../lib/mhtml-to-html/mod.js";
 		document.querySelectorAll(NOTE_TAGNAME).forEach(containerElement => {
 			const noteElement = containerElement.shadowRoot.querySelector("." + NOTE_CLASS);
 			const noteBoundingRect = noteElement.getBoundingClientRect();
-			const anchorElement = getAnchorElement(containerElement);
-			const anchorBoundingRect = anchorElement.getBoundingClientRect();
-			const maxX = anchorBoundingRect.x + Math.max(0, anchorBoundingRect.width - noteBoundingRect.width);
-			const minX = anchorBoundingRect.x;
-			const maxY = anchorBoundingRect.y + Math.max(0, anchorBoundingRect.height - NOTE_HEADER_HEIGHT);
-			const minY = anchorBoundingRect.y;
-			let left = parseInt(noteElement.style.getPropertyValue("left"));
-			let top = parseInt(noteElement.style.getPropertyValue("top"));
-			if (noteBoundingRect.x > maxX) {
-				left -= noteBoundingRect.x - maxX;
+			if ((noteBoundingRect.width || noteBoundingRect.height) && !noteElement.classList.contains(NOTE_MOVING_CLASS)) {
+				const anchorElement = getAnchorElement(containerElement);
+				const anchorBoundingRect = anchorElement.getBoundingClientRect();
+				const offsetX = Number(containerElement.dataset.noteOffsetX);
+				const offsetY = Number(containerElement.dataset.noteOffsetY);
+				const savedOffset = anchorElement != document.documentElement && !isNaN(offsetX) && !isNaN(offsetY);
+				const maxX = anchorBoundingRect.x + Math.max(0, anchorBoundingRect.width - noteBoundingRect.width);
+				const minX = anchorBoundingRect.x;
+				const maxY = anchorBoundingRect.y + Math.max(0, anchorBoundingRect.height - NOTE_HEADER_HEIGHT);
+				const minY = anchorBoundingRect.y;
+				const positionX = Math.min(maxX, Math.max(minX, savedOffset ? anchorBoundingRect.x + offsetX : noteBoundingRect.x));
+				const positionY = Math.min(maxY, Math.max(minY, savedOffset ? anchorBoundingRect.y + offsetY : noteBoundingRect.y));
+				const left = parseFloat(noteElement.style.getPropertyValue("left"));
+				const top = parseFloat(noteElement.style.getPropertyValue("top"));
+				noteElement.style.setProperty("position", "absolute");
+				if (Math.abs(positionX - noteBoundingRect.x) > 0.5) {
+					noteElement.style.setProperty("left", (left + positionX - noteBoundingRect.x) + "px");
+				}
+				if (Math.abs(positionY - noteBoundingRect.y) > 0.5) {
+					noteElement.style.setProperty("top", (top + positionY - noteBoundingRect.y) + "px");
+				}
 			}
-			if (noteBoundingRect.x < minX) {
-				left += minX - noteBoundingRect.x;
-			}
-			if (noteBoundingRect.y > maxY) {
-				top -= noteBoundingRect.y - maxY;
-			}
-			if (noteBoundingRect.y < minY) {
-				top += minY - noteBoundingRect.y;
-			}
-			noteElement.style.setProperty("position", "absolute");
-			noteElement.style.setProperty("left", left + "px");
-			noteElement.style.setProperty("top", top + "px");
 		});
+	}
+
+	function watchNotesLayout() {
+		if (globalThis.ResizeObserver) {
+			let reflowPending;
+			new ResizeObserver(() => {
+				if (!reflowPending) {
+					reflowPending = requestAnimationFrame(() => {
+						reflowPending = null;
+						reflowNotes();
+					});
+				}
+			}).observe(document.documentElement);
+		}
+		if (document.fonts) {
+			document.fonts.ready.then(() => reflowNotes());
+		}
+	}
+
+	function saveNoteOffset(containerElement) {
+		const noteElement = containerElement.shadowRoot.querySelector("." + NOTE_CLASS);
+		if (noteElement) {
+			const anchorElement = getAnchorElement(containerElement);
+			const noteBoundingRect = noteElement.getBoundingClientRect();
+			if (anchorElement == document.documentElement) {
+				delete containerElement.dataset.noteOffsetX;
+				delete containerElement.dataset.noteOffsetY;
+			} else if (noteBoundingRect.width || noteBoundingRect.height) {
+				const anchorBoundingRect = anchorElement.getBoundingClientRect();
+				containerElement.dataset.noteOffsetX = Math.round(noteBoundingRect.x - anchorBoundingRect.x);
+				containerElement.dataset.noteOffsetY = Math.round(noteBoundingRect.y - anchorBoundingRect.y);
+			}
+		}
+	}
+
+	function saveNoteOffsets() {
+		document.querySelectorAll(NOTE_TAGNAME).forEach(containerElement => saveNoteOffset(containerElement));
 	}
 
 	function resetHighlightedElement(element) {
@@ -2560,7 +2609,9 @@ pre code {
 			const PAGE_MASK_ACTIVE_CLASS = ${JSON.stringify(PAGE_MASK_ACTIVE_CLASS)};
 			const REMOVED_CONTENT_CLASS = ${JSON.stringify(REMOVED_CONTENT_CLASS)};
 			const NESTING_TRACK_ID_ATTRIBUTE_NAME = ${JSON.stringify(singlefile.helper.NESTING_TRACK_ID_ATTRIBUTE_NAME)};
-			const reflowNotes = ${minifyText(reflowNotes.toString())};			
+			const reflowNotes = ${minifyText(reflowNotes.toString())};
+			const saveNoteOffset = ${minifyText(saveNoteOffset.toString())};
+			const watchNotesLayout = ${minifyText(watchNotesLayout.toString())};
 			const addNoteRef = ${minifyText(addNoteRef.toString())};
 			const deleteNoteRef = ${minifyText(deleteNoteRef.toString())};
 			const getNoteRefs = ${minifyText(getNoteRefs.toString())};
@@ -2583,9 +2634,8 @@ pre code {
 			processNode(document);
 			reflowNotes();
 			document.querySelectorAll(${JSON.stringify(NOTE_TAGNAME)}).forEach(noteElement => attachNoteListeners(noteElement));
-			if (document.documentElement.dataset && document.documentElement.dataset.sfz !== undefined) {
-				waitResourcesLoad().then(reflowNotes);
-			}
+			waitResourcesLoad().then(reflowNotes);
+			watchNotesLayout();
 			const trackIds = {};
 			document.querySelectorAll("[" + NESTING_TRACK_ID_ATTRIBUTE_NAME + "]").forEach(element => trackIds[element.getAttribute(NESTING_TRACK_ID_ATTRIBUTE_NAME)] = element);
 			Object.keys(trackIds).forEach(id => {
