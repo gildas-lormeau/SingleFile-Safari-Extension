@@ -94,7 +94,7 @@ function fetchResource(url, options = {}, includeRequestId) {
 						resolve({
 							arrayBuffer: xhrRequest.response,
 							array: Array.from(new Uint8Array(xhrRequest.response)),
-							headers: { "content-type": xhrRequest.getResponseHeader("Content-Type") },
+							headers: parseHeaders(xhrRequest.getAllResponseHeaders()),
 							status: xhrRequest.status
 						});
 					}
@@ -116,6 +116,13 @@ function fetchResource(url, options = {}, includeRequestId) {
 		}
 		xhrRequest.send();
 	});
+}
+
+function parseHeaders(rawHeaders) {
+	return rawHeaders.trim().split(/[\r\n]+/).map(line => {
+		const separatorIndex = line.indexOf(":");
+		return [line.substring(0, separatorIndex).trim(), line.substring(separatorIndex + 1).trim()];
+	}).filter(([name]) => name);
 }
 
 function setReferrer(requestId, referrer) {
