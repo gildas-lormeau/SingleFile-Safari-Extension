@@ -134,14 +134,18 @@ async function onMessage(message, sender) {
 async function downloadTabPage(message, tab) {
 	const tabId = tab.id;
 	let contents;
-	if (message.blobURL) {
+	const messageBlob = message.blob instanceof Blob && message.blob.size ? message.blob : null;
+	if (messageBlob || message.blobURL) {
 		try {
 			if (message.compressContent) {
-				message.pageData = await yabson.parse(new Uint8Array(await (await fetch(message.blobURL)).arrayBuffer()));
+				const buffer = messageBlob ? await messageBlob.arrayBuffer() : await (await fetch(message.blobURL)).arrayBuffer();
+				message.pageData = await yabson.parse(new Uint8Array(buffer));
 				await downloadCompressedContent(message, tab);
 			} else {
-				const blob = await (await fetch(message.blobURL)).blob();
-				message.url = message.blobURL;
+				const blob = messageBlob || await (await fetch(message.blobURL)).blob();
+				if (!messageBlob) {
+					message.url = message.blobURL;
+				}
 				await downloadContent(blob, tab, tab.incognito, message);
 			}
 			// eslint-disable-next-line no-unused-vars

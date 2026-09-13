@@ -142,11 +142,13 @@ async function downloadPage(pageData, options) {
 			const blobURL = URL.createObjectURL(blob);
 			message.filename = pageData.filename;
 			message.blobURL = blobURL;
+			message.blob = blob;
 			const result = await browser.runtime.sendMessage(message);
 			URL.revokeObjectURL(blobURL);
 			if (result.error) {
 				message.embeddedImage = embeddedImage;
 				message.blobURL = null;
+				message.blob = null;
 				message.pageData = pageData;
 				const serializer = yabson.getSerializer(message);
 				for await (const chunk of serializer) {
@@ -178,12 +180,15 @@ async function downloadPage(pageData, options) {
 			}
 			if (filename) {
 				message.filename = pageData.filename = filename;
-				const blobURL = URL.createObjectURL(new Blob([pageData.content], { type: pageData.mimeType }));
+				const blob = new Blob([pageData.content], { type: pageData.mimeType });
+				const blobURL = URL.createObjectURL(blob);
 				message.blobURL = blobURL;
+				message.blob = blob;
 				const result = await browser.runtime.sendMessage(message);
 				URL.revokeObjectURL(blobURL);
 				if (result.error) {
 					message.blobURL = null;
+					message.blob = null;
 					for (let blockIndex = 0; blockIndex * MAX_CONTENT_SIZE < pageData.content.length; blockIndex++) {
 						message.truncated = pageData.content.length > MAX_CONTENT_SIZE;
 						if (message.truncated) {
