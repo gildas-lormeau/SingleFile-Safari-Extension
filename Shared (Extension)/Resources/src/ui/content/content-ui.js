@@ -29,6 +29,7 @@ const SELECTED_CONTENT_ATTRIBUTE_NAME = singlefile.helper.SELECTED_CONTENT_ATTRI
 
 const MASK_TAGNAME = "singlefile-mask";
 const MASK_CONTENT_CLASSNAME = "singlefile-mask-content";
+const CANCEL_BUTTON_CLASSNAME = "singlefile-cancel-button";
 const PROGRESSBAR_CLASSNAME = "singlefile-progress-bar";
 const PROGRESSBAR_CONTENT_CLASSNAME = "singlefile-progress-bar-content";
 const SELECTION_ZONE_TAGNAME = "single-file-selection-zone";
@@ -40,13 +41,16 @@ const LOGS_LINE_STATUS_ELEMENT_CLASSNAME = "singlefile-logs-line-icon";
 const SINGLE_FILE_UI_ELEMENT_CLASS = singlefile.helper.SINGLE_FILE_UI_ELEMENT_CLASS;
 const SELECT_PX_THRESHOLD = 8;
 const CSS_PROPERTIES = new Set(Array.from(getComputedStyle(document.documentElement)));
-let LOG_PANEL_WIDTH, LOG_PANEL_DEFERRED_IMAGES_MESSAGE, LOG_PANEL_FRAME_CONTENTS_MESSAGE, LOG_PANEL_EMBEDDED_IMAGE_MESSAGE, LOG_PANEL_STEP_MESSAGE;
+let UI_DIRECTION = "ltr";
+let LOG_PANEL_WIDTH, LOG_PANEL_DEFERRED_CONTENT_MESSAGE, LOG_PANEL_FRAME_CONTENTS_MESSAGE, LOG_PANEL_EMBEDDED_IMAGE_MESSAGE, LOG_PANEL_STEP_MESSAGE, MASK_CANCEL_BUTTON_MESSAGE;
 try {
+	MASK_CANCEL_BUTTON_MESSAGE = browser.i18n.getMessage("maskCancelButton");
 	LOG_PANEL_WIDTH = browser.i18n.getMessage("logPanelWidth");
-	LOG_PANEL_DEFERRED_IMAGES_MESSAGE = browser.i18n.getMessage("logPanelDeferredImages");
+	LOG_PANEL_DEFERRED_CONTENT_MESSAGE = browser.i18n.getMessage("logPanelDeferredContent");
 	LOG_PANEL_FRAME_CONTENTS_MESSAGE = browser.i18n.getMessage("logPanelFrameContents");
 	LOG_PANEL_EMBEDDED_IMAGE_MESSAGE = browser.i18n.getMessage("logPanelEmbeddedImage");
 	LOG_PANEL_STEP_MESSAGE = browser.i18n.getMessage("logPanelStep");
+	UI_DIRECTION = browser.i18n.getMessage("@@bidi_dir");
 	// eslint-disable-next-line no-unused-vars
 } catch (error) {
 	// ignored
@@ -83,14 +87,14 @@ function promptMessage(message, defaultValue) {
 function setVisible(visible) {
 	const maskElement = document.querySelector(MASK_TAGNAME);
 	if (maskElement) {
-		maskElement.style.setProperty("display", visible ? "block" : "none");
+		maskElement.style.setProperty("display", visible ? "block" : "none", "important");
 	}
 	if (logsWindowElement) {
-		logsWindowElement.style.setProperty("display", visible ? "block" : "none");
+		logsWindowElement.style.setProperty("display", visible ? "block" : "none", "important");
 	}
 }
 
-function onStartPage(options) {
+function onStartPage(options, cancelSave) {
 	let maskElement = document.querySelector(MASK_TAGNAME);
 	if (!maskElement) {
 		if (options.logsEnabled) {
@@ -101,17 +105,33 @@ function onStartPage(options) {
 			if (options.progressBarEnabled) {
 				createProgressBarElement(maskElement);
 			}
+			if (!options.silent) {
+				createCancelButtonElement(maskElement, cancelSave);
+			}
+		}
+		if (!options.silent) {
+			setCancelSaveShortcut(cancelSave);
 		}
 	}
 }
 
 function onEndPage() {
+	setCancelSaveShortcut(null);
 	const maskElement = document.querySelector(MASK_TAGNAME);
 	if (maskElement) {
 		maskElement.remove();
 	}
-	logsWindowElement.remove();
+	if (logsWindowElement) {
+		logsWindowElement.remove();
+	}
 	clearLogs();
+}
+
+function setCancelSaveShortcut(cancelSave) {
+	const bootstrap = globalThis.singlefileBootstrap;
+	if (bootstrap) {
+		bootstrap.cancelSave = cancelSave;
+	}
 }
 
 function onLoadResource(index, maxIndex, options) {
@@ -121,11 +141,11 @@ function onLoadResource(index, maxIndex, options) {
 }
 
 function onLoadingDeferResources(options) {
-	updateLog("load-deferred-images", LOG_PANEL_DEFERRED_IMAGES_MESSAGE, "…", options);
+	updateLog("load-deferred-content", LOG_PANEL_DEFERRED_CONTENT_MESSAGE, "…", options);
 }
 
 function onLoadDeferResources(options) {
-	updateLog("load-deferred-images", LOG_PANEL_DEFERRED_IMAGES_MESSAGE, "✓", options);
+	updateLog("load-deferred-content", LOG_PANEL_DEFERRED_CONTENT_MESSAGE, "✓", options);
 }
 
 function onInsertingEmbeddedImage(options) {
@@ -283,6 +303,7 @@ function selectArea() {
 		let selectedRanges = [];
 		addEventListener("mousemove", mousemoveListener, true);
 		addEventListener("click", clickListener, true);
+		addEventListener("keydown", keydownListener, true);
 		addEventListener("keyup", keypressListener, true);
 		document.addEventListener("contextmenu", contextmenuListener, true);
 		getSelection().removeAllRanges();
@@ -311,8 +332,17 @@ function selectArea() {
 			}
 		}
 
+		function keydownListener(event) {
+			if (event.key == "Escape") {
+				event.preventDefault();
+				event.stopPropagation();
+			}
+		}
+
 		function keypressListener(event) {
 			if (event.key == "Escape") {
+				event.preventDefault();
+				event.stopPropagation();
 				cancel();
 			}
 		}
@@ -358,6 +388,7 @@ function selectArea() {
 			getAreaSelector().remove();
 			removeEventListener("mousemove", mousemoveListener, true);
 			removeEventListener("click", clickListener, true);
+			removeEventListener("keydown", keydownListener, true);
 			removeEventListener("keyup", keypressListener, true);
 			selectedAreaElement = null;
 			resolve(Boolean(selectedRanges.length));
@@ -413,7 +444,7 @@ function moveAreaSelector(target) {
 function getAreaSelector() {
 	let selectorElement = document.querySelector(SELECTION_ZONE_TAGNAME);
 	if (!selectorElement) {
-		selectorElement = createElement(SELECTION_ZONE_TAGNAME, document.body);
+		selectorElement = createElement(SELECTION_ZONE_TAGNAME, document.documentElement);
 		selectorElement.style.setProperty("box-sizing", "border-box", "important");
 		selectorElement.style.setProperty("background-color", "#3ea9d7", "important");
 		selectorElement.style.setProperty("border", "10px solid #0b4892", "important");
@@ -490,6 +521,26 @@ function createMaskElement() {
 					background-color: black;
 					transition: opacity 250ms;
 				}
+				.${CANCEL_BUTTON_CLASSNAME} {
+					position: fixed;
+					bottom: 16px;
+					right: 16px;
+					z-index: 2147483647;
+					margin: 0;
+					padding: 6px 12px;
+					border: 1px solid darkgrey;
+					border-radius: 4px;
+					background-color: dimgrey;
+					color: white;
+					font-family: arial, sans-serif;
+					font-size: 13px;
+					cursor: pointer;
+					opacity: .9;
+					transition: opacity 250ms;
+				}
+				.${CANCEL_BUTTON_CLASSNAME}:hover {
+					opacity: 1;
+				}
 			`;
 			shadowRoot.appendChild(styleElement);
 			let maskElementContent = document.createElement("div");
@@ -516,6 +567,26 @@ function createProgressBarElement(maskElement) {
 			const progressBarContentElement = document.createElement("div");
 			progressBarContentElement.classList.add(PROGRESSBAR_CONTENT_CLASSNAME);
 			progressBarContent.appendChild(progressBarContentElement);
+		}
+		// eslint-disable-next-line no-unused-vars
+	} catch (error) {
+		// ignored
+	}
+}
+
+function createCancelButtonElement(maskElement, cancelSave) {
+	try {
+		let cancelButtonElement = maskElement.shadowRoot.querySelector("." + CANCEL_BUTTON_CLASSNAME);
+		if (!cancelButtonElement) {
+			cancelButtonElement = document.createElement("button");
+			cancelButtonElement.classList.add(CANCEL_BUTTON_CLASSNAME);
+			cancelButtonElement.textContent = MASK_CANCEL_BUTTON_MESSAGE;
+			cancelButtonElement.onclick = event => {
+				if (event.button === 0) {
+					cancelSave();
+				}
+			};
+			maskElement.shadowRoot.appendChild(cancelButtonElement);
 		}
 		// eslint-disable-next-line no-unused-vars
 	} catch (error) {
@@ -682,5 +753,6 @@ function createElement(tagName, parentElement) {
 		parentElement.appendChild(element);
 	}
 	CSS_PROPERTIES.forEach(property => element.style.setProperty(property, "initial", "important"));
+	element.style.setProperty("direction", UI_DIRECTION, "important");
 	return element;
 }
