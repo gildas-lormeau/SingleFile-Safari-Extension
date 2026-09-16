@@ -231,6 +231,10 @@
 		"message": "bilgi çubuğunu açık tut",
 		"description": "Options page label: 'keep infobar open'"
 	},
+	"optionAnimateInfobar": {
+		"message": "bilgi çubuğunu hareketlendir",
+		"description": "Options page label: 'animate the infobar'"
+	},
 	"optionRemoveInfobarSavedDate": {
 		"message": "kaydedilen tarihi dahil etme",
 		"description": "Options page label: 'do not include the saved date'"
@@ -252,7 +256,7 @@
 		"description": "Options page label: 'default shortcut'"
 	},
 	"optionsFileNameSubTitle": {
-		"message": "Dosya ismi",
+		"message": "Dosya adı",
 		"description": "Options sub-title: 'File name'"
 	},
 	"optionFilenameTemplate": {
@@ -274,6 +278,46 @@
 	"optionFilenameReplacementCharacter": {
 		"message": "yerine geçen karakter",
 		"description": "Options page label: 'replacement character'"
+	},
+	"optionFilenameReplacements": {
+		"message": "dosya adlarında değiştirilen karakterler",
+		"description": "Options page label: 'characters replaced in file names'"
+	},
+	"optionsFilenameReplacedCharacters": {
+		"message": "Karakter(ler)",
+		"description": "Options page column label in the replaced characters table: 'Character(s)'"
+	},
+	"optionsFilenameReplacementCharacters": {
+		"message": "Yerine geçen",
+		"description": "Options page column label in the replaced characters table: 'Replaced with'"
+	},
+	"optionsFilenameReplacedCharactersPlaceholder": {
+		"message": "Bir karakter yazın (ör. \":\")",
+		"description": "Placeholder in the replaced characters table: 'Type a character (e.g. \":\")'"
+	},
+	"optionsAddFilenameReplacementTooltip": {
+		"message": "Karakteri ekle",
+		"description": "Popup text 'Add the character' in the options page"
+	},
+	"optionsDeleteFilenameReplacementTooltip": {
+		"message": "Bu karakteri değiştirmeyi bırak",
+		"description": "Popup text 'Stop replacing this character' in the options page"
+	},
+	"optionsFilenameReplacementsResetButton": {
+		"message": "Varsayılan karakterleri geri yükle",
+		"description": "Button label 'Restore default characters' in the options page"
+	},
+	"optionsFilenameReplacementsPreviewFilename": {
+		"message": "Bir dosya adı deneyin",
+		"description": "Options page column label in the preview table: 'Test a file name'"
+	},
+	"optionsFilenameReplacementsPreviewResult": {
+		"message": "Sonuç",
+		"description": "Options page column label in the preview table: 'Result'"
+	},
+	"optionsFilenameReplacementsPreviewPlaceholder": {
+		"message": "Bir dosya adı yazın",
+		"description": "Placeholder in the preview table: 'Type a file name'"
 	},
 	"optionReplaceEmojisInFilename": {
 		"message": "emoji'leri metinle değiştir",
@@ -517,7 +561,7 @@
 	},
 	"optionsAutoSettingsSubTitle": {
 		"message": "Otomatik-ayarlar kuralları",
-		"description": "Options sub-title: 'Auto-settings rules'"
+		"description": "Options sub-title: the table of rules that pick a profile automatically from the URL of the page being saved"
 	},
 	"optionsDeleteDisplayedRulesConfirm": {
 		"message": "Görüntülenen tüm kuralların silinmesini onaylayın",
@@ -529,30 +573,30 @@
 	},
 	"optionsAutoSettingsUrl": {
 		"message": "URL",
-		"description": "Options label in the Auto-settings rules: 'URL'"
+		"description": "Column header in the Auto-settings rules table: the complete or partial URL a rule matches against the page being saved"
 	},
 	"optionsAutoSettingsUrlPlaceholder": {
 		"message": "Tam veya kısmi bir URL yazın (ör. example.com)",
-		"description": "Placeholder in the Auto-settings rules: 'Type a complete or partial URL (e.g. example.com)'"
+		"description": "Placeholder of the URL field in the Auto-settings rules table"
 	},
 	"optionsAutoSettingsProfile": {
 		"message": "Profil",
-		"description": "Options label in the Auto-settings rules: 'Profile'"
+		"description": "Column header in the Auto-settings rules table, naming the profile of settings used when a page matching the rule is saved manually. It is a noun, the name of a profile, not an instruction to save"
 	},
 	"optionsAutoSettingsAutoSaveProfile": {
 		"message": "Otomatik kaydetme profili",
-		"description": "Options label in the Auto-settings rules: 'Auto-save profile'"
+		"description": "Column header in the Auto-settings rules table, naming the profile of settings used when a page matching the rule is saved automatically. It is a noun phrase, 'the profile used for auto-saving', never 'automatically save the profile'"
 	},
 	"optionsAutoSettingsShowAllProfiles": {
 		"message": "tüm profilleri göster",
-		"description": "Options label in the Auto-settings rules: 'display all profiles'"
+		"description": "Checkbox label under the Auto-settings rules table: list the rules of every profile instead of only those of the profile selected above"
 	},
 	"optionsAutoSettingsShowAutoSaveProfile": {
 		"message": "'Otomatik kaydetme profili' sütununu göster",
-		"description": "Options label in the Auto-settings rules: 'display 'Auto-save profile' column'"
+		"description": "Checkbox label under the Auto-settings rules table: show or hide the 'Auto-save profile' column. The quoted name must match the translation of optionsAutoSettingsAutoSaveProfile"
 	},
 	"optionsUpdateRuleTooltip": {
-		"message": "kuralı güncelle",
+		"message": "Kuralı güncelle",
 		"description": "Popup text 'Update the rule' in the options page"
 	},
 	"optionsDeleteRuleTooltip": {
@@ -736,6 +780,10 @@
 	"optionInsertMetaCSP": {
 		"message": "içerik güvenlik politikası belirle",
 		"description": "Options page label: 'set content security policy'"
+	},
+	"optionInsertCanonicalLink": {
+		"message": "sayfanın kanonik bağlantısını kaydet",
+		"description": "Options page label: 'save the canonical link of the page'"
 	},
 	"optionSaveToClipboard": {
 		"message": "panoya kopyala",

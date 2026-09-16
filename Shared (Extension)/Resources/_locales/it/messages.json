@@ -204,15 +204,15 @@
 		"description": "Options page label: 'add entry in the context menu of the webpage'"
 	},
 	"optionDisplayShadow": {
-		"message": "Sovrapponi un'ombra sulla pagina durante la lavorazione",
+		"message": "sovrapponi un'ombra sulla pagina durante la lavorazione",
 		"description": "Options page label: 'overlay a shadow on the page during processing'"
 	},
 	"optionDisplayInfobar": {
-		"message": "Visualizza una barra informativa quando vedi una pagina salvata",
+		"message": "visualizza una barra informativa quando vedi una pagina salvata",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
 	"optionInfobarTemplate": {
-		"message": "Modello del contenuto della barra informativa",
+		"message": "modello del contenuto della barra informativa",
 		"description": "Options page label: 'template of the infobar content'"
 	},
 	"optionBlockMixedContent": {
@@ -231,12 +231,16 @@
 		"message": "mantenere aperto l'infobar",
 		"description": "Options page label: 'keep infobar open'"
 	},
+	"optionAnimateInfobar": {
+		"message": "animare l'infobar",
+		"description": "Options page label: 'animate the infobar'"
+	},
 	"optionRemoveInfobarSavedDate": {
 		"message": "non includere la data di salvataggio",
 		"description": "Options page label: 'do not include the saved date'"
 	},
 	"optionConfirmInfobar": {
-		"message": "Apri un finestra di dialogo per modificare il contenuto della barra informativa",
+		"message": "apri una finestra di dialogo per modificare il contenuto della barra informativa",
 		"description": "Options page label: 'open a prompt dialog to edit the infobar content'"
 	},
 	"optionAutoClose": {
@@ -256,7 +260,7 @@
 		"description": "Options sub-title: 'File name'"
 	},
 	"optionFilenameTemplate": {
-		"message": "Modello",
+		"message": "modello",
 		"description": "Options page label: 'template'"
 	},
 	"optionFilenameMaxLength": {
@@ -275,6 +279,46 @@
 		"message": "carattere di sostituzione",
 		"description": "Options page label: 'replacement character'"
 	},
+	"optionFilenameReplacements": {
+		"message": "caratteri sostituiti nei nomi dei file",
+		"description": "Options page label: 'characters replaced in file names'"
+	},
+	"optionsFilenameReplacedCharacters": {
+		"message": "Caratteri",
+		"description": "Options page column label in the replaced characters table: 'Character(s)'"
+	},
+	"optionsFilenameReplacementCharacters": {
+		"message": "Sostituito con",
+		"description": "Options page column label in the replaced characters table: 'Replaced with'"
+	},
+	"optionsFilenameReplacedCharactersPlaceholder": {
+		"message": "Digita un carattere (p.e. \":\")",
+		"description": "Placeholder in the replaced characters table: 'Type a character (e.g. \":\")'"
+	},
+	"optionsAddFilenameReplacementTooltip": {
+		"message": "Aggiungi il carattere",
+		"description": "Popup text 'Add the character' in the options page"
+	},
+	"optionsDeleteFilenameReplacementTooltip": {
+		"message": "Non sostituire più questo carattere",
+		"description": "Popup text 'Stop replacing this character' in the options page"
+	},
+	"optionsFilenameReplacementsResetButton": {
+		"message": "Ripristina i caratteri predefiniti",
+		"description": "Button label 'Restore default characters' in the options page"
+	},
+	"optionsFilenameReplacementsPreviewFilename": {
+		"message": "Prova un nome di file",
+		"description": "Options page column label in the preview table: 'Test a file name'"
+	},
+	"optionsFilenameReplacementsPreviewResult": {
+		"message": "Risultato",
+		"description": "Options page column label in the preview table: 'Result'"
+	},
+	"optionsFilenameReplacementsPreviewPlaceholder": {
+		"message": "Digita un nome di file",
+		"description": "Placeholder in the preview table: 'Type a file name'"
+	},
 	"optionReplaceEmojisInFilename": {
 		"message": "sostituisci le emoji con il testo",
 		"description": "Options page label: 'replace emojis with text'"
@@ -284,11 +328,11 @@
 		"description": "Options page label: 'save the filename template data into the page'"
 	},
 	"optionConfirmFilename": {
-		"message": "Apri la finesta di dialogo \"Salva come\" per confermare il nome del file",
+		"message": "apri la finestra di dialogo \"Salva come\" per confermare il nome del file",
 		"description": "Options page label: 'open the \"Save as\" dialog to confirm the file name'"
 	},
 	"optionFilenameConflictAction": {
-		"message": "Risoluzione conflitto nome file",
+		"message": "risoluzione conflitto nome file",
 		"description": "Options page label: 'filename conflict resolution'"
 	},
 	"optionFilenameConflictActionUniquify": {
@@ -296,7 +340,7 @@
 		"description": "Value for 'filename conflict resolution' option: 'create a unique name'"
 	},
 	"optionFilenameConflictActionOverwrite": {
-		"message": "Sovrascirivi il file esistente",
+		"message": "sovrascrivi il file esistente",
 		"description": "Value for 'filename conflict resolution' option: 'overwrite the existing file'"
 	},
 	"optionFilenameConflictActionPrompt": {
@@ -456,7 +500,7 @@
 		"description": "Options page label: 'move in the head element the styles found outside of it'"
 	},
 	"optionRemoveUnusedStyles": {
-		"message": "Rimuovi stili non utilizzati",
+		"message": "rimuovi stili non utilizzati",
 		"description": "Options page label: 'remove unused styles'"
 	},
 	"optionRemoveAlternativeMedias": {
@@ -517,7 +561,7 @@
 	},
 	"optionsAutoSettingsSubTitle": {
 		"message": "Regole auto-impostazioni",
-		"description": "Options sub-title: 'Auto-settings rules'"
+		"description": "Options sub-title: the table of rules that pick a profile automatically from the URL of the page being saved"
 	},
 	"optionsDeleteDisplayedRulesConfirm": {
 		"message": "Conferma l'eliminazione di tutte le regole visualizzate",
@@ -529,27 +573,27 @@
 	},
 	"optionsAutoSettingsUrl": {
 		"message": "URL",
-		"description": "Options label in the Auto-settings rules: 'URL'"
+		"description": "Column header in the Auto-settings rules table: the complete or partial URL a rule matches against the page being saved"
 	},
 	"optionsAutoSettingsUrlPlaceholder": {
-		"message": "Tipo di URL completo o parziale (p.e. esempio.com)",
-		"description": "Placeholder in the Auto-settings rules: 'Type a complete or partial URL (e.g. example.com)'"
+		"message": "Digita un URL completo o parziale (p.e. esempio.com)",
+		"description": "Placeholder of the URL field in the Auto-settings rules table"
 	},
 	"optionsAutoSettingsProfile": {
 		"message": "Profilo",
-		"description": "Options label in the Auto-settings rules: 'Profile'"
+		"description": "Column header in the Auto-settings rules table, naming the profile of settings used when a page matching the rule is saved manually. It is a noun, the name of a profile, not an instruction to save"
 	},
 	"optionsAutoSettingsAutoSaveProfile": {
-		"message": "Auto-salva profilo",
-		"description": "Options label in the Auto-settings rules: 'Auto-save profile'"
+		"message": "Profilo di auto-salvataggio",
+		"description": "Column header in the Auto-settings rules table, naming the profile of settings used when a page matching the rule is saved automatically. It is a noun phrase, 'the profile used for auto-saving', never 'automatically save the profile'"
 	},
 	"optionsAutoSettingsShowAllProfiles": {
 		"message": "mostra tutti i profili",
-		"description": "Options label in the Auto-settings rules: 'display all profiles'"
+		"description": "Checkbox label under the Auto-settings rules table: list the rules of every profile instead of only those of the profile selected above"
 	},
 	"optionsAutoSettingsShowAutoSaveProfile": {
-		"message": "mostra colonna 'Auto-salva profilo'",
-		"description": "Options label in the Auto-settings rules: 'display 'Auto-save profile' column'"
+		"message": "mostra colonna 'Profilo di auto-salvataggio'",
+		"description": "Checkbox label under the Auto-settings rules table: show or hide the 'Auto-save profile' column. The quoted name must match the translation of optionsAutoSettingsAutoSaveProfile"
 	},
 	"optionsUpdateRuleTooltip": {
 		"message": "Aggiorna la regola",
@@ -736,6 +780,10 @@
 	"optionInsertMetaCSP": {
 		"message": "imposta policy di sicurezza contenuto",
 		"description": "Options page label: 'set content security policy'"
+	},
+	"optionInsertCanonicalLink": {
+		"message": "salva il link canonico della pagina",
+		"description": "Options page label: 'save the canonical link of the page'"
 	},
 	"optionSaveToClipboard": {
 		"message": "copia negli appunti",

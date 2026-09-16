@@ -23,6 +23,15 @@
 
 /* global browser, window, document, localStorage, location, fetch, TextDecoder, DOMParser, HTMLElement, MouseEvent, btoa, URLSearchParams, setInterval, clearInterval */
 
+import {
+	getReplacements,
+	getReplacedCharactersOptions,
+	replaceCharacters,
+	formatCharacters,
+	parseCharacters,
+	testCharacters
+} from "./../common/filename-replacement.js";
+
 const EXTERNAL_CAPTURE_PING_DELAY = 15000;
 const EXTERNAL_CAPTURE_PENDING_REQUEST_TIMEOUT = 300000;
 const HELP_ICON_URL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABIUlEQVQ4y+2TsarCMBSGvxTBRdqiUZAWOrhJB9EXcPKFfCvfQYfulUKHDqXg4CYUJSioYO4mSDX3ttzt3n87fMlHTpIjlsulxpDZbEYYhgghSNOUOI5Ny2mZYBAELBYLer0eAJ7ncTweKYri4x7LJJRS0u12n7XrukgpjSc0CpVSXK/XZ32/31FKNW85z3PW6zXT6RSAJEnIsqy5UGvNZrNhu90CcDqd+C6tT6J+v//2Th+PB2VZ1hN2Oh3G4zGTyQTbtl/YbrdjtVpxu91+Ljyfz0RRhG3bzOfzF+Y4TvNXvlwuaK2pE4tfzr/wzwsty0IIURlL0998KxRCMBqN8H2/wlzXJQxD2u12vVkeDoeUZUkURRU+GAw4HA7s9/sK+wK6CWHasQ/S/wAAAABJRU5ErkJggg==";
@@ -42,7 +51,9 @@ let DEFAULT_PROFILE_NAME,
 	NATIVE_API_API_SUPPORTED,
 	WEB_BLOCKING_API_SUPPORTED,
 	EXTERNAL_CAPTURE_SUPPORTED,
-	SHARE_API_SUPPORTED;
+	SHARE_API_SUPPORTED,
+	DEFAULT_FILENAME_REPLACED_CHARACTERS,
+	DEFAULT_FILENAME_REPLACEMENT_CHARACTERS;
 browser.runtime.sendMessage({ method: "config.getConstants" }).then(data => {
 	({
 		DEFAULT_PROFILE_NAME,
@@ -59,7 +70,9 @@ browser.runtime.sendMessage({ method: "config.getConstants" }).then(data => {
 		NATIVE_API_API_SUPPORTED,
 		WEB_BLOCKING_API_SUPPORTED,
 		EXTERNAL_CAPTURE_SUPPORTED,
-		SHARE_API_SUPPORTED
+		SHARE_API_SUPPORTED,
+		DEFAULT_FILENAME_REPLACED_CHARACTERS,
+		DEFAULT_FILENAME_REPLACEMENT_CHARACTERS
 	} = data);
 	init();
 });
@@ -83,6 +96,7 @@ const acceptHeaderStylesheetLabel = document.getElementById("acceptHeaderStylesh
 const acceptHeaderImageLabel = document.getElementById("acceptHeaderImageLabel");
 const saveRawPageLabel = document.getElementById("saveRawPageLabel");
 const insertMetaCSPLabel = document.getElementById("insertMetaCSPLabel");
+const insertCanonicalLinkLabel = document.getElementById("insertCanonicalLinkLabel");
 const saveToClipboardLabel = document.getElementById("saveToClipboardLabel");
 const saveToFilesystemLabel = document.getElementById("saveToFilesystemLabel");
 const sharePageLabel = document.getElementById("sharePageLabel");
@@ -129,6 +143,11 @@ const filenameMaxLengthLabel = document.getElementById("filenameMaxLengthLabel")
 const filenameMaxLengthBytesUnitLabel = document.getElementById("filenameMaxLengthBytesUnitLabel");
 const filenameMaxLengthCharsUnitLabel = document.getElementById("filenameMaxLengthCharsUnitLabel");
 const filenameReplacementCharacterLabel = document.getElementById("filenameReplacementCharacterLabel");
+const filenameReplacementsLabel = document.getElementById("filenameReplacementsLabel");
+const filenameReplacedCharactersLabel = document.getElementById("filenameReplacedCharactersLabel");
+const filenameReplacementCharactersLabel = document.getElementById("filenameReplacementCharactersLabel");
+const filenameReplacementsPreviewLabel = document.getElementById("filenameReplacementsPreviewLabel");
+const filenameReplacementsPreviewResultLabel = document.getElementById("filenameReplacementsPreviewResultLabel");
 const replaceEmojisInFilenameLabel = document.getElementById("replaceEmojisInFilenameLabel");
 const saveFilenameTemplateDataLabel = document.getElementById("saveFilenameTemplateDataLabel");
 const shadowEnabledLabel = document.getElementById("shadowEnabledLabel");
@@ -212,6 +231,7 @@ const blockMixedContentLabel = document.getElementById("blockMixedContentLabel")
 const saveOriginalURLsLabel = document.getElementById("saveOriginalURLsLabel");
 const includeInfobarLabel = document.getElementById("includeInfobarLabel");
 const openInfobarLabel = document.getElementById("openInfobarLabel");
+const animateInfobarLabel = document.getElementById("animateInfobarLabel");
 const removeInfobarSavedDateLabel = document.getElementById("removeInfobarSavedDateLabel");
 const miscLabel = document.getElementById("miscLabel");
 const externalCapturePermissionsLabel = document.getElementById("externalCapturePermissionsLabel");
@@ -260,6 +280,7 @@ const acceptHeaderStylesheetInput = document.getElementById("acceptHeaderStylesh
 const acceptHeaderImageInput = document.getElementById("acceptHeaderImageInput");
 const saveRawPageInput = document.getElementById("saveRawPageInput");
 const insertMetaCSPInput = document.getElementById("insertMetaCSPInput");
+const insertCanonicalLinkInput = document.getElementById("insertCanonicalLinkInput");
 const saveToClipboardInput = document.getElementById("saveToClipboardInput");
 const addProofInput = document.getElementById("addProofInput");
 const woleetKeyInput = document.getElementById("woleetKeyInput");
@@ -300,6 +321,16 @@ const filenameTemplateInput = document.getElementById("filenameTemplateInput");
 const filenameMaxLengthInput = document.getElementById("filenameMaxLengthInput");
 const filenameMaxLengthUnitInput = document.getElementById("filenameMaxLengthUnitInput");
 const filenameReplacementCharacterInput = document.getElementById("filenameReplacementCharacterInput");
+const replacementsContainerElement = document.querySelector(".replacements-table-container");
+const replacementsDataElement = replacementsContainerElement.querySelector(".replacements-data");
+const replacementViewElement = replacementsContainerElement.querySelector(".replacement-view");
+const replacementCreateElement = replacementsContainerElement.querySelector(".replacement-create");
+const replacementCharactersInput = document.getElementById("replacementCharactersInput");
+const replacementCharacterInput = document.getElementById("replacementCharacterInput");
+const replacementAddButton = document.getElementById("replacementAddButton");
+const filenameReplacementsPreviewInput = document.getElementById("filenameReplacementsPreviewInput");
+const filenameReplacementsPreviewOutput = document.getElementById("filenameReplacementsPreviewOutput");
+const filenameReplacementsResetButton = document.getElementById("filenameReplacementsResetButton");
 const replaceEmojisInFilenameInput = document.getElementById("replaceEmojisInFilenameInput");
 const saveFilenameTemplateDataInput = document.getElementById("saveFilenameTemplateDataInput");
 const shadowEnabledInput = document.getElementById("shadowEnabledInput");
@@ -348,6 +379,7 @@ const blockMixedContentInput = document.getElementById("blockMixedContentInput")
 const saveOriginalURLsInput = document.getElementById("saveOriginalURLsInput");
 const includeInfobarInput = document.getElementById("includeInfobarInput");
 const openInfobarInput = document.getElementById("openInfobarInput");
+const animateInfobarInput = document.getElementById("animateInfobarInput");
 const removeInfobarSavedDateInput = document.getElementById("removeInfobarSavedDateInput");
 const confirmInfobarInput = document.getElementById("confirmInfobarInput");
 const autoCloseInput = document.getElementById("autoCloseInput");
@@ -373,8 +405,8 @@ const ruleEditProfileInput = document.getElementById("ruleEditProfileInput");
 const ruleEditAutoSaveProfileInput = document.getElementById("ruleEditAutoSaveProfileInput");
 const ruleAddButton = document.getElementById("ruleAddButton");
 const ruleCancelButton = document.getElementById("ruleCancelButton");
-const rulesElement = document.querySelector(".rules-table");
-const rulesContainerElement = document.querySelector(".rules-table-container");
+const rulesElement = document.querySelector("#autoSettingsSection .rules-table");
+const rulesContainerElement = document.querySelector("#autoSettingsSection .rules-table-container");
 const ruleEditUrlInput = document.getElementById("ruleEditUrlInput");
 const ruleEditButton = document.getElementById("ruleEditButton");
 const createURLElement = rulesElement.querySelector(".rule-create");
@@ -664,8 +696,46 @@ fileFormatSelectInput.addEventListener("change", () => {
 		insertEmbeddedCustomImageInput.checked = false;
 	}
 }, false);
+replacementCharactersInput.addEventListener("input", () => {
+	const validCharacters = testReplacedCharacters(replacementCharactersInput.value);
+	replacementCharactersInput.classList.toggle("invalid-characters", Boolean(replacementCharactersInput.value) && !validCharacters);
+	replacementAddButton.disabled = !validCharacters;
+}, false);
+replacementCreateElement.onsubmit = async event => {
+	event.preventDefault();
+	if (testReplacedCharacters(replacementCharactersInput.value)) {
+		const replacementElement = replacementViewElement.cloneNode(true);
+		replacementElement.querySelector(".replacement-characters-input").value = replacementCharactersInput.value;
+		replacementElement.querySelector(".replacement-character-input").value = replacementCharacterInput.value;
+		replacementElement.hidden = false;
+		replacementElement.className = "tr data";
+		replacementsDataElement.appendChild(replacementElement);
+		replacementCharactersInput.value = replacementCharacterInput.value = "";
+		replacementCharactersInput.classList.remove("invalid-characters");
+		replacementAddButton.disabled = true;
+		await update();
+		await refresh();
+		replacementCharactersInput.focus();
+	}
+};
+filenameReplacementsPreviewInput.addEventListener("input", displayReplacementsPreview, false);
+filenameReplacementCharacterInput.addEventListener("input", () => {
+	displayReplacementCharacterPlaceholders();
+	displayReplacementsPreview();
+}, false);
+filenameReplacementsResetButton.addEventListener("click", async () => {
+	displayReplacements(getReplacements({
+		filenameReplacedCharacters: DEFAULT_FILENAME_REPLACED_CHARACTERS,
+		filenameReplacementCharacters: DEFAULT_FILENAME_REPLACEMENT_CHARACTERS
+	}));
+	await update();
+	await refresh();
+}, false);
 document.body.onchange = async event => {
 	let target = event.target;
+	if (target.classList.contains("replacement-input")) {
+		return;
+	}
 	if (target != ruleUrlInput &&
 		target != ruleProfileInput &&
 		target != ruleAutoSaveProfileInput &&
@@ -723,6 +793,7 @@ acceptHeaderStylesheetLabel.textContent = browser.i18n.getMessage("optionResourc
 acceptHeaderImageLabel.textContent = browser.i18n.getMessage("optionResourceImage");
 saveRawPageLabel.textContent = browser.i18n.getMessage("optionSaveRawPage");
 insertMetaCSPLabel.textContent = browser.i18n.getMessage("optionInsertMetaCSP");
+insertCanonicalLinkLabel.textContent = browser.i18n.getMessage("optionInsertCanonicalLink");
 saveToClipboardLabel.textContent = browser.i18n.getMessage("optionSaveToClipboard");
 saveToFilesystemLabel.textContent = browser.i18n.getMessage("optionSaveToFilesystem");
 sharePageLabel.textContent = browser.i18n.getMessage("optionSharePage");
@@ -769,6 +840,15 @@ filenameMaxLengthLabel.textContent = browser.i18n.getMessage("optionFilenameMaxL
 filenameMaxLengthBytesUnitLabel.textContent = browser.i18n.getMessage("optionFilenameMaxLengthBytesUnit");
 filenameMaxLengthCharsUnitLabel.textContent = browser.i18n.getMessage("optionFilenameMaxLengthCharsUnit");
 filenameReplacementCharacterLabel.textContent = browser.i18n.getMessage("optionFilenameReplacementCharacter");
+filenameReplacementsLabel.textContent = browser.i18n.getMessage("optionFilenameReplacements");
+filenameReplacedCharactersLabel.textContent = filenameReplacedCharactersLabel.title = browser.i18n.getMessage("optionsFilenameReplacedCharacters");
+filenameReplacementCharactersLabel.textContent = filenameReplacementCharactersLabel.title = browser.i18n.getMessage("optionsFilenameReplacementCharacters");
+filenameReplacementsPreviewLabel.textContent = filenameReplacementsPreviewLabel.title = browser.i18n.getMessage("optionsFilenameReplacementsPreviewFilename");
+filenameReplacementsPreviewResultLabel.textContent = filenameReplacementsPreviewResultLabel.title = browser.i18n.getMessage("optionsFilenameReplacementsPreviewResult");
+filenameReplacementsPreviewInput.placeholder = browser.i18n.getMessage("optionsFilenameReplacementsPreviewPlaceholder");
+filenameReplacementsResetButton.textContent = browser.i18n.getMessage("optionsFilenameReplacementsResetButton");
+replacementCharactersInput.placeholder = browser.i18n.getMessage("optionsFilenameReplacedCharactersPlaceholder");
+replacementAddButton.title = browser.i18n.getMessage("optionsAddFilenameReplacementTooltip");
 replaceEmojisInFilenameLabel.textContent = browser.i18n.getMessage("optionReplaceEmojisInFilename");
 saveFilenameTemplateDataLabel.textContent = browser.i18n.getMessage("optionSaveFilenameTemplateData");
 shadowEnabledLabel.textContent = browser.i18n.getMessage("optionDisplayShadow");
@@ -840,6 +920,7 @@ blockMixedContentLabel.textContent = browser.i18n.getMessage("optionBlockMixedCo
 saveOriginalURLsLabel.textContent = browser.i18n.getMessage("optionSaveOriginalURLs");
 includeInfobarLabel.textContent = browser.i18n.getMessage("optionIncludeInfobar");
 openInfobarLabel.textContent = browser.i18n.getMessage("optionOpenInfobar");
+animateInfobarLabel.textContent = browser.i18n.getMessage("optionAnimateInfobar");
 removeInfobarSavedDateLabel.textContent = browser.i18n.getMessage("optionRemoveInfobarSavedDate");
 confirmInfobarLabel.textContent = browser.i18n.getMessage("optionConfirmInfobar");
 autoCloseLabel.textContent = browser.i18n.getMessage("optionAutoClose");
@@ -856,15 +937,15 @@ defaultEditorModeCutExternalLabel.textContent = browser.i18n.getMessage("optionD
 applySystemThemeLabel.textContent = browser.i18n.getMessage("optionApplySystemTheme");
 contentWidthLabel.textContent = browser.i18n.getMessage("optionContentWidth");
 warnUnsavedPageLabel.textContent = browser.i18n.getMessage("optionWarnUnsavedPage");
-displayInfobarInEditorLabel.textContent = browser.i18n.getMessage("optiondisplayInfobarInEditor");
+displayInfobarInEditorLabel.textContent = browser.i18n.getMessage("optionDisplayInfobarInEditor");
 resetButton.textContent = browser.i18n.getMessage("optionsResetButton");
 exportButton.textContent = browser.i18n.getMessage("optionsExportButton");
 importButton.textContent = browser.i18n.getMessage("optionsImportButton");
 resetButton.title = browser.i18n.getMessage("optionsResetTooltip");
 autoSettingsLabel.textContent = browser.i18n.getMessage("optionsAutoSettingsSubTitle");
-autoSettingsUrlLabel.textContent = browser.i18n.getMessage("optionsAutoSettingsUrl");
-autoSettingsProfileLabel.textContent = browser.i18n.getMessage("optionsAutoSettingsProfile");
-autoSettingsAutoSaveProfileLabel.textContent = browser.i18n.getMessage("optionsAutoSettingsAutoSaveProfile");
+autoSettingsUrlLabel.textContent = autoSettingsUrlLabel.title = browser.i18n.getMessage("optionsAutoSettingsUrl");
+autoSettingsProfileLabel.textContent = autoSettingsProfileLabel.title = browser.i18n.getMessage("optionsAutoSettingsProfile");
+autoSettingsAutoSaveProfileLabel.textContent = autoSettingsAutoSaveProfileLabel.title = browser.i18n.getMessage("optionsAutoSettingsAutoSaveProfile");
 ruleAddButton.title = browser.i18n.getMessage("optionsAddRuleTooltip");
 ruleEditButton.title = browser.i18n.getMessage("optionsValidateChangesTooltip");
 ruleCancelButton.title = browser.i18n.getMessage("optionsCancelChangesTooltip");
@@ -1079,6 +1160,7 @@ async function refresh(profileName) {
 	acceptHeaderImageInput.value = profileOptions.acceptHeaders.image;
 	saveRawPageInput.checked = profileOptions.saveRawPage;
 	insertMetaCSPInput.checked = profileOptions.insertMetaCSP;
+	insertCanonicalLinkInput.checked = profileOptions.insertCanonicalLink;
 	saveToClipboardInput.checked = profileOptions.saveToClipboard;
 	addProofInput.checked = profileOptions.addProof;
 	woleetKeyInput.value = profileOptions.woleetKey;
@@ -1147,6 +1229,7 @@ async function refresh(profileName) {
 	filenameMaxLengthInput.value = profileOptions.filenameMaxLength;
 	filenameMaxLengthUnitInput.value = profileOptions.filenameMaxLengthUnit;
 	filenameReplacementCharacterInput.value = profileOptions.filenameReplacementCharacter;
+	displayReplacements(getReplacements(profileOptions));
 	replaceEmojisInFilenameInput.checked = profileOptions.replaceEmojisInFilename;
 	saveFilenameTemplateDataInput.checked = profileOptions.saveFilenameTemplateData;
 	shadowEnabledInput.checked = profileOptions.shadowEnabled;
@@ -1211,6 +1294,7 @@ async function refresh(profileName) {
 	saveOriginalURLsInput.checked = profileOptions.saveOriginalURLs;
 	includeInfobarInput.checked = profileOptions.includeInfobar;
 	openInfobarInput.checked = profileOptions.openInfobar;
+	animateInfobarInput.checked = profileOptions.animateInfobar;
 	removeInfobarSavedDateInput.checked = profileOptions.removeSavedDate;
 	confirmInfobarInput.checked = profileOptions.confirmInfobarContent;
 	autoCloseInput.checked = profileOptions.autoClose;
@@ -1222,6 +1306,67 @@ async function refresh(profileName) {
 	contentWidthInput.value = profileOptions.contentWidth;
 	warnUnsavedPageInput.checked = profileOptions.warnUnsavedPage;
 	displayInfobarInEditorInput.checked = profileOptions.displayInfobarInEditor;
+}
+
+function displayReplacements(replacements) {
+	Array.from(replacementsDataElement.childNodes).forEach(node => node.remove());
+	replacements.forEach(replacement => {
+		const replacementElement = replacementViewElement.cloneNode(true);
+		const charactersInput = replacementElement.querySelector(".replacement-characters-input");
+		const characterInput = replacementElement.querySelector(".replacement-character-input");
+		charactersInput.value = formatCharacters(replacement.characters);
+		characterInput.value = formatCharacters(replacement.replacement);
+		charactersInput.title = browser.i18n.getMessage("optionsFilenameReplacedCharacters");
+		characterInput.title = browser.i18n.getMessage("optionsFilenameReplacementCharacters");
+		replacementElement.hidden = false;
+		replacementElement.className = "tr data";
+		replacementsDataElement.appendChild(replacementElement);
+		const replacementDeleteButton = replacementElement.querySelector(".replacement-delete-button");
+		replacementDeleteButton.title = browser.i18n.getMessage("optionsDeleteFilenameReplacementTooltip");
+		replacementDeleteButton.addEventListener("click", async () => {
+			replacementElement.remove();
+			await update();
+			await refresh();
+		}, false);
+		charactersInput.addEventListener("change", () => updateReplacement(charactersInput, replacement.characters), false);
+		characterInput.addEventListener("change", () => updateReplacement(characterInput, replacement.replacement), false);
+		charactersInput.addEventListener("input", displayReplacementsPreview, false);
+		characterInput.addEventListener("input", displayReplacementsPreview, false);
+	});
+	displayReplacementCharacterPlaceholders();
+	displayReplacementsPreview();
+}
+
+function displayReplacementCharacterPlaceholders() {
+	replacementCharacterInput.placeholder = filenameReplacementCharacterInput.value;
+	replacementsDataElement.querySelectorAll(".replacement-character-input")
+		.forEach(characterInput => characterInput.placeholder = filenameReplacementCharacterInput.value);
+}
+
+function displayReplacementsPreview() {
+	filenameReplacementsPreviewOutput.textContent = filenameReplacementsPreviewInput.value
+		? replaceCharacters(filenameReplacementsPreviewInput.value, getDisplayedReplacements(), filenameReplacementCharacterInput.value)
+		: "";
+}
+
+function getDisplayedReplacements() {
+	return Array.from(replacementsDataElement.querySelectorAll(".tr")).map(replacementElement => ({
+		characters: parseCharacters(replacementElement.querySelector(".replacement-characters-input").value),
+		replacement: parseCharacters(replacementElement.querySelector(".replacement-character-input").value)
+	}));
+}
+
+async function updateReplacement(input, previousValue) {
+	if (input.classList.contains("replacement-characters-input") && !testReplacedCharacters(input.value)) {
+		input.value = formatCharacters(previousValue);
+	}
+	await update();
+	await refresh();
+}
+
+function testReplacedCharacters(value) {
+	const characters = parseCharacters(value);
+	return Boolean(characters) && testCharacters(characters);
 }
 
 function getProfileText(profileName) {
@@ -1237,6 +1382,7 @@ async function update() {
 	}
 	const selectedProfileName = profileNamesInput.value;
 	const selectedCustomShortcut = customShortcutInput.value || null;
+	const { filenameReplacedCharacters, filenameReplacementCharacters } = getReplacedCharactersOptions(getDisplayedReplacements());
 	if (selectedCustomShortcut) {
 		try {
 			const config = await browser.runtime.sendMessage({ method: "config.get" });
@@ -1282,6 +1428,7 @@ async function update() {
 			},
 			saveRawPage: saveRawPageInput.checked,
 			insertMetaCSP: insertMetaCSPInput.checked,
+			insertCanonicalLink: insertCanonicalLinkInput.checked,
 			saveToClipboard: saveToClipboardInput.checked,
 			addProof: addProofInput.checked,
 			woleetKey: woleetKeyInput.value,
@@ -1318,6 +1465,8 @@ async function update() {
 			filenameMaxLength: filenameMaxLengthInput.value,
 			filenameMaxLengthUnit: filenameMaxLengthUnitInput.value,
 			filenameReplacementCharacter: filenameReplacementCharacterInput.value,
+			filenameReplacedCharacters,
+			filenameReplacementCharacters,
 			replaceEmojisInFilename: replaceEmojisInFilenameInput.checked,
 			saveFilenameTemplateData: saveFilenameTemplateDataInput.checked,
 			shadowEnabled: shadowEnabledInput.checked,
@@ -1360,6 +1509,7 @@ async function update() {
 			saveOriginalURLs: saveOriginalURLsInput.checked,
 			includeInfobar: includeInfobarInput.checked,
 			openInfobar: openInfobarInput.checked,
+			animateInfobar: animateInfobarInput.checked,
 			removeSavedDate: removeInfobarSavedDateInput.checked,
 			confirmInfobarContent: confirmInfobarInput.checked,
 			autoClose: autoCloseInput.checked,

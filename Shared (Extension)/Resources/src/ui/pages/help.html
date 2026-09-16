@@ -181,6 +181,15 @@
 							character</span>
 						<p>Enter the character used to replace invalid characters in the filename.</p>
 					</li>
+					<li data-options-label="filenameReplacementsLabel">
+						<span class="option">Option: characters replaced in file names</span>
+						<p>Each row of the table replaces one character of the file name with another one. Edit the
+							second column to change what a character becomes, leave it empty to use the replacement
+							character above, and delete a row to keep the character as it is. The first column also
+							accepts a range of characters (e.g. <code>\x00-\x1f</code>) and the escape sequences
+							<code>\x00</code> to <code>\xff</code>. Type a file name in the preview field to see the
+							result.</p>
+					</li>
 					<li data-options-label="replaceEmojisInFilenameLabel">
 						<span class="option">Option: replace emojis with text</span>
 						<p>Check this option to replace emojis in the file name with their unicode text representation.
@@ -300,6 +309,13 @@
 							loaded.</p>
 						<p class="notice">It is recommended to <u>check</u> this option</p>
 					</li>
+					<li data-options-label="insertCanonicalLinkLabel"> <span class="option">Option: save the canonical
+							link of the page</span>
+						<p>Check this option to insert a link element pointing at the address the page was saved from, so
+							that the saved copy still declares where it came from. A canonical link already present in the
+							page is left as it is, and nothing is inserted when the page is not saved from an HTTP(S)
+							address.</p>
+					</li>
 					<li data-options-label="removeFramesLabel"> <span class="option">Option: remove frames</span>
 						<p>Check this option to remove all frame and iframe elements. Checking this option can
 							considerably reduce the size of the file without altering the document most of the time. It
@@ -362,6 +378,12 @@
 					<li data-options-label="openInfobarLabel"> <span class="option">Option: keep infobar
 							open</span>
 						<p>Check this option to keep the infobar open when viewing a saved page.</p>
+					</li>
+					<li data-options-label="animateInfobarLabel"> <span class="option">Option: animate the
+							infobar</span>
+						<p>Check this option to make the infobar blink and display an expanding ring when a saved page
+							is opened. The animation stops when the infobar is opened, and does not run when the system
+							is set to reduce motion.</p>
 					</li>
 				</ul>
 				<p>Stylesheets</p>

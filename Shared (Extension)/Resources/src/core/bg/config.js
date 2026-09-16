@@ -26,6 +26,11 @@
 import { download } from "./download-util.js";
 import * as tabsData from "./tabs-data.js";
 import { normalizeLayout } from "./../../ui/common/menu-layout.js";
+import {
+	DEFAULT_REPLACED_CHARACTERS as DEFAULT_FILENAME_REPLACED_CHARACTERS,
+	DEFAULT_REPLACEMENT_CHARACTERS as DEFAULT_FILENAME_REPLACEMENT_CHARACTERS
+} from "./../../ui/common/filename-replacement.js";
+import { DEFAULT_MAX_APPENDED_DATA_LENGTH } from "single-file-core/processors/compression/compression-constants.js";
 
 const CURRENT_PROFILE_NAME = "-";
 const DEFAULT_PROFILE_NAME = "__Default_Settings__";
@@ -54,8 +59,6 @@ const EXTERNAL_CAPTURE_SUPPORTED = IS_NOT_SAFARI;
 const SHARE_API_SUPPORTED = navigator.canShare && navigator.canShare({ files: [new File([new Blob([""], { type: "text/html" })], "test.html")] });
 const BROWSER_MENUS_API_SUPPORTED = Boolean(browser.menus && browser.menus.onClicked && browser.menus.create && browser.menus.update && browser.menus.removeAll);
 const LEGACY_FILENAME_REPLACED_CHARACTERS = ["~", "+", "\\\\", "?", "%", "*", ":", "|", "\"", "<", ">", "\u0000-\u001f", "\u007f"];
-const DEFAULT_FILENAME_REPLACED_CHARACTERS = ["~", "+", "?", "%", "*", ":", "|", "\"", "<", ">", "\\\\", "\x00-\x1f", "\x7F"];
-const DEFAULT_FILENAME_REPLACEMENT_CHARACTERS = ["～", "＋", "？", "％", "＊", "：", "｜", "＂", "＜", "＞", "＼"];
 const DEPRECATED_OPTION_NAMES = {
 	loadDeferredImages: "loadDeferredContent",
 	loadDeferredImagesMaxIdleTime: "loadDeferredContentMaxIdleTime",
@@ -86,6 +89,7 @@ const DEFAULT_CONFIG = {
 	infobarTemplate: "",
 	includeInfobar: !IS_NOT_SAFARI,
 	openInfobar: false,
+	animateInfobar: true,
 	confirmInfobarContent: false,
 	autoClose: false,
 	confirmFilename: false,
@@ -165,7 +169,7 @@ const DEFAULT_CONFIG = {
 	disableCompression: false,
 	extractDataFromPage: false,
 	preventAppendedData: false,
-	maxAppendedDataLength: 16361,
+	maxAppendedDataLength: DEFAULT_MAX_APPENDED_DATA_LENGTH,
 	insertEmbeddedImage: false,
 	insertEmbeddedScreenshotImage: false,
 	insertTextBody: false,
@@ -568,7 +572,9 @@ async function onMessage(message) {
 			WEB_BLOCKING_API_SUPPORTED,
 			EXTERNAL_CAPTURE_SUPPORTED,
 			SHARE_API_SUPPORTED,
-			BROWSER_MENUS_API_SUPPORTED
+			BROWSER_MENUS_API_SUPPORTED,
+			DEFAULT_FILENAME_REPLACED_CHARACTERS,
+			DEFAULT_FILENAME_REPLACEMENT_CHARACTERS
 		};
 	}
 	if (message.method.endsWith(".getRules")) {

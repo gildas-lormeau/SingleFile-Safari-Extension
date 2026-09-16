@@ -868,6 +868,7 @@
 	const LOGS_LINE_CLASSNAME = "singlefile-logs-line";
 	const LOGS_LINE_TEXT_ELEMENT_CLASSNAME = "singlefile-logs-line-text";
 	const LOGS_LINE_STATUS_ELEMENT_CLASSNAME = "singlefile-logs-line-icon";
+	const LOGS_LINE_STATUS_DONE_CLASSNAME = "singlefile-logs-line-icon-done";
 	const SINGLE_FILE_UI_ELEMENT_CLASS = singlefile.helper.SINGLE_FILE_UI_ELEMENT_CLASS;
 	const CSS_PROPERTIES = new Set(Array.from(getComputedStyle(document.documentElement)));
 	const UI_DIRECTION = getMessage("@@bidi_dir", "ltr");
@@ -941,6 +942,10 @@
 					text-align: center;
 					position: relative;
 					top: 1px;
+					color: black;
+				}
+				.${LOGS_LINE_STATUS_ELEMENT_CLASSNAME}.${LOGS_LINE_STATUS_DONE_CLASSNAME} {
+					color: #055000;
 				}
 				@media (prefers-color-scheme: dark) {
 					.${LOGS_CLASSNAME} {
@@ -949,6 +954,12 @@
 					.${LOGS_LINE_CLASSNAME} {
 						color: #eeeeee;
 						background-color: #1c1b22;
+					}
+					.${LOGS_LINE_STATUS_ELEMENT_CLASSNAME} {
+						color: #eeeeee;
+					}
+					.${LOGS_LINE_STATUS_ELEMENT_CLASSNAME}.${LOGS_LINE_STATUS_DONE_CLASSNAME} {
+						color: #7dc67d;
 					}
 				}
 			`;
@@ -3410,7 +3421,7 @@
 
 		let NOTES_WEB_STYLESHEET, MASK_WEB_STYLESHEET, HIGHLIGHTS_WEB_STYLESHEET;
 		let selectedNote, anchorElement, maskNoteElement, maskPageElement, highlightSelectionMode, removeHighlightMode, resizingNoteMode, movingNoteMode, highlightColor, collapseNoteTimeout, cuttingOuterMode, cuttingMode, cuttingTouchTarget, cuttingPath, cuttingPathIndex, previousContent;
-		let removedElements = [], removedElementIndex = 0, pageResources, pageUrl, pageCompressContent, includeInfobar, openInfobar, infobarPositionAbsolute, infobarPositionTop, infobarPositionBottom, infobarPositionLeft, infobarPositionRight;
+		let removedElements = [], removedElementIndex = 0, pageResources, pageUrl, pageCompressContent, includeInfobar, openInfobar, animateInfobar, infobarPositionAbsolute, infobarPositionTop, infobarPositionBottom, infobarPositionLeft, infobarPositionRight;
 		let pageArchiveContent, archivePages, archiveManifest, archivePassword, archiveUrlToPath, archiveTocContent, archiveTocPresent, stashedArchivePages, modifiedArchivePagePaths, currentArchivePagePath, archiveTocDisplayed, droppedArchiveContent;
 
 		globalThis.zip = singlefile.helper.zip;
@@ -3524,6 +3535,7 @@
 				if (message.method == "getContent") {
 					includeInfobar = message.includeInfobar;
 					openInfobar = message.openInfobar;
+					animateInfobar = message.animateInfobar;
 					infobarPositionAbsolute = message.infobarPositionAbsolute;
 					infobarPositionTop = message.infobarPositionTop;
 					infobarPositionBottom = message.infobarPositionBottom;
@@ -3597,6 +3609,7 @@
 				if (message.method == "displayInfobar") {
 					singlefile.helper.displayIcon(document, true, {
 						openInfobar: message.openInfobar,
+						animateInfobar: message.animateInfobar,
 						infobarPositionAbsolute: message.infobarPositionAbsolute,
 						infobarPositionTop: message.infobarPositionTop,
 						infobarPositionBottom: message.infobarPositionBottom,
@@ -4778,6 +4791,7 @@
 			if (includeInfobar) {
 				const options = singlefile.helper.extractInfobarData(doc);
 				options.openInfobar = openInfobar;
+				options.animateInfobar = animateInfobar;
 				options.infobarPositionAbsolute = infobarPositionAbsolute;
 				options.infobarPositionTop = infobarPositionTop;
 				options.infobarPositionRight = infobarPositionRight;
