@@ -193,10 +193,10 @@ const DEFAULT_CONFIG = {
 		audio: "audio/webm,audio/ogg,audio/wav,audio/*;q=0.9,application/ogg;q=0.7,video/*;q=0.6,*/*;q=0.5"
 	},
 	moveStylesInHead: false,
+	customStylesheet: "",
 	networkTimeout: 0,
 	woleetKey: "",
 	blockImages: false,
-	blockAlternativeImages: true,
 	blockStylesheets: false,
 	blockFonts: false,
 	blockScripts: true,
@@ -357,6 +357,7 @@ async function upgrade() {
 			});
 			profile._migratedDeferredContentOptions = true;
 		}
+		delete profile.blockAlternativeImages;
 		for (const key of Object.keys(DEFAULT_CONFIG)) {
 			if (profile[key] === undefined) {
 				profile[key] = DEFAULT_CONFIG[key];
