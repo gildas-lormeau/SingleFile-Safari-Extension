@@ -315,6 +315,10 @@
                         <p>选中此选项可删除与任何内容都不匹配的所有字体CSS规则。选中此选项不应更改文档，并且可以大大减小文件的大小。</p>
                         <p class="notice">建议<u>选中</u>此选项</p>
                     </li>
+                    <li data-options-label="removeUnusedGlyphsLabel"><span class="option">选项：移除未使用字形</span>
+                        <p>选中此选项可从嵌入的字体中删除页面未显示的字形。此选项为实验性功能。它适用于 TrueType 和 WOFF 字体，以及浏览器能够解压和压缩的 WOFF2 字体（Firefox 147 及更高版本）。如果结果没有变小或浏览器无法加载该字体，则保留原字体。</p>
+                        <p class="notice">建议<u>取消选中</u>此选项</p>
+                    </li>
                     <li data-options-label="removeAlternativeFontsLabel"><span class="option">选项：删除替代字体</span>
                         <p>选中此选项可删除所用字体的替代字体。选中此选项不应更改文档，并且可以大大减小文件的大小。</p>
                         <p class="notice">建议<u>选中</u>此选项</p>
@@ -832,6 +836,8 @@
                         "%uppercase&lt;{page-title}&gt;" 返回页面标题的大写形式）。</li>
                     <li><code>%capitalize&lt;value&gt;</code>: 返回 <code>value</code> 的首字母大写形式（例如
                         "%capitalize&lt;{page-title}&gt;" 返回页面标题的首字母大写形式）。</li>
+                    <li><code>%titlecase&lt;value&gt;</code>: 返回 <code>value</code> 的每个单词首字母大写形式，其他字母保持不变（例如
+                        "%titlecase&lt;%lowercase&lt;{page-title}&gt;&gt;" 返回页面标题的标题大小写形式）。</li>
                     <li><code>%replace&lt;value|search|replacement&gt;</code>: 返回 <code>value</code>，将所有
                         <code>search</code> 值替换为 <code>replacement</code>（例如 "%replace&lt;{page-title}| |_&gt;"
                         将页面标题中的所有空格替换为下划线）。
