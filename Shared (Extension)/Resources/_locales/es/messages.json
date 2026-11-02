@@ -211,6 +211,14 @@
 		"message": "mostrar una barra informativa al ver una página guardada",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile no puede mostrar la barra informativa ni guardar las páginas abiertas desde el sistema de archivos porque no tiene permiso para acceder a los archivos locales. Para solucionarlo, active \"Acceder a los archivos locales de su equipo\" en \"Permisos y datos\" en la página de SingleFile en about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile no puede mostrar la barra informativa ni guardar las páginas abiertas desde el sistema de archivos porque no tiene permiso para acceder a las URL de archivo. Para solucionarlo, active \"Permitir el acceso a las URL de archivo\" en la página de SingleFile dentro de la página de extensiones del navegador.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
+	},
 	"optionInfobarTemplate": {
 		"message": "plantilla del contenido de la barra informativa",
 		"description": "Options page label: 'template of the infobar content'"
@@ -628,7 +636,7 @@
 		"description": "Popup text 'Confirm the deletion of the selected rule' in the options page"
 	},
 	"optionAutoSaveLoadOrUnload": {
-		"message": "auto-guardar tras cargar la página o al purgar la página",
+		"message": "auto-guardar tras cargar la página o al descargar la página",
 		"description": "auto-save after page load or on page unload"
 	},
 	"optionAutoSaveLoad": {
@@ -636,7 +644,7 @@
 		"description": "Options page label: 'auto-save after page load'"
 	},
 	"optionAutoSaveUnload": {
-		"message": "auto-guardar al purgar la página",
+		"message": "auto-guardar al descargar la página",
 		"description": "Options page label: 'auto-save on page unload'"
 	},
 	"optionAutoSaveDiscard": {
@@ -704,7 +712,7 @@
 		"description": "Options page label: 'default mode > remove external elements'"
 	},
 	"optionApplySystemTheme": {
-		"message": "aplicar diseño del sistema al formatear una páginae",
+		"message": "aplicar el tema del sistema al formatear una página",
 		"description": "Title of the button 'apply the system theme when formatting a page'"
 	},
 	"optionContentWidth": {
@@ -810,7 +818,7 @@
 		"description": "Options page label: 'add proof of existence'"
 	},
 	"optionsAddProofConfirm": {
-		"message": "Confirm you allow SingleFile to send to the Woleet API a SHA256 hash of each page you are going to save. You can find more information about this feature in the help page or by clicking on the question mark next to the option.",
+		"message": "Confirme que autoriza a SingleFile a enviar a la API de Woleet un hash SHA256 de cada página que vaya a guardar. Encontrará más información sobre esta función en la página de ayuda o haciendo clic en el signo de interrogación situado junto a la opción.",
 		"description": "Popup text displayed wen enabling the option 'add proof of existence'"
 	},
 	"optionWoleetKey": {
@@ -858,7 +866,7 @@
 		"description": "Options page label: 'region'"
 	},
 	"optionS3Bucket": {
-		"message": "bucket nombre",
+		"message": "nombre del bucket",
 		"description": "Options page label: 'bucket name'"
 	},
 	"optionS3AccessKey": {
@@ -925,6 +933,10 @@
 		"message": "sincronizar opciones",
 		"description": "Options label: 'synchronize options'"
 	},
+	"optionSynchronizeError": {
+		"message": "No se pudieron copiar las opciones al almacenamiento sincronizado, siguen guardadas localmente.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
+	},
 	"optionsResetButton": {
 		"message": "Restablecer",
 		"description": "Options button: 'Reset'"
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "Importar",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "No se pudieron importar las opciones, las opciones actuales no han cambiado.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Contenido diferido",
@@ -1214,7 +1230,7 @@
 		"description": "Status displayed next to a URL the batch save skipped because its rule maps it to the disabled profile"
 	},
 	"optionSaveToRestFormApi": {
-		"message": "subir a un formulario REST Api",
+		"message": "subir a una API REST Form",
 		"description": "Options page label: 'upload to a REST Form API'"
 	},
 	"optionRestFormApiUrl": {
@@ -1222,15 +1238,15 @@
 		"description": "Options page label: 'URL'"
 	},
 	"optionRestFormApiToken": {
-		"message": "authorization token",
+		"message": "token de autorización",
 		"description": "Options page label: 'authorization token'"
 	},
 	"optionRestFormApiFileFieldName": {
-		"message": "archive data field name",
+		"message": "nombre del campo de los datos del archivo",
 		"description": "Options page label: 'archive data field name'"
 	},
 	"optionRestFormApiUrlFieldName": {
-		"message": "archive URL field name",
+		"message": "nombre del campo de la URL del archivo",
 		"description": "Options page label: 'archive URL field name'"
 	},
 	"optionsEditorTitle": {

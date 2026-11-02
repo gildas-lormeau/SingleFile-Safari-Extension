@@ -160,11 +160,11 @@
 		"description": "Badge label during initialization: '•••'"
 	},
 	"buttonSaveProgressTooltip": {
-		"message": "Speicherung aktiviert: ",
+		"message": "Speicherfortschritt: ",
 		"description": "Button title during save: 'Save progress: xx%'"
 	},
 	"buttonUploadProgressTooltip": {
-		"message": "Upload aktiviert: ",
+		"message": "Upload-Fortschritt: ",
 		"description": "Button title during save: 'Upload progress: xx%'"
 	},
 	"buttonOKBadge": {
@@ -208,11 +208,19 @@
 		"description": "Options page label: 'overlay a shadow on the page during processing'"
 	},
 	"optionDisplayInfobar": {
-		"message": "Infoknopf beim Betrachten einer gespeicherten Seite anzeigen",
+		"message": "Infobar beim Betrachten einer gespeicherten Seite anzeigen",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile kann die Infobar nicht anzeigen und keine aus dem Dateisystem geöffneten Seiten speichern, weil es nicht auf lokale Dateien zugreifen darf. Um dies zu beheben, aktivieren Sie „Auf lokale Dateien auf Ihrem Computer zugreifen“ unter „Berechtigungen und Daten“ auf der SingleFile-Seite in about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile kann die Infobar nicht anzeigen und keine aus dem Dateisystem geöffneten Seiten speichern, weil es nicht auf Datei-URLs zugreifen darf. Um dies zu beheben, aktivieren Sie „Zugriff auf Datei-URLs zulassen“ auf der SingleFile-Seite in der Erweiterungsverwaltung des Browsers.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
+	},
 	"optionInfobarTemplate": {
-		"message": "Muster für Inhalt des Infoknopfs",
+		"message": "Muster für Inhalt der Infobar",
 		"description": "Options page label: 'template of the infobar content'"
 	},
 	"optionBlockMixedContent": {
@@ -224,7 +232,7 @@
 		"description": "Options page label: 'save original URLs of embedded resources'"
 	},
 	"optionIncludeInfobar": {
-		"message": "Einfügen Inhalt des Infoknopfs in die gespeicherte Seite",
+		"message": "Einfügen Inhalt der Infobar in die gespeicherte Seite",
 		"description": "Options page label: 'include the infobar in the saved page'"
 	},
 	"optionOpenInfobar": {
@@ -240,7 +248,7 @@
 		"description": "Options page label: 'do not include the saved date'"
 	},
 	"optionConfirmInfobar": {
-		"message": "Inhalt des Infoknopfs im Dialogfenster eingeben",
+		"message": "Inhalt der Infobar im Dialogfenster eingeben",
 		"description": "Options page label: 'open a prompt dialog to edit the infobar content'"
 	},
 	"optionAutoClose": {
@@ -428,7 +436,7 @@
 		"description": "Options page label: 'custom image'"
 	},
 	"optionsInfobarSubTitle": {
-		"message": "Infoknopf",
+		"message": "Infobar",
 		"description": "Options sub-title: 'Infobar'"
 	},
 	"optionsImagesSubTitle": {
@@ -640,7 +648,7 @@
 		"description": "Options page label: 'auto-save on page unload'"
 	},
 	"optionAutoSaveDiscard": {
-		"message": "Automatische Speicherung beim Schließen des Tabs",
+		"message": "Automatische Speicherung beim Verwerfen (Entladen) des Tabs",
 		"description": "Options page label: 'auto-save on tab discard'"
 	},
 	"optionAutoSaveRemove": {
@@ -716,7 +724,7 @@
 		"description": "Title of the button 'warn if leaving page with unsaved changes'"
 	},
 	"optionDisplayInfobarInEditor": {
-		"message": "Anzeige der Infoknopf",
+		"message": "Anzeige der Infobar",
 		"description": "Title of the button 'display the infobar'"
 	},
 	"optionsMiscSubTitle": {
@@ -806,11 +814,11 @@
 		"description": "Options page label: 'share page'"
 	},
 	"optionAddProof": {
-		"message": "Existenzberechtigung hinzufügen",
+		"message": "Existenznachweis hinzufügen",
 		"description": "Options page label: 'add proof of existence'"
 	},
 	"optionsAddProofConfirm": {
-		"message": "Confirm you allow SingleFile to send to the Woleet API a SHA256 hash of each page you are going to save. You can find more information about this feature in the help page or by clicking on the question mark next to the option.",
+		"message": "Bestätigen Sie, dass SingleFile einen SHA256-Hash jeder von Ihnen gespeicherten Seite an die Woleet-API senden darf. Weitere Informationen zu dieser Funktion finden Sie auf der Hilfeseite oder durch Klicken auf das Fragezeichen neben der Option.",
 		"description": "Popup text displayed wen enabling the option 'add proof of existence'"
 	},
 	"optionWoleetKey": {
@@ -878,7 +886,7 @@
 		"description": "Options page label: 'URL'"
 	},
 	"optionWebDAVUser": {
-		"message": "Benutzerkennwort",
+		"message": "Benutzerkennung",
 		"description": "Options page label: 'user identifier'"
 	},
 	"optionWebDAVPassword": {
@@ -925,6 +933,10 @@
 		"message": "Optionen synchronisieren",
 		"description": "Options label: 'synchronize options'"
 	},
+	"optionSynchronizeError": {
+		"message": "Die Optionen konnten nicht in den synchronisierten Speicher kopiert werden. Sie bleiben lokal gespeichert.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
+	},
 	"optionsResetButton": {
 		"message": "Zurücksetzen",
 		"description": "Options button: 'Reset'"
@@ -934,7 +946,7 @@
 		"description": "Options 'Reset' button tooltip"
 	},
 	"optionsResetConfirm": {
-		"message": "Zurücksetzung aller Optionen des aktuellen Profils bestätigen",
+		"message": "Zurücksetzung aller Optionen oder des aktuellen Profils bestätigen",
 		"description": "Popup text 'Confirm the reset of all options or the current profile' in the options page"
 	},
 	"optionsResetAllButton": {
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "Importieren",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "Die Einstellungen konnten nicht importiert werden. Die aktuellen Einstellungen bleiben unverändert.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Zurückgestellte Inhalte",

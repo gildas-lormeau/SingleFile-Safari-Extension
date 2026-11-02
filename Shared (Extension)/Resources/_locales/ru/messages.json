@@ -211,6 +211,14 @@
 		"message": "показать информационную панель при просмотре сохранённой страницы",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile не может показать информационную панель или сохранить страницы, открытые из файловой системы, так как ему не разрешён доступ к локальным файлам. Чтобы это исправить, включите «Доступ к локальным файлам на вашем компьютере» в разделе «Разрешения и данные» на странице SingleFile в about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile не может показать информационную панель или сохранить страницы, открытые из файловой системы, так как ему не разрешён доступ к URL-адресам файлов. Чтобы это исправить, включите «Разрешить открывать файлы по ссылкам» на странице SingleFile в списке расширений браузера.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
+	},
 	"optionInfobarTemplate": {
 		"message": "шаблон содержимого информационной панели",
 		"description": "Options page label: 'template of the infobar content'"
@@ -500,7 +508,7 @@
 		"description": "Options page label: 'group duplicate stylesheets together'"
 	},
 	"optionMoveStylesInHead": {
-		"message": "переместить в основной элемент стили, найденные вне него",
+		"message": "переместить в элемент head стили, найденные вне него",
 		"description": "Options page label: 'move in the head element the styles found outside of it'"
 	},
 	"optionCustomStylesheet": {
@@ -512,7 +520,7 @@
 		"description": "Options page label: 'remove unused styles'"
 	},
 	"optionRemoveAlternativeMedias": {
-		"message": "удалить таблицы стилей для экранов альтернативных устройств",
+		"message": "удалить таблицы стилей, не предназначенные для отображения на экране",
 		"description": "Options page label: 'remove stylesheets for alternative devices to screens'"
 	},
 	"optionsNetworkSubTitle": {
@@ -652,7 +660,7 @@
 		"description": "Options page label: 'auto-save waiting delay after page load (s)'"
 	},
 	"optionAutoSaveRepeat": {
-		"message": "переодическое автосохранение",
+		"message": "периодическое автосохранение",
 		"description": "Options page label: 'auto-save periodically'"
 	},
 	"optionAutoSaveRepeatDelay": {
@@ -676,7 +684,7 @@
 		"description": "Options page label: 'open saved pages in a new tab'"
 	},
 	"optionAutoOpenEditor": {
-		"message": "сохранять открытые страницы из редактора аннотаций SingleFile",
+		"message": "открывать страницы, сохранённые с помощью SingleFile, в редакторе аннотаций",
 		"description": "Options page label: 'open pages saved with SingleFile in the annotation editor'"
 	},
 	"optionDefaultEditorMode": {
@@ -778,7 +786,7 @@
 		"description": "Options page label: 'maximum download time (s)'"
 	},
 	"optionPassReferrerOnError": {
-		"message": "пропустить заголовок «Referer» после ошибки запроса перекрёстного источника",
+		"message": "передавать заголовок «Referer» после ошибки запроса перекрёстного источника",
 		"description": "Options page label: 'pass \"Referer\" header after a cross-origin request error'"
 	},
 	"optionSaveRawPage": {
@@ -922,8 +930,12 @@
 		"description": "Options help link"
 	},
 	"optionSynchronize": {
-		"message": "параметры синхронизации",
+		"message": "синхронизировать параметры",
 		"description": "Options label: 'synchronize options'"
+	},
+	"optionSynchronizeError": {
+		"message": "Невозможно скопировать параметры в синхронизированное хранилище. Они по-прежнему хранятся локально.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
 	},
 	"optionsResetButton": {
 		"message": "Сброс",
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "Импорт",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "Невозможно импортировать настройки. Текущие настройки остались без изменений.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Отложенное содержимое",

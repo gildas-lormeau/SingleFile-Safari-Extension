@@ -115,7 +115,7 @@
                         <p>模板示例：</p>
                         <ul>
                             <li><code>{page-title} ({date-iso} {time-locale}).html</code>将为标题为“SingleFile简介”的页面生成类似“SingleFile介绍（2018-09-15
-                                11_06_03 PM）.html”的文件名。</li>
+                                11：06：03 PM）.html”的文件名。</li>
                             <li><code>archives/{url-last-segment} - {date-iso}</code>将为托管在上的页面生成类似“welcome-2018-09-15”的文件名https://example.com/welcome.html.保存的文件将保存在子目录“archives”中。
                             </li>
                             <li><code>archives/{year-locale}/{month-locale}/{day-locale}/{page-title}.html</code>将生成文件名，如“Introduction
@@ -222,6 +222,7 @@
                             class="option">选项：查看保存的页面时显示信息栏</span>
                         <p>选中此选项可在查看已保存的页面时，在页面右上角显示ℹ按钮。单击此按钮，您可以获取有关保存日期的更多信息并打开原始URL。</p>
                         <p class="notice">建议<u>选中</u>此选项</p>
+                        <p class="notice">在 Firefox 153 及更高版本中，只有在 about:addons 的 SingleFile 页面的“权限和数据”中启用“访问计算机上的本地文件”权限后，才会显示信息栏。在基于 Chromium 的浏览器中，必须在扩展页面中启用“允许访问文件URL”选项。</p>
                     </li>
                     <li data-options-label="infobarTemplateLabel"><span class="option">选项：信息栏内容模板</span>
                         <p>该模板允许您自定义信息栏中显示的内容。您可以使用任何有效字符，<code>\n</code>表示换行或<code>\t</code>表示制表符。您还可以使用以下任何变量<a
@@ -711,13 +712,13 @@
                     <li><code>{page-author}</code>: 页面的作者</li>
                     <li><code>{page-creator}</code>: 页面的创建者</li>
                     <li><code>{page-publisher}</code>: 页面的出版者</li>
-                    <li><code>{datetime-iso}</code>: 保存日期和时间的 ISO 格式（例如 "2018-09-15T22_38_26_317Z"）</li>
-                    <li><code>{datetime-utc}</code>: 保存日期和时间的 UTC 格式（例如 "Sat, 15 Sep 2018 22_38_26 GMT"）</li>
-                    <li><code>{datetime-locale}</code>: 日期和时间的本地化值（例如 "9_16_2018, 12_54_31 AM"）</li>
-                    <li><code>{date-iso}</code>: 保存日期的 ISO 格式（例如 "2018-09-15"）</li>
+                    <li><code>{datetime-iso}</code>: 保存日期和时间的 ISO 格式（UTC，例如 "2018-09-15T22:38:26.317Z"）</li>
+                    <li><code>{datetime-utc}</code>: 保存日期和时间的 UTC 格式（例如 "Sat, 15 Sep 2018 22:38:26 GMT"）</li>
+                    <li><code>{datetime-locale}</code>: 日期和时间的本地化值（例如 "9_16_2018, 12:54:31 AM"）</li>
+                    <li><code>{date-iso}</code>: 保存日期的 ISO 格式（UTC，例如 "2018-09-15"）</li>
                     <li><code>{date-locale}</code>: 保存日期的本地化值（例如 "16_09_2018"）</li>
-                    <li><code>{time-iso}</code>: 保存时间的 ISO 格式（例如 "22_38_26_317"）</li>
-                    <li><code>{time-locale}</code>: 保存时间的本地化值（例如 "00_38_26"）</li>
+                    <li><code>{time-iso}</code>: 保存时间的 ISO 格式（UTC，例如 "22:38:26.317"）</li>
+                    <li><code>{time-locale}</code>: 保存时间的本地化值（例如 "00:38:26"）</li>
                     <li><code>{time-ms}</code>: 保存时间的 Unix Epoch 后的毫秒数（例如 1563582018000）</li>
                     <li><code>{day-utc}</code>: 保存日期的 UTC 格式的天数（例如 "15"）</li>
                     <li><code>{day-locale}</code>: 天数的本地化值（例如 "15"）</li>
@@ -731,13 +732,13 @@
                     <li><code>{minutes-locale}</code>: 分钟的本地化值（例如 "38"）</li>
                     <li><code>{seconds-utc}</code>: 保存日期的 UTC 格式的秒数（例如 "31"）</li>
                     <li><code>{seconds-locale}</code>: 秒数的本地化值（例如 "31"）</li>
-                    <li><code>{visit-datetime-iso}</code>: 访问日期和时间的 ISO 格式（例如 "2018-09-15T22_38_26_317Z"）</li>
-                    <li><code>{visit-datetime-utc}</code>: 访问日期和时间的 UTC 格式（例如 "Sat, 15 Sep 2018 22_38_26 GMT"）</li>
-                    <li><code>{visit-datetime-locale}</code>: 日期和时间的本地化值（例如 "9_16_2018, 12_54_31 AM"）</li>
-                    <li><code>{visit-date-iso}</code>: 访问日期的 ISO 格式（例如 "2018-09-15"）</li>
+                    <li><code>{visit-datetime-iso}</code>: 访问日期和时间的 ISO 格式（UTC，例如 "2018-09-15T22:38:26.317Z"）</li>
+                    <li><code>{visit-datetime-utc}</code>: 访问日期和时间的 UTC 格式（例如 "Sat, 15 Sep 2018 22:38:26 GMT"）</li>
+                    <li><code>{visit-datetime-locale}</code>: 日期和时间的本地化值（例如 "9_16_2018, 12:54:31 AM"）</li>
+                    <li><code>{visit-date-iso}</code>: 访问日期的 ISO 格式（UTC，例如 "2018-09-15"）</li>
                     <li><code>{visit-date-locale}</code>: 访问日期的本地化值（例如 "16_09_2018"）</li>
-                    <li><code>{visit-time-iso}</code>: 访问时间的 ISO 格式（例如 "22_38_26_317"）</li>
-                    <li><code>{visit-time-locale}</code>: 访问时间的本地化值（例如 "00_38_26"）</li>
+                    <li><code>{visit-time-iso}</code>: 访问时间的 ISO 格式（UTC，例如 "22:38:26.317"）</li>
+                    <li><code>{visit-time-locale}</code>: 访问时间的本地化值（例如 "00:38:26"）</li>
                     <li><code>{visit-time-ms}</code>: 访问时间的 Unix Epoch 后的毫秒数（例如 1563582018000）</li>
                     <li><code>{visit-day-utc}</code>: 访问日期的 UTC 格式的天数（例如 "15"）</li>
                     <li><code>{visit-day-locale}</code>: 访问日期的本地化天数（例如 "15"）</li>
@@ -976,6 +977,7 @@
                         </ul>
                     </li>
                     <li>火狐<ul>
+                            <li>自 Firefox 153 起，您必须在 about:addons 的 SingleFile 页面的“权限和数据”中启用“访问计算机上的本地文件”权限，以便在查看已保存的页面时显示信息栏，保存或注释存储在文件系统上的页面。</li>
                             <li>如果设置为“提示输入名称”，则“文件名&gt;文件名冲突解决”选项不起作用。</li>
                             <li>有时，SingleFile无法保存沙盒iframe的内容。</li>
                             <li>在处理文件系统中的页面时，外部资源（如图像、样式表、字体等）将不会嵌入到保存的页面中。</li>

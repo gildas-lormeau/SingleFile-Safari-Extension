@@ -211,6 +211,14 @@
 		"message": "wyświetlaj pasek informacyjny podczas przeglądania zapisanej strony",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile nie może wyświetlić paska informacyjnego ani zapisać stron otwartych z systemu plików, ponieważ nie ma uprawnień dostępu do plików lokalnych. Aby to naprawić, włącz „Dostęp do lokalnych plików na komputerze” w sekcji „Uprawnienia i dane” na stronie SingleFile w about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile nie może wyświetlić paska informacyjnego ani zapisać stron otwartych z systemu plików, ponieważ nie ma uprawnień dostępu do adresów URL plików. Aby to naprawić, włącz „Zezwalaj na dostęp do adresów URL plików” na stronie SingleFile na stronie rozszerzeń przeglądarki.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
+	},
 	"optionInfobarTemplate": {
 		"message": "szablon zawartości paska informacyjnego",
 		"description": "Options page label: 'template of the infobar content'"
@@ -524,7 +532,7 @@
 		"description": "Options page label: 'blocked resources'"
 	},
 	"optionsAcceptHeaders": {
-		"message": "nagłówek \"Akceptuj\"",
+		"message": "nagłówek \"Accept\"",
 		"description": "Options page label: '\"Accept\" header'"
 	},
 	"optionResourceScript": {
@@ -858,7 +866,7 @@
 		"description": "Options page label: 'region'"
 	},
 	"optionS3Bucket": {
-		"message": "nazwa komory",
+		"message": "nazwa bucketa",
 		"description": "Options page label: 'bucket name'"
 	},
 	"optionS3AccessKey": {
@@ -925,6 +933,10 @@
 		"message": "synchronizuj opcje",
 		"description": "Options label: 'synchronize options'"
 	},
+	"optionSynchronizeError": {
+		"message": "Nie udało się skopiować opcji do zsynchronizowanej pamięci. Pozostają one zapisane lokalnie.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
+	},
 	"optionsResetButton": {
 		"message": "Resetuj",
 		"description": "Options button: 'Reset'"
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "Importuj",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "Nie udało się zaimportować ustawień. Bieżące ustawienia pozostają bez zmian.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Odroczona treść",

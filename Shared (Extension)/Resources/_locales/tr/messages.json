@@ -160,11 +160,11 @@
 		"description": "Badge label during initialization: '•••'"
 	},
 	"buttonSaveProgressTooltip": {
-		"message": "İlerlemeyi kaydet: ",
+		"message": "Kaydetme ilerlemesi: ",
 		"description": "Button title during save: 'Save progress: xx%'"
 	},
 	"buttonUploadProgressTooltip": {
-		"message": "İlerlemeyi yükle: ",
+		"message": "Yükleme ilerlemesi: ",
 		"description": "Button title during save: 'Upload progress: xx%'"
 	},
 	"buttonOKBadge": {
@@ -210,6 +210,14 @@
 	"optionDisplayInfobar": {
 		"message": "kayıtlı bir sayfayı görüntülerken bir bilgi çubuğu görüntüle",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
+	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile, yerel dosyalara erişmesine izin verilmediği için bilgi çubuğunu görüntüleyemiyor ve dosya sisteminden açılan sayfaları kaydedemiyor. Bunu düzeltmek için about:addons içindeki SingleFile sayfasında, \"İzinler ve veriler\" bölümündeki \"Bilgisayarınızdaki yerel dosyalara erişim\" seçeneğini etkinleştirin.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile, dosya URL'lerine erişmesine izin verilmediği için bilgi çubuğunu görüntüleyemiyor ve dosya sisteminden açılan sayfaları kaydedemiyor. Bunu düzeltmek için tarayıcının uzantılar sayfasındaki SingleFile sayfasında \"Dosya URL'lerine erişime izin ver\" seçeneğini etkinleştirin.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
 	},
 	"optionInfobarTemplate": {
 		"message": "bilgi çubuğu içeriği şablonu",
@@ -324,7 +332,7 @@
 		"description": "Options page label: 'replace emojis with text'"
 	},
 	"optionSaveFilenameTemplateData": {
-		"message": "dosya adı şablon verilerini sayfaya kaydetme",
+		"message": "dosya adı şablon verilerini sayfaya kaydet",
 		"description": "Options page label: 'save the filename template data into the page'"
 	},
 	"optionConfirmFilename": {
@@ -716,7 +724,7 @@
 		"description": "Title of the button 'warn if leaving page with unsaved changes'"
 	},
 	"optionDisplayInfobarInEditor": {
-		"message": "bilgi çubuğunu görüntüleme",
+		"message": "bilgi çubuğunu görüntüle",
 		"description": "Title of the button 'display the infobar'"
 	},
 	"optionsMiscSubTitle": {
@@ -922,8 +930,12 @@
 		"description": "Options help link"
 	},
 	"optionSynchronize": {
-		"message": "senkronizasyon seçenekleri",
+		"message": "seçenekleri senkronize et",
 		"description": "Options label: 'synchronize options'"
+	},
+	"optionSynchronizeError": {
+		"message": "Seçenekler senkronize depolama alanına kopyalanamadı; hâlâ yerel olarak saklanıyor.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
 	},
 	"optionsResetButton": {
 		"message": "Sıfırla",
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "İçe aktar",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "Seçenekler içe aktarılamadı; mevcut seçenekler değiştirilmedi.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Ertelenmiş içerik",

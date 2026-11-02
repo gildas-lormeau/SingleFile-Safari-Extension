@@ -4,7 +4,7 @@
 		"description": "Description of the extension."
 	},
 	"commandSaveSelectedTabs": {
-		"message": "Salva la scheda selezionata o i suoi contenuti selezionati",
+		"message": "Salva le schede selezionate o i loro contenuti selezionati",
 		"description": "Command (Ctrl+Shift+Y): 'Save the selected tabs or their selected contents'"
 	},
 	"commandSaveAllTabs": {
@@ -210,6 +210,14 @@
 	"optionDisplayInfobar": {
 		"message": "visualizza una barra informativa quando vedi una pagina salvata",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
+	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile non può visualizzare la barra informativa né salvare le pagine aperte dal filesystem perché non è autorizzato ad accedere ai file locali. Per risolvere il problema, attiva \"Accedi ai file locali sul tuo computer\" in \"Permessi e dati\" nella pagina di SingleFile in about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile non può visualizzare la barra informativa né salvare le pagine aperte dal filesystem perché non è autorizzato ad accedere agli URL dei file. Per risolvere il problema, attiva \"Consenti l'accesso agli URL dei file\" nella pagina di SingleFile nella pagina delle estensioni del browser.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
 	},
 	"optionInfobarTemplate": {
 		"message": "modello del contenuto della barra informativa",
@@ -512,7 +520,7 @@
 		"description": "Options page label: 'remove unused styles'"
 	},
 	"optionRemoveAlternativeMedias": {
-		"message": "rimuovi stili non utilizzati per per schermi dispositivi alternativi",
+		"message": "rimuovi i fogli di stile per dispositivi alternativi agli schermi",
 		"description": "Options page label: 'remove stylesheets for alternative devices to screens'"
 	},
 	"optionsNetworkSubTitle": {
@@ -528,15 +536,15 @@
 		"description": "Options page label: '\"Accept\" header'"
 	},
 	"optionResourceScript": {
-		"message": "scripts",
+		"message": "script",
 		"description": "Options page label: 'scripts'"
 	},
 	"optionResourceVideo": {
-		"message": "videos",
+		"message": "video",
 		"description": "Options page label: 'videos'"
 	},
 	"optionResourceAudio": {
-		"message": "audios",
+		"message": "audio",
 		"description": "Options page label: 'audios'"
 	},
 	"optionResourceDocument": {
@@ -628,7 +636,7 @@
 		"description": "Popup text 'Confirm the deletion of the selected rule' in the options page"
 	},
 	"optionAutoSaveLoadOrUnload": {
-		"message": "auto-salva dopo il caricamento della pagina o al non caricamento della pagina",
+		"message": "auto-salva dopo il caricamento della pagina o alla chiusura della pagina",
 		"description": "auto-save after page load or on page unload"
 	},
 	"optionAutoSaveLoad": {
@@ -636,7 +644,7 @@
 		"description": "Options page label: 'auto-save after page load'"
 	},
 	"optionAutoSaveUnload": {
-		"message": "auto-salva al non caricamento della pagina",
+		"message": "auto-salva alla chiusura della pagina",
 		"description": "Options page label: 'auto-save on page unload'"
 	},
 	"optionAutoSaveDiscard": {
@@ -810,7 +818,7 @@
 		"description": "Options page label: 'add proof of existence'"
 	},
 	"optionsAddProofConfirm": {
-		"message": "Conferma che permetti a SingleFile di inare alle API Woleet un hash SHA256 di ogni pagina che stai per salvare. Puoi trovare maggiori informazioni su questa caratteristica nella pagina di aiuto o facendo clic sul punto esclamativo accanto all'opzione.",
+		"message": "Conferma che permetti a SingleFile di inviare alle API Woleet un hash SHA256 di ogni pagina che stai per salvare. Puoi trovare maggiori informazioni su questa funzione nella pagina di aiuto o facendo clic sul punto interrogativo accanto all'opzione.",
 		"description": "Popup text displayed wen enabling the option 'add proof of existence'"
 	},
 	"optionWoleetKey": {
@@ -925,6 +933,10 @@
 		"message": "sincronizza opzioni",
 		"description": "Options label: 'synchronize options'"
 	},
+	"optionSynchronizeError": {
+		"message": "Impossibile copiare le opzioni nell'archiviazione sincronizzata, restano salvate localmente.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
+	},
 	"optionsResetButton": {
 		"message": "Ripristina",
 		"description": "Options button: 'Reset'"
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "Importa",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "Impossibile importare le opzioni, le opzioni attuali restano invariate.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Contenuto differito",
@@ -1130,7 +1146,7 @@
 		"description": "Title of the pending save page 'Pending saves' in the editor"
 	},
 	"pendingsCancelAllButton": {
-		"message": "Cancella tutto",
+		"message": "Annulla tutto",
 		"description": "Pending saves button 'Cancel all'"
 	},
 	"pendingsURLTitle": {
@@ -1154,7 +1170,7 @@
 		"description": "Value of 'status' for current saves"
 	},
 	"pendingsCancellingStatus": {
-		"message": "cancellazione",
+		"message": "annullamento",
 		"description": "Value of 'status' for cancelled saves"
 	},
 	"pendingsNoPendings": {

@@ -211,12 +211,20 @@
 		"message": "відображати інформ. панель під час перегляду збереженої сторінки",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
 	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "SingleFile не може відобразити інформаційну панель або зберегти сторінки, відкриті з файлової системи, оскільки йому не дозволено доступ до локальних файлів. Щоб це виправити, увімкніть «Доступ до локальних файлів на вашому комп'ютері» в розділі «Дозволи та дані» на сторінці SingleFile в about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "SingleFile не може відобразити інформаційну панель або зберегти сторінки, відкриті з файлової системи, оскільки йому не дозволено доступ до URL-адрес файлів. Щоб це виправити, увімкніть «Дозволити доступ до URL-адрес файлів» на сторінці SingleFile у списку розширень браузера.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
+	},
 	"optionInfobarTemplate": {
 		"message": "шаблон вмісту інформаційної панелі",
 		"description": "Options page label: 'template of the infobar content'"
 	},
 	"optionBlockMixedContent": {
-		"message": "блок змішаного наповнення",
+		"message": "блокувати змішаний вміст",
 		"description": "Options page label: 'block mixed content'"
 	},
 	"optionSaveOriginalURLs": {
@@ -328,7 +336,7 @@
 		"description": "Options page label: 'save the filename template data into the page'"
 	},
 	"optionConfirmFilename": {
-		"message": "відкривати діалогове вікно \"Save as\" для підтвердження імені файлу",
+		"message": "відкривати діалогове вікно \"Зберегти як\" для підтвердження імені файлу",
 		"description": "Options page label: 'open the \"Save as\" dialog to confirm the file name'"
 	},
 	"optionFilenameConflictAction": {
@@ -404,7 +412,7 @@
 		"description": "Options page label: 'create a root directory'"
 	},
 	"optionDisableCompression": {
-		"message": "відключити сжаття",
+		"message": "вимкнути стиснення",
 		"description": "Options page label: 'disable compression'"
 	},
 	"optionPreventAppendedData": {
@@ -512,7 +520,7 @@
 		"description": "Options page label: 'remove unused styles'"
 	},
 	"optionRemoveAlternativeMedias": {
-		"message": "видалити стилі для екранів альтернативних пристроїв",
+		"message": "видалити таблиці стилів для пристроїв, відмінних від екранів",
 		"description": "Options page label: 'remove stylesheets for alternative devices to screens'"
 	},
 	"optionsNetworkSubTitle": {
@@ -640,7 +648,7 @@
 		"description": "Options page label: 'auto-save on page unload'"
 	},
 	"optionAutoSaveDiscard": {
-		"message": "автозбереження на вкладці відкинути",
+		"message": "автозбереження при відкиданні вкладки",
 		"description": "Options page label: 'auto-save on tab discard'"
 	},
 	"optionAutoSaveRemove": {
@@ -842,7 +850,7 @@
 		"description": "Options page label: 'repository name'"
 	},
 	"optionGitHubBranch": {
-		"message": "назва філії",
+		"message": "назва гілки",
 		"description": "Options page label: 'branch name'"
 	},
 	"optionSaveToS3": {
@@ -922,8 +930,12 @@
 		"description": "Options help link"
 	},
 	"optionSynchronize": {
-		"message": "параметри синхронізації",
+		"message": "синхронізувати параметри",
 		"description": "Options label: 'synchronize options'"
+	},
+	"optionSynchronizeError": {
+		"message": "Не вдалося скопіювати параметри до синхронізованого сховища. Вони й надалі зберігаються локально.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
 	},
 	"optionsResetButton": {
 		"message": "Скидання",
@@ -961,6 +973,10 @@
 		"message": "Імпорт",
 		"description": "Options button: 'Import'"
 	},
+	"optionsImportError": {
+		"message": "Не вдалося імпортувати параметри. Поточні параметри залишилися без змін.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
+	},
 	"logPanelDeferredContent": {
 		"message": "Відстрочений вміст",
 		"description": "Label 'Deferred content' in the log panel"
@@ -978,7 +994,7 @@
 		"description": "Label 'Step' (for 'Step x / 4') in the log panel"
 	},
 	"logPanelWidth": {
-		"message": "Сто двадцять і два,",
+		"message": "122",
 		"description": "Width of the log panel in pixels, it should be adjusted for the longest label beginning with 'log' (e.g. 'logPanelDeferredContent')"
 	},
 	"maskCancelButton": {
@@ -1074,11 +1090,11 @@
 		"description": "Title of the button 'Display/hide notes' in the editor"
 	},
 	"editorToggleHighlights": {
-		"message": "Показати/приховати текст",
+		"message": "Показати/приховати позначений текст",
 		"description": "Title of the button 'Display/hide the highlighted text' in the editor"
 	},
 	"editorRemoveHighlight": {
-		"message": "Видалити виділений текст",
+		"message": "Зняти позначення з виділеного тексту",
 		"description": "Title of the button 'Remove the selected highlighted text' in the editor"
 	},
 	"editorEditPage": {
@@ -1150,7 +1166,7 @@
 		"description": "Value of 'status' for pending saves"
 	},
 	"pendingsProcessingStatus": {
-		"message": "переробка",
+		"message": "обробка",
 		"description": "Value of 'status' for current saves"
 	},
 	"pendingsCancellingStatus": {

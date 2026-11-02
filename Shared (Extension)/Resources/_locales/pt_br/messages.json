@@ -160,11 +160,11 @@
 		"description": "Badge label during initialization: '•••'"
 	},
 	"buttonSaveProgressTooltip": {
-		"message": "Salvar progresso: ",
+		"message": "Progresso do salvamento: ",
 		"description": "Button title during save: 'Save progress: xx%'"
 	},
 	"buttonUploadProgressTooltip": {
-		"message": "Enviar progresso: ",
+		"message": "Progresso do envio: ",
 		"description": "Button title during save: 'Upload progress: xx%'"
 	},
 	"buttonOKBadge": {
@@ -210,6 +210,14 @@
 	"optionDisplayInfobar": {
 		"message": "mostrar o infobar ao ver uma página salva",
 		"description": "Options page label: 'display an infobar when viewing a saved page'"
+	},
+	"optionDisplayInfobarFileAccessFirefox": {
+		"message": "O SingleFile não consegue mostrar o infobar nem salvar páginas abertas a partir do sistema de arquivos porque não tem permissão para acessar arquivos locais. Para corrigir isso, ative \"Acessar arquivos locais no seu computador\" em \"Permissões e dados\" na página do SingleFile em about:addons.",
+		"description": "Options page warning displayed in Firefox when the extension cannot access local files: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access local files. To fix this, enable \"Access local files on your computer\" in \"Permissions and data\" on the SingleFile page in about:addons.'"
+	},
+	"optionDisplayInfobarFileAccessChromium": {
+		"message": "O SingleFile não consegue mostrar o infobar nem salvar páginas abertas a partir do sistema de arquivos porque não tem permissão para acessar URLs de arquivo. Para corrigir isso, ative \"Permitir acesso a URLs de arquivo\" na página do SingleFile, na página de extensões do navegador.",
+		"description": "Options page warning displayed in Chromium-based browsers when the extension cannot access file URLs: 'SingleFile cannot display the infobar or save pages opened from the filesystem because it is not allowed to access file URLs. To fix this, enable \"Allow access to file URLs\" on the SingleFile page in the extensions page of the browser.'"
 	},
 	"optionInfobarTemplate": {
 		"message": "modelo de conteúdo do infobar",
@@ -324,7 +332,7 @@
 		"description": "Options page label: 'replace emojis with text'"
 	},
 	"optionSaveFilenameTemplateData": {
-		"message": "save the filename template data into the page",
+		"message": "salvar os dados do modelo de nome de arquivo na página",
 		"description": "Options page label: 'save the filename template data into the page'"
 	},
 	"optionConfirmFilename": {
@@ -628,7 +636,7 @@
 		"description": "Popup text 'Confirm the deletion of the selected rule' in the options page"
 	},
 	"optionAutoSaveLoadOrUnload": {
-		"message": "salvar autom. após carregamento ou purga da página",
+		"message": "salvar autom. após o carregamento ou ao descarregar a página",
 		"description": "auto-save after page load or on page unload"
 	},
 	"optionAutoSaveLoad": {
@@ -636,7 +644,7 @@
 		"description": "Options page label: 'auto-save after page load'"
 	},
 	"optionAutoSaveUnload": {
-		"message": "salvar autom. após purga da página",
+		"message": "salvar autom. ao descarregar a página",
 		"description": "Options page label: 'auto-save on page unload'"
 	},
 	"optionAutoSaveDiscard": {
@@ -925,6 +933,10 @@
 		"message": "sincronizar opções",
 		"description": "Options label: 'synchronize options'"
 	},
+	"optionSynchronizeError": {
+		"message": "Não foi possível copiar as opções para o armazenamento sincronizado, elas continuam salvas localmente.",
+		"description": "Options error: 'The options could not be copied to the synchronized storage, they are still stored locally.'"
+	},
 	"optionsResetButton": {
 		"message": "Restaurar",
 		"description": "Options button: 'Reset'"
@@ -960,6 +972,10 @@
 	"optionsImportButton": {
 		"message": "Importar",
 		"description": "Options button: 'Import'"
+	},
+	"optionsImportError": {
+		"message": "Não foi possível importar as opções, as opções atuais permanecem inalteradas.",
+		"description": "Options error: 'The settings could not be imported, the current settings are unchanged.'"
 	},
 	"logPanelDeferredContent": {
 		"message": "Conteúdo diferido",
@@ -1086,7 +1102,7 @@
 		"description": "Title of the button 'Enable/disable read-only' in the editor"
 	},
 	"editorFormatPage": {
-		"message": "Formatar à página para melhor legibilidade",
+		"message": "Formatar a página para melhor legibilidade",
 		"description": "Title of the button 'Format the page for better readability' in the editor"
 	},
 	"editorCutInnerPage": {
@@ -1226,7 +1242,7 @@
 		"description": "Options page label: 'authorization token'"
 	},
 	"optionRestFormApiFileFieldName": {
-		"message": "nome do campo de dados do ficheiro",
+		"message": "nome do campo de dados do arquivo",
 		"description": "Options page label: 'archive data field name'"
 	},
 	"optionRestFormApiUrlFieldName": {
