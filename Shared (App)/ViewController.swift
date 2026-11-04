@@ -67,7 +67,7 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
 
         SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
             guard error == nil else {
-                // Insert code to inform the user that something went wrong.
+                NSLog("showPreferencesForExtension failed: %@", error!.localizedDescription)
                 return
             }
 
