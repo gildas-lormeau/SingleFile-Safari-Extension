@@ -86,6 +86,7 @@ const DEFAULT_CONFIG = {
 	loadDeferredContentDispatchScrollEvent: true,
 	loadDeferredContentBeforeFrames: false,
 	loadDeferredContentMinZoomFactor: 0,
+	loadDeferredContentKeepEmulatedScreenSize: false,
 	filenameTemplate: "%if-empty<{page-title}|No title> ({date-locale} {time-locale}).{filename-extension}",
 	infobarTemplate: "",
 	includeInfobar: !IS_NOT_SAFARI,
@@ -187,7 +188,7 @@ const DEFAULT_CONFIG = {
 	saveOriginalURLs: false,
 	acceptHeaders: {
 		font: "application/font-woff2;q=1.0,application/font-woff;q=0.9,*/*;q=0.8",
-		image: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+		image: "image/jxl,image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
 		stylesheet: "text/css,*/*;q=0.1",
 		script: "*/*",
 		document: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
