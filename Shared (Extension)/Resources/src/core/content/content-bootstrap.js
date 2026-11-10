@@ -29,7 +29,7 @@ const ARCHIVE_SCAN_LENGTH = 1024 * 1024;
 const singlefile = globalThis.singlefileBootstrap;
 const pendingResponses = new Map();
 
-let unloadListenerAdded, optionsAutoSave, tabId, tabIndex, autoSaveEnabled, autoSaveTimeout, autoSavingPage, pageAutoSaved, previousLocationHref, savedPageDetected, compressContent, extractDataFromPageTags, insertTextBody, insertMetaCSP;
+let unloadListenerAdded, optionsAutoSave, tabId, tabIndex, incognito, autoSaveEnabled, autoSaveTimeout, autoSavingPage, pageAutoSaved, previousLocationHref, savedPageDetected, compressContent, extractDataFromPageTags, insertTextBody, insertMetaCSP;
 singlefile.pageInfo = {
 	visitDate: new Date()
 };
@@ -38,6 +38,7 @@ browser.runtime.sendMessage({ method: "bootstrap.init" }).then(message => {
 	const options = message.options;
 	tabId = message.tabId;
 	tabIndex = message.tabIndex;
+	incognito = message.incognito;
 	autoSaveEnabled = message.autoSaveEnabled;
 	if (options && options.autoOpenEditor && detectSavedPage(document)) {
 		if (document.readyState == "loading") {
@@ -46,11 +47,7 @@ browser.runtime.sendMessage({ method: "bootstrap.init" }).then(message => {
 			openEditor(document);
 		}
 	} else {
-		if (document.readyState == "loading") {
-			document.addEventListener("DOMContentLoaded", refresh);
-		} else {
-			refresh();
-		}
+		refresh();
 	}
 });
 browser.runtime.onMessage.addListener(message => {
@@ -127,8 +124,9 @@ function executeBootstrap(data) {
 
 async function onMessage(message) {
 	if (autoSaveEnabled && message.method == "content.autosave") {
+		const response = { pageAutoSaved: Boolean(pageAutoSaved) };
 		initAutoSavePage(message);
-		return {};
+		return response;
 	}
 	if (message.method == "content.maybeInit") {
 		init();
@@ -265,8 +263,8 @@ function onVisibilityChange() {
 }
 
 function onUnload() {
-	if (!pageAutoSaved && (optionsAutoSave.autoSaveUnload || optionsAutoSave.autoSaveLoadOrUnload || optionsAutoSave.autoSaveRemove)) {
-		autoSaveUnloadedPage({ autoSaveUnload: optionsAutoSave.autoSaveUnload, autoSaveRemove: optionsAutoSave.autoSaveRemove });
+	if (!pageAutoSaved && document.body && (optionsAutoSave.autoSaveUnload || optionsAutoSave.autoSaveLoadOrUnload || optionsAutoSave.autoSaveRemove)) {
+		autoSaveUnloadedPage({ autoSaveUnload: optionsAutoSave.autoSaveUnload || optionsAutoSave.autoSaveLoadOrUnload, autoSaveRemove: optionsAutoSave.autoSaveRemove });
 	}
 }
 
@@ -282,6 +280,10 @@ function autoSaveUnloadedPage({ autoSaveUnload, autoSaveDiscard, autoSaveRemove 
 	}
 	const docData = helper.preProcessDoc(document, globalThis, optionsAutoSave);
 	savePage(docData, frames, { autoSaveUnload, autoSaveDiscard, autoSaveRemove });
+	if (frames && frames.sessionId) {
+		singlefile.processors.frameTree.cleanup(frames.sessionId);
+	}
+	helper.postProcessDoc(document, docData.markedElements, docData.invalidElements);
 }
 
 function savePage(docData, frames, { autoSaveUnload, autoSaveDiscard, autoSaveRemove } = {}) {
@@ -306,6 +308,7 @@ function savePage(docData, frames, { autoSaveUnload, autoSaveDiscard, autoSaveRe
 		worklets: docData.worklets,
 		frames: frames,
 		url: location.href,
+		incognito,
 		visitDate,
 		autoSaveUnload,
 		autoSaveDiscard,

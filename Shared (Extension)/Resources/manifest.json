@@ -9,7 +9,7 @@
     "64": "src/ui/resources/icon_64.png",
     "128": "src/ui/resources/icon_128.png"
   },
-  "version": "1.36.0",
+  "version": "1.37.0",
   "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
@@ -127,14 +127,12 @@
     "lib/single-file-infobar.js",
     "lib/single-file-extension-editor.js",
     "lib/single-file-extension-editor-helper.js",
+    "lib/single-file-notes.js",
     "lib/single-file-zip.min.js",
     "lib/single-file-z-worker.js",
     "lib/web-stream.js",
     "src/lib/readability/Readability.js",
-    "src/lib/readability/Readability-readerable.js",
-    "src/ui/pages/editor-note-web.css",
-    "src/ui/pages/editor-mask-web.css",
-    "src/ui/pages/editor-frame-web.css"
+    "src/lib/readability/Readability-readerable.js"
   ],
   "permissions": [
     "contextMenus",

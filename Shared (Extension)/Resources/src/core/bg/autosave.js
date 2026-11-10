@@ -50,24 +50,19 @@ export {
 
 async function onMessage(message, sender) {
 	if (message.method.endsWith(".save")) {
-		if (message.autoSaveDiscard || message.autoSaveRemove) {
-			if (sender.tab) {
+		const tab = sender.tab || { id: message.tabId, index: message.tabIndex, url: message.url, incognito: message.incognito };
+		if (!message.autoSaveUnload && (message.autoSaveDiscard || message.autoSaveRemove)) {
+			const pendingMessage = pendingMessages[tab.id];
+			if (pendingMessage && ((pendingMessage.removed && message.autoSaveRemove) || (pendingMessage.discarded && message.autoSaveDiscard))) {
+				delete pendingMessages[tab.id];
+				await saveContent(message, tab);
+			} else if (sender.tab) {
 				message.tab = sender.tab;
 				pendingMessages[sender.tab.id] = message;
-			} else if (pendingMessages[message.tabId] &&
-				((pendingMessages[message.tabId].removed && message.autoSaveRemove) ||
-					(pendingMessages[message.tabId].discarded && message.autoSaveDiscard))
-			) {
-				delete pendingMessages[message.tabId];
-				await saveContent(message, { id: message.tabId, index: message.tabIndex, url: sender.url });
-			}
-			if (message.autoSaveUnload) {
-				delete pendingMessages[message.tabId];
-				await saveContent(message, sender.tab);
 			}
 		} else {
 			delete pendingMessages[message.tabId];
-			await saveContent(message, sender.tab);
+			await saveContent(message, tab);
 		}
 		return {};
 	}
@@ -80,8 +75,8 @@ function onTabUpdated(tabId) {
 async function onTabRemoved(tabId) {
 	const message = pendingMessages[tabId];
 	if (message) {
+		delete pendingMessages[tabId];
 		if (message.autoSaveRemove) {
-			delete pendingMessages[tabId];
 			await saveContent(message, message.tab);
 		}
 	} else {
@@ -128,6 +123,9 @@ async function onInit(tab) {
 
 async function saveContent(message, tab) {
 	const tabId = tab.id;
+	if (message.taskId) {
+		business.onSaveStart(message.taskId);
+	}
 	const options = await config.getOptions(tab.url, true);
 	if (options) {
 		ui.onStart(tabId, 1, true);
@@ -270,6 +268,8 @@ async function saveContent(message, tab) {
 			}
 			ui.onEnd(tabId, true);
 		}
+	} else if (message.taskId) {
+		business.onSaveEnd(message.taskId);
 	}
 }
 
