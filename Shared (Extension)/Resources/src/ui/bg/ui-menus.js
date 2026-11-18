@@ -43,7 +43,7 @@ const SURFACE_CONTEXTS = {
 	button: ["browser_action"],
 	tab: ["tab"]
 };
-const EDITOR_HIDDEN_ACTIONS = ["edit-and-save-page", "save-selected-links", "save-selection", "save-frame", "auto-save", "domain-rule"];
+const EDITOR_HIDDEN_ACTIONS = ["edit-and-save-page", "save-selected-links", "save-selection", "edit-and-save-selection", "save-frame", "auto-save", "domain-rule"];
 const AUTO_SAVE_MODES = [
 	{ mode: "disabled", labelKey: "menuAutoSaveDisabled" },
 	{ mode: "tab", labelKey: "menuAutoSaveTab" },
@@ -146,7 +146,7 @@ function isActionSupported(action) {
 	if (action == "auto-save") {
 		return config.AUTO_SAVE_SUPPORTED;
 	}
-	if (action == "save-selected-tabs") {
+	if (action == "save-selected-tabs" || action == "save-selected-tabs-in-archive") {
 		return config.SELECTABLE_TABS_SUPPORTED;
 	}
 	return true;
@@ -334,6 +334,9 @@ async function initialize() {
 			if (item.action == "save-selection") {
 				business.saveTabs([tab], Object.assign(profileOptions, { selected: true }));
 			}
+			if (item.action == "edit-and-save-selection") {
+				business.saveTabs([tab], Object.assign(profileOptions, { selected: true, openEditor: true }));
+			}
 			if (item.action == "save-frame") {
 				business.saveTabs([tab], { frameId: event.frameId });
 			}
@@ -348,6 +351,18 @@ async function initialize() {
 			if (item.action == "save-all-tabs") {
 				const tabs = await queryTabs({ currentWindow: true });
 				business.saveTabs(tabs, profileOptions);
+			}
+			if (item.action == "save-selected-tabs-in-archive") {
+				const tabs = await queryTabs({ currentWindow: true, highlighted: true });
+				business.saveTabsInArchive(tabs, profileOptions);
+			}
+			if (item.action == "save-unpinned-tabs-in-archive") {
+				const tabs = await queryTabs({ currentWindow: true, pinned: false });
+				business.saveTabsInArchive(tabs, profileOptions);
+			}
+			if (item.action == "save-all-tabs-in-archive") {
+				const tabs = await queryTabs({ currentWindow: true });
+				business.saveTabsInArchive(tabs, profileOptions);
 			}
 			if (item.action == "batch-save-urls") {
 				business.batchSaveUrls();
@@ -464,6 +479,7 @@ async function refreshTab(tab) {
 				});
 				if (config.SELECTABLE_TABS_SUPPORTED) {
 					getItems("save-selection").forEach(([id]) => promises.push(menus.update(id, { visible: !options.saveRawPage })));
+					getItems("edit-and-save-selection").forEach(([id]) => promises.push(menus.update(id, { visible: !options.saveRawPage && !options.openEditor })));
 				}
 				const [profiles, rule] = await Promise.all([config.getProfiles(), config.getRule(tab.url, true)]);
 				const profileNames = Object.keys(profiles);

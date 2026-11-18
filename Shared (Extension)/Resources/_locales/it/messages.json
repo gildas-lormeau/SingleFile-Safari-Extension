@@ -95,6 +95,10 @@
 		"message": "Salva selezione",
 		"description": "Menu entry: 'Save selection'"
 	},
+	"menuEditAndSaveSelection": {
+		"message": "Annotate and save the selection...",
+		"description": "Menu entry: 'Annotate and save the selection...'"
+	},
 	"menuSaveFrame": {
 		"message": "Salva frame",
 		"description": "Menu entry: 'Save frame'"
@@ -114,6 +118,18 @@
 	"menuSaveAllTabs": {
 		"message": "Salva tutte le schede",
 		"description": "Menu entry: 'Save all tabs'"
+	},
+	"menuSaveSelectedTabsInArchive": {
+		"message": "Save selected tabs in one archive",
+		"description": "Menu entry: 'Save selected tabs in one archive'"
+	},
+	"menuSaveUnpinnedTabsInArchive": {
+		"message": "Save unpinned tabs in one archive",
+		"description": "Menu entry: 'Save unpinned tabs in one archive'"
+	},
+	"menuSaveAllTabsInArchive": {
+		"message": "Save all tabs in one archive",
+		"description": "Menu entry: 'Save all tabs in one archive'"
 	},
 	"menuBatchSaveUrls": {
 		"message": "Salvataggio batch di URL...",
